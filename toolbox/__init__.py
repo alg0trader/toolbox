@@ -1,3 +1,4 @@
+import os
 import time
 import inspect
 import threading
@@ -11,8 +12,8 @@ from .toolbox import ChamferPlugin
 
 
 # Get the script directory in order to locate icons.
-# filename = inspect.getframeinfo(inspect.currentframe()).filename
-# path = os.path.dirname(os.path.abspath(filename))
+filename = inspect.getframeinfo(inspect.currentframe()).filename
+path = os.path.dirname(os.path.abspath(filename))
 
 
 def init_toolbar():
@@ -25,8 +26,6 @@ def init_toolbar():
             return None
         return pcbneww[0]
 
-    import os
-    path = os.path.dirname(__file__)
     while not wx.GetApp():
         time.sleep(1)
     
