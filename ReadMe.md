@@ -1,15 +1,15 @@
 KiCad Toolbox
 =============
-A toolbox plugin that allows for the following features in Pcbnew:
+A KiCad action plugin that allows for the following features in Pcbnew:
 
  1.  Rounded tracks (*in progress*)
  2.  Chamfers, or mitered-bends (*future*)
  3.  Via stitching (*future*)
  4.  Profile routing based on the Edge.Cuts layer (*future*)
  5.  DXF to KiCad footprint conversion (*future*)
- 6.  Creation of thru-reflect-line boards for RF calibration (*future*)
- 7.  HFSS exporting (*future*)
- 8.  AWR exportiing (*future*)
+ 6.  HFSS exporting (*future*)
+ 7.  AWR exporting (*future*)
+ 8.  Creation of thru-reflect-line boards for RF calibration (*future*)
 
 
 Installation
