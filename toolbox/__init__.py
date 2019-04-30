@@ -7,13 +7,8 @@ import wx
 import wx.aui
 import pcbnew
 
-from .toolbox import CurvePlugin
-from .toolbox import ChamferPlugin
-
-
-# Get the script directory in order to locate icons.
-filename = inspect.getframeinfo(inspect.currentframe()).filename
-path = os.path.dirname(os.path.abspath(filename))
+import callback
+from .toolbox import *
 
 
 def init_toolbar():
@@ -31,11 +26,15 @@ def init_toolbar():
     
     # Add curve routing tool button.
     curves_button_id = 0
-    curves_button_bm = wx.Bitmap(path + '/toolbox_icons/curves.png', wx.BITMAP_TYPE_PNG)
+    curves_button_bm = wx.Bitmap(get_path() + '/toolbox_icons/curves.png', wx.BITMAP_TYPE_PNG)
 
     # Add chamfer tool button.
     chamfer_button_id = 1
-    chamfer_button_bm = wx.Bitmap(path + '/toolbox_icons/chamfer.png', wx.BITMAP_TYPE_PNG)
+    chamfer_button_bm = wx.Bitmap(get_path() + '/toolbox_icons/chamfer.png', wx.BITMAP_TYPE_PNG)
+
+    # Add settings tool button.
+    settings_button_id = 2
+    settings_button_bm = wx.Bitmap(get_path() + '/toolbox_icons/settings.png', wx.BITMAP_TYPE_PNG)
 
     while True:
         time.sleep(1)
@@ -48,15 +47,20 @@ def init_toolbar():
             top_tb.AddSeparator()
             curves_button_id = wx.NewId()
             top_tb.AddTool(curves_button_id, "Curve", curves_button_bm, "Route a curved trace", wx.ITEM_NORMAL)
-            top_tb.Bind(wx.EVT_TOOL, gui.curve_callback, id=curves_button_id)
+            top_tb.Bind(wx.EVT_TOOL, callback.curve_callback, id=curves_button_id)
             top_tb.Realize()
         # if not chamfer_button_id == 0 or not top_tb.FindTool(chamfer_button_id):
         #     top_tb.AddSeparator()
         #     chamfer_button_id = wx.NewId()
-        #     top_tb.AddTool(chamfer_button, "Chamfer", chamfer_button_bm, "Create a chamfer", wx.ITEM_NORMAL)
-        #     top_tb.Bind(wx.EVT_TOOL, gui.chamfer_callback, id=chamfer_button)
+        #     top_tb.AddTool(chamfer_button_id, "Chamfer", chamfer_button_bm, "Create a chamfer", wx.ITEM_NORMAL)
+        #     top_tb.Bind(wx.EVT_TOOL, callback.chamfer_callback, id=chamfer_button_id)
         #     top_tb.Realize()
-
+    if not settings_button_id == 0 or not top_tb.FindTool(settings_button_id):
+            top_tb.AddSeparator()
+            settings_button_id = wx.NewId()
+            top_tb.AddTool(settings_button_id, "Chamfer", chamfer_button_bm, "Adjust Toolbox settings", wx.ITEM_NORMAL)
+            top_tb.Bind(wx.EVT_TOOL, callback.chamfer_callback, id=settings_button_id)
+            top_tb.Realize()
 
 # Register curve plugin
 curvePlugin = CurvePlugin()
@@ -68,6 +72,10 @@ curvePlugin.register()
 # chamferPlugin.defaults()
 # chamferPlugin.register()
 
+# Register settings plugin
+settingsPlugin = SettingsPlugin()
+settingsPlugin.defaults()
+settingsPlugin.register()
 
 # Add a button the hacky way if plugin button is not supported
 # in pcbnew, unless this is linux.
@@ -81,3 +89,8 @@ if not curvePlugin.pcbnew_icon_support and not sys.platform.startswith('linux'):
 #     t = threading.Thread(target=init_toolbar)
 #     t.daemon = True
 #     t.start()
+
+if not settingsPlugin.pcbnew_icon_support and not sys.platform.startswith('linux'):
+    t = threading.Thread(target=init_toolbar)
+    t.daemon = True
+    t.start()
