@@ -9,12 +9,13 @@ import settings
 
 def curve_callback(event):
     '''Initiates the curve routing tool based on existing settings.'''
-    self.cfgSettings = settings.CurveSettings()
+    cfgSettings = settings.CurveSettings()
+    cfgSettings.Load()
 
-    if self.cfgSettings.curveType == settings.CurveSettings._CURVE_TYPE_CFG['Value']['Circular']:
+    if cfgSettings.curveType == cfgSettings._CURVE_TYPE_CFG['Value']['Circular']:
         # Route a circular curve
         pass
-    elif self.cfgSettings.curveType == settings.CurveSettings_CURVE_TYPE_CFG['Value']['Hermite']:
+    elif cfgSettings.curveType == cfgSettings._CURVE_TYPE_CFG['Value']['Hermite']:
         # Route a hermite curve
         pass
 
