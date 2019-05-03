@@ -57,8 +57,9 @@ class CurveSettings(BaseSettings):
     _PAD_VECTOR_CFG = {'Key':'1', 'Value':{'Auto':'0', 'Manual':'1'}}
     _ARC_RADIUS = {'Key':'2'}
     _ARC_UNIT_CFG = {'Key':'3', 'Value':{'mm':'0', 'in':'1', 'mil':'2'}}
-    _FROM_PAD_CFG = {'Key':'4', 'Value':_BOTTOM}
-    _TO_PAD_CFG = {'Key':'5', 'Value':_BOTTOM}
+    _MAX_ARC_CHECK_CFG = {'Key':'4', 'Value':'0'}
+    _FROM_PAD_CFG = {'Key':'5', 'Value':_BOTTOM}
+    _TO_PAD_CFG = {'Key':'6', 'Value':_BOTTOM}
 
 
     def __init__(self):
@@ -69,6 +70,7 @@ class CurveSettings(BaseSettings):
         self.padVectorCfg = self._PAD_VECTOR_CFG['Value']['Auto']
         self.arcRadius = '0'
         self.arcRadiusUnit = self._ARC_UNIT_CFG['Value']['mm']
+        self.maxArcCheck = '1'
         self.fromPad = self._FROM_PAD_CFG['Value']
         self.toPad = self._TO_PAD_CFG['Value']
         
@@ -76,6 +78,7 @@ class CurveSettings(BaseSettings):
         self.SetValue(self._CURVE_SECTION, self._PAD_VECTOR_CFG['Key'], self.padVectorCfg)
         self.SetValue(self._CURVE_SECTION, self._ARC_RADIUS['Key'], self.arcRadius)
         self.SetValue(self._CURVE_SECTION, self._ARC_UNIT_CFG['Key'], self.arcRadiusUnit)
+        self.SetValue(self._CURVE_SECTION, self._MAX_ARC_CHECK_CFG['Key'], self.maxArcCheck)
         self.SetValue(self._CURVE_SECTION, self._FROM_PAD_CFG['Key'], self.fromPad)
         self.SetValue(self._CURVE_SECTION, self._TO_PAD_CFG['Key'], self.toPad)
     
@@ -84,6 +87,7 @@ class CurveSettings(BaseSettings):
         self.SetValue(self._CURVE_SECTION, self._PAD_VECTOR_CFG['Key'], self.padVectorCfg)
         self.SetValue(self._CURVE_SECTION, self._ARC_RADIUS['Key'], self.arcRadius)
         self.SetValue(self._CURVE_SECTION, self._ARC_UNIT_CFG['Key'], self.arcRadiusUnit)
+        self.SetValue(self._CURVE_SECTION, self._MAX_ARC_CHECK_CFG['Key'], self.maxArcCheck)
         self.SetValue(self._CURVE_SECTION, self._FROM_PAD_CFG['Key'], self.fromPad)
         self.SetValue(self._CURVE_SECTION, self._TO_PAD_CFG['Key'], self.toPad)
         self.Write()
@@ -96,6 +100,7 @@ class CurveSettings(BaseSettings):
             self.padVectorCfg = self.GetValue(self._CURVE_SECTION, self._PAD_VECTOR_CFG['Key'])
             self.arcRadius = self.GetValue(self._CURVE_SECTION, self._ARC_RADIUS['Key'])
             self.arcRadiusUnit = self.GetValue(self._CURVE_SECTION, self._ARC_UNIT_CFG['Key'])
+            self.maxArcCheck = self.GetValue(self._CURVE_SECTION, self._MAX_ARC_CHECK_CFG['Key'])
             self.fromPad = self.GetValue(self._CURVE_SECTION, self._FROM_PAD_CFG['Key'])
             self.toPad = self.GetValue(self._CURVE_SECTION, self._TO_PAD_CFG['Key'])
         except:

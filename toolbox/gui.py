@@ -30,6 +30,14 @@ class CurveTab(gui_base.SettingsDialogBase):
         self.toBottomRadioBtn.SetValue(True)
         self.toPadImg.SetBitmap(wx.Bitmap(get_path() + '/toolbox_icons/bottom.png'))
     
+    def GetMaxArcCheck(self):
+        if self.maxArcRadiusCheck.GetValue(): return '1'
+        else: return '0'
+    
+    def SetMaxArcCheck(self, value):
+        if value == '1': self.maxArcRadiusCheck.SetValue(True)
+        else: self.maxArcRadiusCheck.SetValue(False)
+    
     def GetFromPad(self):
         if self.fromRightRadioBtn.GetValue(): return '0'
         elif self.fromTopRightRadioBtn.GetValue(): return '1'
@@ -170,6 +178,7 @@ class SettingsDialog(CurveTab):
         self.padVectorRadioBox.SetSelection(int(self.cfgSettings.padVectorCfg))
         self.arcRadius_spinCtrlDouble.SetValue(float(self.cfgSettings.arcRadius))
         self.arcRadiusUnitsChoice.SetSelection(int(self.cfgSettings.arcRadiusUnit))
+        self.SetMaxArcCheck(self.cfgSettings.maxArcCheck)
         self.SetFromPad(self.cfgSettings.fromPad)
         self.SetToPad(self.cfgSettings.toPad)
     
@@ -187,6 +196,7 @@ class SettingsDialog(CurveTab):
             self.cfgSettings.padVectorCfg = self.padVectorRadioBox.GetSelection()
             self.cfgSettings.arcRadius = self.arcRadius_spinCtrlDouble.GetValue()
             self.cfgSettings.arcRadiusUnit = self.arcRadiusUnitsChoice.GetSelection()
+            self.cfgSettings.maxArcCheck = self.GetMaxArcCheck()
             self.cfgSettings.fromPad = self.GetFromPad()
             self.cfgSettings.toPad = self.GetToPad()
 
