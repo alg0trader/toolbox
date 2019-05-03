@@ -17,7 +17,7 @@ import wx.xrc
 class SettingsDialogBase ( wx.Dialog ):
 
 	def __init__( self, parent ):
-		wx.Dialog.__init__ ( self, parent, id = wx.ID_ANY, title = u"Settings", pos = wx.DefaultPosition, size = wx.DefaultSize, style = wx.DEFAULT_DIALOG_STYLE )
+		wx.Dialog.__init__ ( self, parent, id = wx.ID_ANY, title = u"Toolbox Settings", pos = wx.DefaultPosition, size = wx.DefaultSize, style = wx.DEFAULT_DIALOG_STYLE )
 
 		self.SetSizeHints( wx.DefaultSize, wx.DefaultSize )
 
@@ -77,7 +77,7 @@ class SettingsDialogBase ( wx.Dialog ):
 		_fromVectorsfgSizer.SetFlexibleDirection( wx.BOTH )
 		_fromVectorsfgSizer.SetNonFlexibleGrowMode( wx.FLEX_GROWMODE_SPECIFIED )
 
-		self.fromTopLeftRadioBtn = wx.RadioButton( _fromPadsbSizer.GetStaticBox(), wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.fromTopLeftRadioBtn = wx.RadioButton( _fromPadsbSizer.GetStaticBox(), wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, wx.RB_GROUP )
 		_fromVectorsfgSizer.Add( self.fromTopLeftRadioBtn, 0, wx.ALL|wx.ALIGN_CENTER_HORIZONTAL|wx.ALIGN_BOTTOM, 5 )
 
 		self.fromTopRadioBtn = wx.RadioButton( _fromPadsbSizer.GetStaticBox(), wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, 0 )
@@ -126,7 +126,7 @@ class SettingsDialogBase ( wx.Dialog ):
 		_toVectorsfgSizer.SetFlexibleDirection( wx.BOTH )
 		_toVectorsfgSizer.SetNonFlexibleGrowMode( wx.FLEX_GROWMODE_SPECIFIED )
 
-		self.toTopLeftRadioBtn = wx.RadioButton( _toPadVectorbSizer.GetStaticBox(), wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.toTopLeftRadioBtn = wx.RadioButton( _toPadVectorbSizer.GetStaticBox(), wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, wx.RB_GROUP )
 		_toVectorsfgSizer.Add( self.toTopLeftRadioBtn, 0, wx.ALL|wx.ALIGN_CENTER_HORIZONTAL|wx.ALIGN_BOTTOM, 5 )
 
 		self.toTopRadioBtn = wx.RadioButton( _toPadVectorbSizer.GetStaticBox(), wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, 0 )
