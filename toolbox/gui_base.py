@@ -174,9 +174,78 @@ class SettingsDialogBase ( wx.Dialog ):
 		self.curveTrackPanel.SetSizer( _curvebSizer )
 		self.curveTrackPanel.Layout()
 		_curvebSizer.Fit( self.curveTrackPanel )
-		self.settingsNotebook.AddPage( self.curveTrackPanel, u"Curve", True )
+		self.settingsNotebook.AddPage( self.curveTrackPanel, u"Curve", False )
 		self.chamferTrackPanel = wx.Panel( self.settingsNotebook, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.TAB_TRAVERSAL )
-		self.settingsNotebook.AddPage( self.chamferTrackPanel, u"Chamfer", False )
+		_chamferbSizer = wx.BoxSizer( wx.VERTICAL )
+
+		_chamferfgSizer = wx.FlexGridSizer( 0, 4, 0, 0 )
+		_chamferfgSizer.SetFlexibleDirection( wx.BOTH )
+		_chamferfgSizer.SetNonFlexibleGrowMode( wx.FLEX_GROWMODE_SPECIFIED )
+
+		self.chamferLineWidthStaticText = wx.StaticText( self.chamferTrackPanel, wx.ID_ANY, u"Line Width", wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.chamferLineWidthStaticText.Wrap( -1 )
+
+		_chamferfgSizer.Add( self.chamferLineWidthStaticText, 0, wx.ALL|wx.ALIGN_CENTER_VERTICAL, 5 )
+
+		self.chamferLineWidthTextCtrl = wx.TextCtrl( self.chamferTrackPanel, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, 0 )
+		_chamferfgSizer.Add( self.chamferLineWidthTextCtrl, 0, wx.ALL|wx.ALIGN_CENTER_VERTICAL, 5 )
+
+		chamferLineWidthUnitwxChoiceChoices = [ u"mm", u"mil", u"in" ]
+		self.chamferLineWidthUnitwxChoice = wx.Choice( self.chamferTrackPanel, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, chamferLineWidthUnitwxChoiceChoices, 0 )
+		self.chamferLineWidthUnitwxChoice.SetSelection( 0 )
+		_chamferfgSizer.Add( self.chamferLineWidthUnitwxChoice, 0, wx.ALL|wx.ALIGN_CENTER_VERTICAL, 5 )
+
+		self._chamferRouteTracksCheckBox = wx.CheckBox( self.chamferTrackPanel, wx.ID_ANY, u"Route", wx.DefaultPosition, wx.DefaultSize, 0 )
+		_chamferfgSizer.Add( self._chamferRouteTracksCheckBox, 1, wx.ALIGN_CENTER_VERTICAL|wx.ALL|wx.EXPAND|wx.ALIGN_RIGHT, 5 )
+
+		self.chamferBoardHeightStaticText = wx.StaticText( self.chamferTrackPanel, wx.ID_ANY, u"Board Height", wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.chamferBoardHeightStaticText.Wrap( -1 )
+
+		_chamferfgSizer.Add( self.chamferBoardHeightStaticText, 0, wx.ALL|wx.ALIGN_CENTER_VERTICAL, 5 )
+
+		self.chamferBoardHeightTextCtrl = wx.TextCtrl( self.chamferTrackPanel, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, 0 )
+		_chamferfgSizer.Add( self.chamferBoardHeightTextCtrl, 0, wx.ALL|wx.ALIGN_CENTER_VERTICAL, 5 )
+
+		chamferBoardHeightUnitwxChoiceChoices = [ u"mm", u"mil", u"in", u"in" ]
+		self.chamferBoardHeightUnitwxChoice = wx.Choice( self.chamferTrackPanel, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, chamferBoardHeightUnitwxChoiceChoices, 0 )
+		self.chamferBoardHeightUnitwxChoice.SetSelection( 0 )
+		_chamferfgSizer.Add( self.chamferBoardHeightUnitwxChoice, 0, wx.ALL, 5 )
+
+
+		_chamferfgSizer.Add( ( 0, 0), 1, wx.EXPAND, 5 )
+
+		self.chamferAngleStaticText = wx.StaticText( self.chamferTrackPanel, wx.ID_ANY, u"Angle (°)", wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.chamferAngleStaticText.Wrap( -1 )
+
+		_chamferfgSizer.Add( self.chamferAngleStaticText, 0, wx.ALL, 5 )
+
+		self.chamferAngleTextCtrl = wx.TextCtrl( self.chamferTrackPanel, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, 0 )
+		_chamferfgSizer.Add( self.chamferAngleTextCtrl, 0, wx.ALL, 5 )
+
+		chamferUnitwxChoiceChoices = [ u"mm", u"mil", u"in" ]
+		self.chamferUnitwxChoice = wx.Choice( self.chamferTrackPanel, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, chamferUnitwxChoiceChoices, 0 )
+		self.chamferUnitwxChoice.SetSelection( 0 )
+		_chamferfgSizer.Add( self.chamferUnitwxChoice, 0, wx.ALL, 5 )
+
+
+		_chamferfgSizer.Add( ( 0, 0), 1, wx.EXPAND, 5 )
+
+
+		_chamferbSizer.Add( _chamferfgSizer, 0, wx.ALL|wx.ALIGN_CENTER_VERTICAL|wx.EXPAND, 5 )
+
+		_chamferImgbSizer = wx.BoxSizer( wx.VERTICAL )
+
+		self.chamferImg = wx.StaticBitmap( self.chamferTrackPanel, wx.ID_ANY, wx.NullBitmap, wx.DefaultPosition, wx.Size( 295,150 ), 0 )
+		_chamferImgbSizer.Add( self.chamferImg, 1, wx.ALIGN_CENTER_HORIZONTAL|wx.ALL, 5 )
+
+
+		_chamferbSizer.Add( _chamferImgbSizer, 1, wx.EXPAND, 5 )
+
+
+		self.chamferTrackPanel.SetSizer( _chamferbSizer )
+		self.chamferTrackPanel.Layout()
+		_chamferbSizer.Fit( self.chamferTrackPanel )
+		self.settingsNotebook.AddPage( self.chamferTrackPanel, u"Chamfer", True )
 		self.viaStitchPanel = wx.Panel( self.settingsNotebook, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.TAB_TRAVERSAL )
 		self.settingsNotebook.AddPage( self.viaStitchPanel, u"Via Stitch", False )
 		self.routePanel = wx.Panel( self.settingsNotebook, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.TAB_TRAVERSAL )

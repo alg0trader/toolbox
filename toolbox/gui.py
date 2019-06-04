@@ -21,6 +21,7 @@ class CurveTab(gui_base.SettingsDialogBase):
     def __init__(self):
         # Load Curve-Tab Settings
         gui_base.SettingsDialogBase.__init__(self, None)
+        # super(CurveTab, self).__init__()
 
         # Default to bottom vector direction for 'From' pad (for now)
         self.fromBottomRadioBtn.SetValue(True)
@@ -160,14 +161,27 @@ class CurveTab(gui_base.SettingsDialogBase):
     def OnToBottomRightRadioBtn(self, event):
         self.toPadImg.SetBitmap(wx.Bitmap(get_path() + '/toolbox_icons/bottom_right.png'))
 
+class ChamferTab(CurveTab):
+    """
+    Class for methods relative to the curve-tab in the settings dialog window.
+    """
+    def __init__(self):
+        # Load Chamfer-Tab Settings
+        # gui_base.SettingsDialogBase.__init__(self, None)
+        # super(ChamferTab, self).__init__()
+        CurveTab.__init__(self)
 
-class SettingsDialog(CurveTab):
+        # Load arbitrary chamfer guide image
+        self.chamferImg.SetBitmap(wx.Bitmap(get_path() + '/toolbox_icons/arbitrary_chamfer.png'))
+
+
+class SettingsDialog(ChamferTab):
     """
     Class for inheriting dialog base class.
     """
     def __init__(self):
-        CurveTab.__init__(self)
-        # TODO: Initialize other tabs when implemented
+        ChamferTab.__init__(self)
+
         self.Centre()
 
         # Load settings

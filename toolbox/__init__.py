@@ -49,12 +49,12 @@ def init_toolbar():
             top_tb.AddTool(curves_button_id, "Curve", curves_button_bm, "Route a curved trace", wx.ITEM_NORMAL)
             top_tb.Bind(wx.EVT_TOOL, callback.curve_callback, id=curves_button_id)
             top_tb.Realize()
-        # if not chamfer_button_id == 0 or not top_tb.FindTool(chamfer_button_id):
-        #     top_tb.AddSeparator()
-        #     chamfer_button_id = wx.NewId()
-        #     top_tb.AddTool(chamfer_button_id, "Chamfer", chamfer_button_bm, "Create a chamfer", wx.ITEM_NORMAL)
-        #     top_tb.Bind(wx.EVT_TOOL, callback.chamfer_callback, id=chamfer_button_id)
-        #     top_tb.Realize()
+        if not chamfer_button_id == 0 or not top_tb.FindTool(chamfer_button_id):
+            top_tb.AddSeparator()
+            chamfer_button_id = wx.NewId()
+            top_tb.AddTool(chamfer_button_id, "Chamfer", chamfer_button_bm, "Create a chamfer", wx.ITEM_NORMAL)
+            top_tb.Bind(wx.EVT_TOOL, callback.chamfer_callback, id=chamfer_button_id)
+            top_tb.Realize()
     if not settings_button_id == 0 or not top_tb.FindTool(settings_button_id):
             top_tb.AddSeparator()
             settings_button_id = wx.NewId()
@@ -68,9 +68,9 @@ curvePlugin.defaults()
 curvePlugin.register()
 
 # Register chamfer plugin
-# chamferPlugin = ChamferPlugin()
-# chamferPlugin.defaults()
-# chamferPlugin.register()
+chamferPlugin = ChamferPlugin()
+chamferPlugin.defaults()
+chamferPlugin.register()
 
 # Register settings plugin
 settingsPlugin = SettingsPlugin()
@@ -85,10 +85,10 @@ if not curvePlugin.pcbnew_icon_support and not sys.platform.startswith('linux'):
     t.daemon = True
     t.start()
 
-# if not chamferPlugin.pcbnew_icon_support and not sys.platform.startswith('linux'):
-#     t = threading.Thread(target=init_toolbar)
-#     t.daemon = True
-#     t.start()
+if not chamferPlugin.pcbnew_icon_support and not sys.platform.startswith('linux'):
+    t = threading.Thread(target=init_toolbar)
+    t.daemon = True
+    t.start()
 
 if not settingsPlugin.pcbnew_icon_support and not sys.platform.startswith('linux'):
     t = threading.Thread(target=init_toolbar)
