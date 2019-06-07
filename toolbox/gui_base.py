@@ -174,7 +174,7 @@ class SettingsDialogBase ( wx.Dialog ):
 		self.curveTrackPanel.SetSizer( _curvebSizer )
 		self.curveTrackPanel.Layout()
 		_curvebSizer.Fit( self.curveTrackPanel )
-		self.settingsNotebook.AddPage( self.curveTrackPanel, u"Curve", False )
+		self.settingsNotebook.AddPage( self.curveTrackPanel, u"Curve", True )
 		self.chamferTrackPanel = wx.Panel( self.settingsNotebook, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.TAB_TRAVERSAL )
 		_chamferbSizer = wx.BoxSizer( wx.VERTICAL )
 
@@ -187,15 +187,17 @@ class SettingsDialogBase ( wx.Dialog ):
 
 		_chamferfgSizer.Add( self.chamferLineWidthStaticText, 0, wx.ALL|wx.ALIGN_CENTER_VERTICAL, 5 )
 
-		self.chamferLineWidthTextCtrl = wx.TextCtrl( self.chamferTrackPanel, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, 0 )
-		_chamferfgSizer.Add( self.chamferLineWidthTextCtrl, 0, wx.ALL|wx.ALIGN_CENTER_VERTICAL, 5 )
+		self.chamferLineWidthSpinCtrlDouble = wx.SpinCtrlDouble( self.chamferTrackPanel, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, wx.SP_ARROW_KEYS, 0, 100, 0, 1 )
+		self.chamferLineWidthSpinCtrlDouble.SetDigits( 0 )
+		_chamferfgSizer.Add( self.chamferLineWidthSpinCtrlDouble, 0, wx.ALL, 5 )
 
 		chamferLineWidthUnitwxChoiceChoices = [ u"mm", u"mil", u"in" ]
 		self.chamferLineWidthUnitwxChoice = wx.Choice( self.chamferTrackPanel, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, chamferLineWidthUnitwxChoiceChoices, 0 )
 		self.chamferLineWidthUnitwxChoice.SetSelection( 0 )
 		_chamferfgSizer.Add( self.chamferLineWidthUnitwxChoice, 0, wx.ALL|wx.ALIGN_CENTER_VERTICAL, 5 )
 
-		self._chamferRouteTracksCheckBox = wx.CheckBox( self.chamferTrackPanel, wx.ID_ANY, u"Route", wx.DefaultPosition, wx.DefaultSize, 0 )
+		self._chamferRouteTracksCheckBox = wx.CheckBox( self.chamferTrackPanel, wx.ID_ANY, u"Autoroute", wx.DefaultPosition, wx.DefaultSize, 0 )
+		self._chamferRouteTracksCheckBox.SetValue(True)
 		_chamferfgSizer.Add( self._chamferRouteTracksCheckBox, 1, wx.ALIGN_CENTER_VERTICAL|wx.ALL|wx.EXPAND|wx.ALIGN_RIGHT, 5 )
 
 		self.chamferBoardHeightStaticText = wx.StaticText( self.chamferTrackPanel, wx.ID_ANY, u"Board Height", wx.DefaultPosition, wx.DefaultSize, 0 )
@@ -203,8 +205,9 @@ class SettingsDialogBase ( wx.Dialog ):
 
 		_chamferfgSizer.Add( self.chamferBoardHeightStaticText, 0, wx.ALL|wx.ALIGN_CENTER_VERTICAL, 5 )
 
-		self.chamferBoardHeightTextCtrl = wx.TextCtrl( self.chamferTrackPanel, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, 0 )
-		_chamferfgSizer.Add( self.chamferBoardHeightTextCtrl, 0, wx.ALL|wx.ALIGN_CENTER_VERTICAL, 5 )
+		self.boardHeightSpinCtrlDouble = wx.SpinCtrlDouble( self.chamferTrackPanel, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, wx.SP_ARROW_KEYS, 0, 100, 0, 1 )
+		self.boardHeightSpinCtrlDouble.SetDigits( 0 )
+		_chamferfgSizer.Add( self.boardHeightSpinCtrlDouble, 0, wx.ALL, 5 )
 
 		chamferBoardHeightUnitwxChoiceChoices = [ u"mm", u"mil", u"in", u"in" ]
 		self.chamferBoardHeightUnitwxChoice = wx.Choice( self.chamferTrackPanel, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, chamferBoardHeightUnitwxChoiceChoices, 0 )
@@ -214,15 +217,16 @@ class SettingsDialogBase ( wx.Dialog ):
 
 		_chamferfgSizer.Add( ( 0, 0), 1, wx.EXPAND, 5 )
 
-		self.chamferAngleStaticText = wx.StaticText( self.chamferTrackPanel, wx.ID_ANY, u"Angle (°)", wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.chamferAngleStaticText = wx.StaticText( self.chamferTrackPanel, wx.ID_ANY, u"Angle", wx.DefaultPosition, wx.DefaultSize, 0 )
 		self.chamferAngleStaticText.Wrap( -1 )
 
 		_chamferfgSizer.Add( self.chamferAngleStaticText, 0, wx.ALL, 5 )
 
-		self.chamferAngleTextCtrl = wx.TextCtrl( self.chamferTrackPanel, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, 0 )
-		_chamferfgSizer.Add( self.chamferAngleTextCtrl, 0, wx.ALL, 5 )
+		self.chamferAngleSpinCtrlDouble = wx.SpinCtrlDouble( self.chamferTrackPanel, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, wx.SP_ARROW_KEYS, 0, 100, 0, 1 )
+		self.chamferAngleSpinCtrlDouble.SetDigits( 0 )
+		_chamferfgSizer.Add( self.chamferAngleSpinCtrlDouble, 0, wx.ALL, 5 )
 
-		chamferUnitwxChoiceChoices = [ u"mm", u"mil", u"in" ]
+		chamferUnitwxChoiceChoices = [ u"Deg", u"Rad" ]
 		self.chamferUnitwxChoice = wx.Choice( self.chamferTrackPanel, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, chamferUnitwxChoiceChoices, 0 )
 		self.chamferUnitwxChoice.SetSelection( 0 )
 		_chamferfgSizer.Add( self.chamferUnitwxChoice, 0, wx.ALL, 5 )
@@ -245,7 +249,7 @@ class SettingsDialogBase ( wx.Dialog ):
 		self.chamferTrackPanel.SetSizer( _chamferbSizer )
 		self.chamferTrackPanel.Layout()
 		_chamferbSizer.Fit( self.chamferTrackPanel )
-		self.settingsNotebook.AddPage( self.chamferTrackPanel, u"Chamfer", True )
+		self.settingsNotebook.AddPage( self.chamferTrackPanel, u"Chamfer", False )
 		self.viaStitchPanel = wx.Panel( self.settingsNotebook, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.TAB_TRAVERSAL )
 		self.settingsNotebook.AddPage( self.viaStitchPanel, u"Via Stitch", False )
 		self.routePanel = wx.Panel( self.settingsNotebook, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.TAB_TRAVERSAL )

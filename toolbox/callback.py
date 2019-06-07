@@ -2,6 +2,7 @@ import wx
 import wx.aui
 
 import gui
+import chamfer
 import settings
 
 
@@ -21,7 +22,14 @@ def curve_callback(event):
 
 def chamfer_callback(event):
     '''Initiates the chamfer tool based on existing settings.'''
-    pass
+    cfgSettings = settings.ChamferSettings()
+    cfgSettings.Load()
+    
+    # TODO Convert mm, mil, or in depending on setting
+    
+
+    c = chamfer.Chamfer(float(cfgSettings.lineWidth), float(cfgSettings.boardHeight), float(cfgSettings.chamferAngle))
+    c.ChamferFootprint()
 
 def settings_callback(event):
     '''Initiates the settings panel for edit.'''

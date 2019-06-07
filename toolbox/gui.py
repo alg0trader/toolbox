@@ -167,13 +167,13 @@ class ChamferTab(CurveTab):
     """
     def __init__(self):
         # Load Chamfer-Tab Settings
-        # gui_base.SettingsDialogBase.__init__(self, None)
-        # super(ChamferTab, self).__init__()
         CurveTab.__init__(self)
 
         # Load arbitrary chamfer guide image
         self.chamferImg.SetBitmap(wx.Bitmap(get_path() + '/toolbox_icons/arbitrary_chamfer.png'))
-
+    
+    # Override chamfer methods
+    
 
 class SettingsDialog(ChamferTab):
     """
@@ -184,7 +184,7 @@ class SettingsDialog(ChamferTab):
 
         self.Centre()
 
-        # Load settings
+        # Load Curve-Tab settings
         self.cfgSettings = settings.CurveSettings()
         self.cfgSettings.Load()
 
@@ -195,6 +195,17 @@ class SettingsDialog(ChamferTab):
         self.SetMaxArcCheck(self.cfgSettings.maxArcCheck)
         self.SetFromPad(self.cfgSettings.fromPad)
         self.SetToPad(self.cfgSettings.toPad)
+
+        # Load Chamfer-Tab settings
+        self.cfgSettings = settings.ChamferSettings()
+        self.cfgSettings.Load()
+
+        self.chamferLineWidthSpinCtrlDouble.SetValue(float(self.cfgSettings.lineWidth))
+        self.chamferLineWidthUnitwxChoice.SetSelection(int(self.cfgSettings.lineUnit))
+        self.boardHeightSpinCtrlDouble.SetValue(float(self.cfgSettings.boardHeight))
+        self.chamferBoardHeightUnitwxChoice.SetSelection(int(self.cfgSettings.heightUnit))
+        self.chamferAngleSpinCtrlDouble.SetValue(float(self.cfgSettings.chamferAngle))
+        self.chamferUnitwxChoice.SetSelection(int(self.cfgSettings.angleUnit))
     
     # Hack for new wxFormBuilder generating code incompatible with old wxPython
     # no inspection PyMethodOverriding
@@ -213,7 +224,18 @@ class SettingsDialog(ChamferTab):
             self.cfgSettings.maxArcCheck = self.GetMaxArcCheck()
             self.cfgSettings.fromPad = self.GetFromPad()
             self.cfgSettings.toPad = self.GetToPad()
+            # TODO check if input is invalid
+            self.cfgSettings.Save()
 
+            # Chamfer-Tab settings
+            cfgSettings = settings.ChamferSettings()
+            self.cfgSettings.lineWidth = self.chamferLineWidthSpinCtrlDouble.GetValue()
+            self.cfgSettings.lineUnit = self.chamferLineWidthUnitwxChoice.GetSelection()
+            self.cfgSettings.boardHeight = self.boardHeightSpinCtrlDouble.GetValue()
+            self.cfgSettings.heightunit = self.chamferBoardHeightUnitwxChoice.GetSelection()
+            self.cfgSettings.chamferAngle = self.chamferAngleSpinCtrlDouble.GetValue()
+            self.cfgSettings.angleUnit = self.chamferUnitwxChoice.GetSelection()
+            # TODO check if input is invalid
             self.cfgSettings.Save()
         finally:
             self.Destroy()

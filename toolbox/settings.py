@@ -74,13 +74,7 @@ class CurveSettings(BaseSettings):
         self.fromPad = self._FROM_PAD_CFG['Value']
         self.toPad = self._TO_PAD_CFG['Value']
         
-        self.SetValue(self._CURVE_SECTION, self._CURVE_TYPE_CFG['Key'], self.curveType)
-        self.SetValue(self._CURVE_SECTION, self._PAD_VECTOR_CFG['Key'], self.padVectorCfg)
-        self.SetValue(self._CURVE_SECTION, self._ARC_RADIUS['Key'], self.arcRadius)
-        self.SetValue(self._CURVE_SECTION, self._ARC_UNIT_CFG['Key'], self.arcRadiusUnit)
-        self.SetValue(self._CURVE_SECTION, self._MAX_ARC_CHECK_CFG['Key'], self.maxArcCheck)
-        self.SetValue(self._CURVE_SECTION, self._FROM_PAD_CFG['Key'], self.fromPad)
-        self.SetValue(self._CURVE_SECTION, self._TO_PAD_CFG['Key'], self.toPad)
+        self.Save()
     
     def Save(self):
         self.SetValue(self._CURVE_SECTION, self._CURVE_TYPE_CFG['Key'], self.curveType)
@@ -113,5 +107,48 @@ class ChamferSettings(BaseSettings):
     """
     Class for chamfer-specific settings.
     """
+    _CHAMFER_SECTION = 'chamfer_tab'
+    _CHAMFER_LINE_WIDTH = {'Key':'0'}
+    _CHAMFER_LINE_UNIT = {'Key':'1', 'Value':{'mm':'0', 'mil':'1', 'in':'2'}}
+    _CHAMFER_BOARD_HEIGHT = {'Key':'2'}
+    _CHAMFER_HEIGHT_UNIT = {'Key':'3', 'Value':{'mm':'0', 'mil':'1', 'in':'2'}}
+    _CHAMFER_ANGLE = {'Key':'4'}
+    _CHAMFER_ANGLE_UNIT = {'Key':'5', 'Value':{'deg':'0', 'rad':1}}
+
     def __init__(self):
-        pass
+        BaseSettings.__init__(self)
+    
+    def Defaults(self):
+        self.lineWidth = '0.5334'     # 21 mils by default
+        self.lineUnit = self._CHAMFER_LINE_UNIT['Value']['mm']
+        self.boardHeight = '0.254'    # 10 mils by default
+        self.heightUnit = self._CHAMFER_HEIGHT_UNIT['Value']['mm']
+        self.chamferAngle = '90'      # 90 degrees by default
+        self.angleUnit = self._CHAMFER_ANGLE_UNIT['Value']['deg']
+
+        self.Save()
+    
+    def Save(self):
+        self.SetValue(self._CHAMFER_SECTION, self._CHAMFER_LINE_WIDTH['Key'], self.lineWidth)
+        self.SetValue(self._CHAMFER_SECTION, self._CHAMFER_LINE_UNIT['Key'], self.lineUnit)
+        self.SetValue(self._CHAMFER_SECTION, self._CHAMFER_BOARD_HEIGHT['Key'], self.boardHeight)
+        self.SetValue(self._CHAMFER_SECTION, self._CHAMFER_HEIGHT_UNIT['Key'], self.heightUnit)
+        self.SetValue(self._CHAMFER_SECTION, self._CHAMFER_ANGLE['Key'], self.chamferAngle)
+        self.SetValue(self._CHAMFER_SECTION, self._CHAMFER_ANGLE_UNIT['Key'], self.angleUnit)
+        self.Write()
+    
+    def Load(self):
+        try:
+            self.Read()
+
+            self.lineWidth = self.GetValue(self._CHAMFER_SECTION, self._CHAMFER_LINE_WIDTH['Key'])
+            self.lineUnit = self.GetValue(self._CHAMFER_SECTION, self._CHAMFER_LINE_UNIT['Key'])
+            self.boardHeight = self.GetValue(self._CHAMFER_SECTION, self._CHAMFER_BOARD_HEIGHT['Key'])
+            self.heightUnit = self.GetValue(self._CHAMFER_SECTION, self._CHAMFER_HEIGHT_UNIT['Key'])
+            self.chamferAngle = self.GetValue(self._CHAMFER_SECTION, self._CHAMFER_ANGLE['Key'])
+            self.angleUnit = self.GetValue(self._CHAMFER_SECTION, self._CHAMFER_ANGLE_UNIT['Key'])
+        
+        except:
+            self.Defaults()
+            self.Write()
+            self.Load()
