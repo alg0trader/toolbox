@@ -245,6 +245,11 @@ class SettingsDialogBase ( wx.Dialog ):
 
 		_chamferbSizer.Add( _chamferImgbSizer, 1, wx.EXPAND, 5 )
 
+		self.chamferCutStaticText = wx.StaticText( self.chamferTrackPanel, wx.ID_ANY, wx.EmptyString, wx.Point( -1,-1 ), wx.DefaultSize, 0 )
+		self.chamferCutStaticText.Wrap( -1 )
+
+		_chamferbSizer.Add( self.chamferCutStaticText, 0, wx.ALL|wx.EXPAND, 5 )
+
 
 		self.chamferTrackPanel.SetSizer( _chamferbSizer )
 		self.chamferTrackPanel.Layout()
@@ -294,8 +299,11 @@ class SettingsDialogBase ( wx.Dialog ):
 		self.toBottomLeftRadioBtn.Bind( wx.EVT_RADIOBUTTON, self.OnToBottomLeftRadioBtn )
 		self.toBottomRadioBtn.Bind( wx.EVT_RADIOBUTTON, self.OnToBottomRadioBtn )
 		self.toBottomRightRadioBtn.Bind( wx.EVT_RADIOBUTTON, self.OnToBottomRightRadioBtn )
+		self.chamferLineWidthSpinCtrlDouble.Bind( wx.EVT_SPINCTRLDOUBLE, self.OnChamferSpinCtrlDouble )
 		self.chamferLineWidthUnitwxChoice.Bind( wx.EVT_CHOICE, self.OnChamferLineWidthUnit )
+		self.chamferHeightSpinCtrlDouble.Bind( wx.EVT_SPINCTRLDOUBLE, self.OnChamferSpinCtrlDouble )
 		self.chamferBoardHeightUnitwxChoice.Bind( wx.EVT_CHOICE, self.OnChamferBoardHeightUnit )
+		self.chamferAngleSpinCtrlDouble.Bind( wx.EVT_SPINCTRLDOUBLE, self.OnChamferSpinCtrlDouble )
 		self.chamferUnitwxChoice.Bind( wx.EVT_CHOICE, self.OnChamferAngleUnit )
 		self.settingsButtonSizerOK.Bind( wx.EVT_BUTTON, self.OnOKSettingsButtonClick )
 
@@ -358,11 +366,16 @@ class SettingsDialogBase ( wx.Dialog ):
 	def OnToBottomRightRadioBtn( self, event ):
 		event.Skip()
 
+	def OnChamferSpinCtrlDouble( self, event ):
+		event.Skip()
+
 	def OnChamferLineWidthUnit( self, event ):
 		event.Skip()
 
+
 	def OnChamferBoardHeightUnit( self, event ):
 		event.Skip()
+
 
 	def OnChamferAngleUnit( self, event ):
 		event.Skip()

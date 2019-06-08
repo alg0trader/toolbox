@@ -76,11 +76,14 @@ class Chamfer:
                 q22 * (x - x1) * (y - y1)
                 ) / ((x2 - x1) * (y2 - y1) + 0.0)
     
-    def OptimalMiter(self, w, h, angle):
+    def OptimalMiter(self):
         '''
         Calculate optimal miter by interpolating from table.
         https://awrcorp.com/download/faq/english/docs/Elements/MBENDA.htm
         '''
+
+        w, h, angle = self.width, self.height, self.angle_deg
+
         wh = w/h
         whs = [0.5, 1.0, 2.0]
         angles = [0, 30, 60, 90, 120]
@@ -118,7 +121,7 @@ class Chamfer:
         corner_width = pcbnew.ToMM(w)/m.cos(self.angle/2)
 
         # Get proportion of width to cut
-        cut = self.OptimalMiter(self.width, self.height, self.angle_deg)
+        cut = self.OptimalMiter()
         print("Cut: {0:.2f}%".format(cut*100))
 
         # Distance from uncut outside corner point to point 7

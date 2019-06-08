@@ -2,6 +2,8 @@
 import wx
 import wx.aui
 import gui_base
+
+import chamfer
 import settings
 import math as m
 from .toolbox import get_path
@@ -208,6 +210,7 @@ class SettingsDialog(ChamferTab):
         self.chamferAngleSpinCtrlDouble.SetValue(float(self.cfgSettings.chamferAngle))
         self.chamferUnitwxChoice.SetSelection(int(self.cfgSettings.angleUnit))
         self.SetChamferAutorouteCheck(self.cfgSettings.chamferAutoroute)
+        self.OnChamferSpinCtrlDouble(None)
     
     # Hack for new wxFormBuilder generating code incompatible with old wxPython
     # no inspection PyMethodOverriding
@@ -221,6 +224,23 @@ class SettingsDialog(ChamferTab):
     def SetChamferAutorouteCheck(self, value):
         if value == '1': self.chamferRouteTracksCheckBox.SetValue(True)
         else: self.chamferRouteTracksCheckBox.SetValue(False)
+    
+    def OnChamferSpinCtrlDouble(self, event):
+        lw = self.chamferLineWidthSpinCtrlDouble.GetValue()
+        bh = self.chamferHeightSpinCtrlDouble.GetValue()
+        ca = self.chamferAngleSpinCtrlDouble.GetValue()
+        
+        if self.chamferLineWidthUnitwxChoice.GetSelection() == '1': lw = lw * 0.0254
+        elif self.chamferLineWidthUnitwxChoice.GetSelection() == '2': lw = lw * 25.4
+        
+        if self.chamferBoardHeightUnitwxChoice.GetSelection() == '1': bh = bh * 0.0254
+        elif self.chamferBoardHeightUnitwxChoice.GetSelection() == '2': bh = bh * 25.4
+        
+        if self.chamferUnitwxChoice.GetSelection() == '1': ca = ca * 57.2958
+
+        cut = chamfer.Chamfer(lw, bh, ca, None, None).OptimalMiter()
+        self.chamferCutStaticText.SetLabel(' '*63 + 'Cut: {0:.2f}%'.format(cut*100))
+        
     
     def OnChamferLineWidthUnit(self, event):
         oldUnit = self.cfgSettings.lineUnit
