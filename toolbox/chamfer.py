@@ -10,10 +10,12 @@ class Chamfer:
     """
     Class for creating arbitrary angled chamfers.
     """
-    def __init__(self, width, height, angle):
+    def __init__(self, width, height, angle, net, layer):
         self.width = pcbnew.FromMM(width)       # mm
         self.height = pcbnew.FromMM(height)     # mm
         self.angle_deg = angle                  # deg
+        self.net = net
+        self.layer = layer
     
     def smdRectPad(self, module, size, pos, name, angle):
         '''Build a rectangular pad.'''
@@ -33,6 +35,8 @@ class Chamfer:
         # If distance is smaller than clearance
         # DRC doesn't allow routing the pads
         pad.SetLocalClearance(1)
+        pad.SetNet(self.net)
+
         return pad
     
     def Polygon(self, points, layer):
@@ -176,6 +180,8 @@ class Chamfer:
         posy += (pad_l/2)*m.cos(self.angle)
         size_pad = pcbnew.wxSize(pad_l, self.width)
         self.module.Add(self.smdRectPad(self.module, size_pad, pcbnew.wxPoint(posx, posy), "2", (self.angle_deg-90)*10))
+
+        if self.layer == 31: self.module.Flip(self.module.GetCenter())
 
         # Add to Pcbnew
         pcbnew.GetBoard().Add(self.module)

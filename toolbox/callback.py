@@ -4,7 +4,7 @@ import wx.aui
 import gui
 import chamfer
 import settings
-
+from layout import Layout
 
 # Callback functions
 
@@ -22,13 +22,46 @@ def curve_callback(event):
 
 def chamfer_callback(event):
     '''Initiates the chamfer tool based on existing settings.'''
+
+    # Check if two pads or if multiple tracks are selected
+    net = None
+    layer = None
+    spads = Layout.get_selected_pads()
+    stracks = Layout.get_selected_tracks()
+    
+    if len(spads) == 2:
+        if spads[0].GetNetname() != spads[1].GetNetname():
+            gui.menu_dialog('Pads must be assigned\nto the same net.')
+            return
+        
+        net = spads[0].GetNet()
+        layer = spads[0].GetParent().GetLayer()
+        # Grab open-endpoints of tracks
+        # Place chamfer
+        # Potentially autoroute
+        pass
+    elif len(stracks) == 2:
+        if stracks[0].GetNetname() != stracks[1].GetNetname():
+            gui.menu_dialog('Tracks must be assigned\nto the same net.')
+            return
+        
+        net = stracks[0].GetNet()
+        layer = stracks[0].GetLayer()
+        # Find intersection of line vectors (using pad-vector algorithm)
+        # Place chamfer
+        # Potentially autoroute
+        pass
+    else:
+        gui.menu_dialog('Select two or more tracks, or two pads.')
+        return
+
     cfgSettings = settings.ChamferSettings()
     cfgSettings.Load()
     
-    # TODO Convert mm, mil, or in depending on setting
-    
+    # TODO Convert mm, mil, or in depending on unit settings
 
-    c = chamfer.Chamfer(float(cfgSettings.lineWidth), float(cfgSettings.boardHeight), float(cfgSettings.chamferAngle))
+    c = chamfer.Chamfer(float(cfgSettings.lineWidth), float(cfgSettings.boardHeight), \
+                        float(cfgSettings.chamferAngle), net, layer)
     c.ChamferFootprint()
 
 def settings_callback(event):

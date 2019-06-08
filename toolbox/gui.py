@@ -206,14 +206,24 @@ class SettingsDialog(ChamferTab):
         self.chamferBoardHeightUnitwxChoice.SetSelection(int(self.cfgSettings.heightUnit))
         self.chamferAngleSpinCtrlDouble.SetValue(float(self.cfgSettings.chamferAngle))
         self.chamferUnitwxChoice.SetSelection(int(self.cfgSettings.angleUnit))
+        self.SetChamferAutorouteCheck(self.cfgSettings.chamferAutoroute)
     
     # Hack for new wxFormBuilder generating code incompatible with old wxPython
     # no inspection PyMethodOverriding
     def SetSizeHints(self, sz1, sz2):
         self.SetSizeHintsSz(sz1, sz2)
     
+    def GetChamferAutorouteCheck(self):
+        if self.chamferRouteTracksCheckBox.GetValue(): return '1'
+        else: return '0'
+
+    def SetChamferAutorouteCheck(self, value):
+        if value == '1': self.chamferRouteTracksCheckBox.SetValue(True)
+        else: self.chamferRouteTracksCheckBox.SetValue(False)
+    
     def OnOKSettingsButtonClick(self, event):
         # Save settings from user
+        # TODO check if input settings are valid
         try:
             # Curve-Tab settings
             cfgSettings = settings.CurveSettings()
@@ -224,7 +234,6 @@ class SettingsDialog(ChamferTab):
             self.cfgSettings.maxArcCheck = self.GetMaxArcCheck()
             self.cfgSettings.fromPad = self.GetFromPad()
             self.cfgSettings.toPad = self.GetToPad()
-            # TODO check if input is invalid
             self.cfgSettings.Save()
 
             # Chamfer-Tab settings
@@ -235,7 +244,7 @@ class SettingsDialog(ChamferTab):
             self.cfgSettings.heightunit = self.chamferBoardHeightUnitwxChoice.GetSelection()
             self.cfgSettings.chamferAngle = self.chamferAngleSpinCtrlDouble.GetValue()
             self.cfgSettings.angleUnit = self.chamferUnitwxChoice.GetSelection()
-            # TODO check if input is invalid
+            self.cfgSettings.chamferAutoroute = self.GetChamferAutorouteCheck()
             self.cfgSettings.Save()
         finally:
             self.Destroy()

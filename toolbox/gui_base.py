@@ -196,9 +196,9 @@ class SettingsDialogBase ( wx.Dialog ):
 		self.chamferLineWidthUnitwxChoice.SetSelection( 0 )
 		_chamferfgSizer.Add( self.chamferLineWidthUnitwxChoice, 0, wx.ALL|wx.ALIGN_CENTER_VERTICAL, 5 )
 
-		self._chamferRouteTracksCheckBox = wx.CheckBox( self.chamferTrackPanel, wx.ID_ANY, u"Autoroute", wx.DefaultPosition, wx.DefaultSize, 0 )
-		self._chamferRouteTracksCheckBox.SetValue(True)
-		_chamferfgSizer.Add( self._chamferRouteTracksCheckBox, 1, wx.ALIGN_CENTER_VERTICAL|wx.ALL|wx.EXPAND|wx.ALIGN_RIGHT, 5 )
+		self.chamferRouteTracksCheckBox = wx.CheckBox( self.chamferTrackPanel, wx.ID_ANY, u"Autoroute", wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.chamferRouteTracksCheckBox.SetValue(True)
+		_chamferfgSizer.Add( self.chamferRouteTracksCheckBox, 1, wx.ALIGN_CENTER_VERTICAL|wx.ALL|wx.EXPAND|wx.ALIGN_RIGHT, 5 )
 
 		self.chamferBoardHeightStaticText = wx.StaticText( self.chamferTrackPanel, wx.ID_ANY, u"Board Height", wx.DefaultPosition, wx.DefaultSize, 0 )
 		self.chamferBoardHeightStaticText.Wrap( -1 )
@@ -294,6 +294,9 @@ class SettingsDialogBase ( wx.Dialog ):
 		self.toBottomLeftRadioBtn.Bind( wx.EVT_RADIOBUTTON, self.OnToBottomLeftRadioBtn )
 		self.toBottomRadioBtn.Bind( wx.EVT_RADIOBUTTON, self.OnToBottomRadioBtn )
 		self.toBottomRightRadioBtn.Bind( wx.EVT_RADIOBUTTON, self.OnToBottomRightRadioBtn )
+		self.chamferLineWidthUnitwxChoice.Bind( wx.EVT_CHOICE, self.OnChamferLineWidthUnit )
+		self.chamferBoardHeightUnitwxChoice.Bind( wx.EVT_CHOICE, self.OnChamferBoardHeightUnit )
+		self.chamferUnitwxChoice.Bind( wx.EVT_CHOICE, self.OnChamferAngleUnit )
 		self.settingsButtonSizerOK.Bind( wx.EVT_BUTTON, self.OnOKSettingsButtonClick )
 
 	def __del__( self ):
@@ -353,6 +356,15 @@ class SettingsDialogBase ( wx.Dialog ):
 		event.Skip()
 
 	def OnToBottomRightRadioBtn( self, event ):
+		event.Skip()
+
+	def OnChamferLineWidthUnit( self, event ):
+		event.Skip()
+
+	def OnChamferBoardHeightUnit( self, event ):
+		event.Skip()
+
+	def OnChamferAngleUnit( self, event ):
 		event.Skip()
 
 	def OnOKSettingsButtonClick( self, event ):

@@ -114,6 +114,7 @@ class ChamferSettings(BaseSettings):
     _CHAMFER_HEIGHT_UNIT = {'Key':'3', 'Value':{'mm':'0', 'mil':'1', 'in':'2'}}
     _CHAMFER_ANGLE = {'Key':'4'}
     _CHAMFER_ANGLE_UNIT = {'Key':'5', 'Value':{'deg':'0', 'rad':1}}
+    _CHAMFER_AUTOROUTE = {'Key':'6'}
 
     def __init__(self):
         BaseSettings.__init__(self)
@@ -125,6 +126,7 @@ class ChamferSettings(BaseSettings):
         self.heightUnit = self._CHAMFER_HEIGHT_UNIT['Value']['mm']
         self.chamferAngle = '90'      # 90 degrees by default
         self.angleUnit = self._CHAMFER_ANGLE_UNIT['Value']['deg']
+        self.chamferAutoroute = True
 
         self.Save()
     
@@ -135,6 +137,7 @@ class ChamferSettings(BaseSettings):
         self.SetValue(self._CHAMFER_SECTION, self._CHAMFER_HEIGHT_UNIT['Key'], self.heightUnit)
         self.SetValue(self._CHAMFER_SECTION, self._CHAMFER_ANGLE['Key'], self.chamferAngle)
         self.SetValue(self._CHAMFER_SECTION, self._CHAMFER_ANGLE_UNIT['Key'], self.angleUnit)
+        self.SetValue(self._CHAMFER_SECTION, self._CHAMFER_AUTOROUTE['Key'], self.chamferAutoroute)
         self.Write()
     
     def Load(self):
@@ -147,6 +150,7 @@ class ChamferSettings(BaseSettings):
             self.heightUnit = self.GetValue(self._CHAMFER_SECTION, self._CHAMFER_HEIGHT_UNIT['Key'])
             self.chamferAngle = self.GetValue(self._CHAMFER_SECTION, self._CHAMFER_ANGLE['Key'])
             self.angleUnit = self.GetValue(self._CHAMFER_SECTION, self._CHAMFER_ANGLE_UNIT['Key'])
+            self.chamferAutoroute = self.GetValue(self._CHAMFER_SECTION, self._CHAMFER_AUTOROUTE['Key'])
         
         except:
             self.Defaults()
