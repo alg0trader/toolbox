@@ -58,10 +58,19 @@ def chamfer_callback(event):
     cfgSettings = settings.ChamferSettings()
     cfgSettings.Load()
     
-    # TODO Convert to mm if mil or in
+    lw = float(cfgSettings.lineWidth)
+    bh = float(cfgSettings.boardHeight)
+    ca = float(cfgSettings.chamferAngle)
+    
+    if cfgSettings.lineUnit == '1': lw = lw * 0.0254
+    elif cfgSettings.lineUnit == '2': lw = lw * 25.4
+    
+    if cfgSettings.heightUnit == '1': bh = bh * 0.0254
+    elif cfgSettings.heightUnit == '2': bh = bh * 25.4
+    
+    if cfgSettings.angleUnit == '1': ca = ca * 57.2958
 
-    c = chamfer.Chamfer(float(cfgSettings.lineWidth), float(cfgSettings.boardHeight), \
-                        float(cfgSettings.chamferAngle), net, layer)
+    c = chamfer.Chamfer(lw, bh, ca, net, layer)
     c.ChamferFootprint()
 
 def settings_callback(event):

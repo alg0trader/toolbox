@@ -249,13 +249,6 @@ class SettingsDialog(ChamferTab):
         oldUnit = self.cfgSettings.heightUnit
         newUnit = str(self.chamferBoardHeightUnitwxChoice.GetSelection())
 
-        f = open('kicad_foo.txt', 'w')
-        f.write('old type: %s\n' % str(type(oldUnit)))
-        f.write('new type: %s\n' % str(type(newUnit)))
-        f.write('old unit: %s\n' % oldUnit)
-        f.write('new unit: %s' % newUnit)
-        f.close()
-
         if oldUnit == '0' and newUnit == '1':
             # mm to mils
             self.chamferHeightSpinCtrlDouble.SetValue(self.chamferHeightSpinCtrlDouble.GetValue()*39.3701)
