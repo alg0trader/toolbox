@@ -205,11 +205,11 @@ class SettingsDialogBase ( wx.Dialog ):
 
 		_chamferfgSizer.Add( self.chamferBoardHeightStaticText, 0, wx.ALL|wx.ALIGN_CENTER_VERTICAL, 5 )
 
-		self.boardHeightSpinCtrlDouble = wx.SpinCtrlDouble( self.chamferTrackPanel, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, wx.SP_ARROW_KEYS, 0, 100, 0, 1 )
-		self.boardHeightSpinCtrlDouble.SetDigits( 0 )
-		_chamferfgSizer.Add( self.boardHeightSpinCtrlDouble, 0, wx.ALL, 5 )
+		self.chamferHeightSpinCtrlDouble = wx.SpinCtrlDouble( self.chamferTrackPanel, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, wx.SP_ARROW_KEYS, 0, 100, 0, 1 )
+		self.chamferHeightSpinCtrlDouble.SetDigits( 0 )
+		_chamferfgSizer.Add( self.chamferHeightSpinCtrlDouble, 0, wx.ALL, 5 )
 
-		chamferBoardHeightUnitwxChoiceChoices = [ u"mm", u"mil", u"in", u"in" ]
+		chamferBoardHeightUnitwxChoiceChoices = [ u"mm", u"mil", u"in" ]
 		self.chamferBoardHeightUnitwxChoice = wx.Choice( self.chamferTrackPanel, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, chamferBoardHeightUnitwxChoiceChoices, 0 )
 		self.chamferBoardHeightUnitwxChoice.SetSelection( 0 )
 		_chamferfgSizer.Add( self.chamferBoardHeightUnitwxChoice, 0, wx.ALL, 5 )

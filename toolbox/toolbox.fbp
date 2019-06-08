@@ -2257,7 +2257,7 @@
                                                     <property name="minimize_button">0</property>
                                                     <property name="minimum_size"></property>
                                                     <property name="moveable">1</property>
-                                                    <property name="name">boardHeightSpinCtrlDouble</property>
+                                                    <property name="name">chamferHeightSpinCtrlDouble</property>
                                                     <property name="pane_border">1</property>
                                                     <property name="pane_position"></property>
                                                     <property name="pane_size"></property>
@@ -2295,7 +2295,7 @@
                                                     <property name="caption"></property>
                                                     <property name="caption_visible">1</property>
                                                     <property name="center_pane">0</property>
-                                                    <property name="choices">&quot;mm&quot; &quot;mil&quot; &quot;in&quot; &quot;in&quot;</property>
+                                                    <property name="choices">&quot;mm&quot; &quot;mil&quot; &quot;in&quot;</property>
                                                     <property name="close_button">1</property>
                                                     <property name="context_help"></property>
                                                     <property name="context_menu">1</property>

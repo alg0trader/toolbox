@@ -3,6 +3,7 @@ import wx
 import wx.aui
 import gui_base
 import settings
+import math as m
 from .toolbox import get_path
 
 
@@ -202,7 +203,7 @@ class SettingsDialog(ChamferTab):
 
         self.chamferLineWidthSpinCtrlDouble.SetValue(float(self.cfgSettings.lineWidth))
         self.chamferLineWidthUnitwxChoice.SetSelection(int(self.cfgSettings.lineUnit))
-        self.boardHeightSpinCtrlDouble.SetValue(float(self.cfgSettings.boardHeight))
+        self.chamferHeightSpinCtrlDouble.SetValue(float(self.cfgSettings.boardHeight))
         self.chamferBoardHeightUnitwxChoice.SetSelection(int(self.cfgSettings.heightUnit))
         self.chamferAngleSpinCtrlDouble.SetValue(float(self.cfgSettings.chamferAngle))
         self.chamferUnitwxChoice.SetSelection(int(self.cfgSettings.angleUnit))
@@ -220,6 +221,78 @@ class SettingsDialog(ChamferTab):
     def SetChamferAutorouteCheck(self, value):
         if value == '1': self.chamferRouteTracksCheckBox.SetValue(True)
         else: self.chamferRouteTracksCheckBox.SetValue(False)
+    
+    def OnChamferLineWidthUnit(self, event):
+        oldUnit = self.cfgSettings.lineUnit
+        newUnit = str(self.chamferLineWidthUnitwxChoice.GetSelection())
+
+        if oldUnit == '0' and newUnit == '1':
+            self.chamferLineWidthSpinCtrlDouble.SetValue(self.chamferLineWidthSpinCtrlDouble.GetValue()*39.3701)
+            self.cfgSettings.lineUnit = '1'
+        elif oldUnit == '0' and newUnit == '2':
+            self.chamferLineWidthSpinCtrlDouble.SetValue(self.chamferLineWidthSpinCtrlDouble.GetValue()*0.0393701)
+            self.cfgSettings.lineUnit = '2'
+        elif oldUnit == '1' and newUnit == '0':
+            self.chamferLineWidthSpinCtrlDouble.SetValue(self.chamferLineWidthSpinCtrlDouble.GetValue()*0.0254)
+            self.cfgSettings.lineUnit = '0'
+        elif oldUnit == '1' and newUnit == '2':
+            self.chamferLineWidthSpinCtrlDouble.SetValue(self.chamferLineWidthSpinCtrlDouble.GetValue()*0.001)
+            self.cfgSettings.lineUnit = '2'
+        elif oldUnit == '2' and newUnit == '0':
+            self.chamferLineWidthSpinCtrlDouble.SetValue(self.chamferLineWidthSpinCtrlDouble.GetValue()*25.4)
+            self.cfgSettings.lineUnit = '0'
+        elif oldUnit == '2' and newUnit == '1':
+            self.chamferLineWidthSpinCtrlDouble.SetValue(self.chamferLineWidthSpinCtrlDouble.GetValue()*1000.0)
+            self.cfgSettings.lineUnit = '1'
+
+    def OnChamferBoardHeightUnit(self, event):
+        oldUnit = self.cfgSettings.heightUnit
+        newUnit = str(self.chamferBoardHeightUnitwxChoice.GetSelection())
+
+        f = open('kicad_foo.txt', 'w')
+        f.write('old type: %s\n' % str(type(oldUnit)))
+        f.write('new type: %s\n' % str(type(newUnit)))
+        f.write('old unit: %s\n' % oldUnit)
+        f.write('new unit: %s' % newUnit)
+        f.close()
+
+        if oldUnit == '0' and newUnit == '1':
+            # mm to mils
+            self.chamferHeightSpinCtrlDouble.SetValue(self.chamferHeightSpinCtrlDouble.GetValue()*39.3701)
+            self.cfgSettings.heightUnit = '1'
+        elif oldUnit == '0' and newUnit == '2':
+            # mm to in
+            self.chamferHeightSpinCtrlDouble.SetValue(self.chamferHeightSpinCtrlDouble.GetValue()*0.0393701)
+            self.cfgSettings.heightUnit = '2'
+        elif oldUnit == '1' and newUnit == '0':
+            # mils to mm
+            self.chamferHeightSpinCtrlDouble.SetValue(self.chamferHeightSpinCtrlDouble.GetValue()*0.0254)
+            self.cfgSettings.heightUnit = '0'
+        elif oldUnit == '1' and newUnit == '2':
+            # mils to in
+            self.chamferHeightSpinCtrlDouble.SetValue(self.chamferHeightSpinCtrlDouble.GetValue()*0.001)
+            self.cfgSettings.heightUnit = '2'
+        elif oldUnit == '2' and newUnit == '0':
+            # in to mm
+            self.chamferHeightSpinCtrlDouble.SetValue(self.chamferHeightSpinCtrlDouble.GetValue()*25.4)
+            self.cfgSettings.heightUnit = '0'
+        elif oldUnit == '2' and newUnit == '1':
+            # in to mils
+            self.chamferHeightSpinCtrlDouble.SetValue(self.chamferHeightSpinCtrlDouble.GetValue()*1000.0)
+            self.cfgSettings.heightUnit = '1'
+
+    def OnChamferAngleUnit(self, event):
+        oldUnit = self.cfgSettings.angleUnit
+        newUnit = str(self.chamferUnitwxChoice.GetSelection())
+
+        if oldUnit == '0' and newUnit == '1':
+            # deg to rad
+            self.chamferAngleSpinCtrlDouble.SetValue(m.radians(self.chamferAngleSpinCtrlDouble.GetValue()))
+            self.cfgSettings.angleUnit = '1'
+        elif oldUnit == '1' and newUnit == '0':
+            # rad to deg
+            self.chamferAngleSpinCtrlDouble.SetValue(round(m.degrees(self.chamferAngleSpinCtrlDouble.GetValue()), 2))
+            self.cfgSettings.angleUnit = '0'
     
     def OnOKSettingsButtonClick(self, event):
         # Save settings from user
@@ -240,7 +313,7 @@ class SettingsDialog(ChamferTab):
             cfgSettings = settings.ChamferSettings()
             self.cfgSettings.lineWidth = self.chamferLineWidthSpinCtrlDouble.GetValue()
             self.cfgSettings.lineUnit = self.chamferLineWidthUnitwxChoice.GetSelection()
-            self.cfgSettings.boardHeight = self.boardHeightSpinCtrlDouble.GetValue()
+            self.cfgSettings.boardHeight = self.chamferHeightSpinCtrlDouble.GetValue()
             self.cfgSettings.heightunit = self.chamferBoardHeightUnitwxChoice.GetSelection()
             self.cfgSettings.chamferAngle = self.chamferAngleSpinCtrlDouble.GetValue()
             self.cfgSettings.angleUnit = self.chamferUnitwxChoice.GetSelection()

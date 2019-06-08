@@ -58,7 +58,7 @@ def chamfer_callback(event):
     cfgSettings = settings.ChamferSettings()
     cfgSettings.Load()
     
-    # TODO Convert mm, mil, or in depending on unit settings
+    # TODO Convert to mm if mil or in
 
     c = chamfer.Chamfer(float(cfgSettings.lineWidth), float(cfgSettings.boardHeight), \
                         float(cfgSettings.chamferAngle), net, layer)
