@@ -108,6 +108,17 @@ class Chamfer:
         
         return self.bilinear_interpolation(wh, angle, [x1,x2,y1,y2])/100.0
     
+    @staticmethod
+    def CheckParameters(w, h, angle):
+        errors = list()
+        if w < 0: errors.append('Width < 0')
+        if w/h < 0.25: errors.append('Width/Height < 0.25')
+        if angle > 90: errors.append('Angle > 90 deg')
+        if angle < 0: errors.append('Angle < 0 deg')
+        
+        if len(errors) >= 1: return '\n'.join(errors)
+        else: return ''        
+    
     def ChamferFootprint(self):
         self.module = pcbnew.MODULE(None)   # Create new module
         # TODO self.module.SetPosition()

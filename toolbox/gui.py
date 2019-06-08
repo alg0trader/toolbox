@@ -230,13 +230,16 @@ class SettingsDialog(ChamferTab):
         bh = self.chamferHeightSpinCtrlDouble.GetValue()
         ca = self.chamferAngleSpinCtrlDouble.GetValue()
         
-        if self.chamferLineWidthUnitwxChoice.GetSelection() == '1': lw = lw * 0.0254
-        elif self.chamferLineWidthUnitwxChoice.GetSelection() == '2': lw = lw * 25.4
+        if str(self.chamferLineWidthUnitwxChoice.GetSelection()) == '1': lw = lw * 0.0254
+        elif str(self.chamferLineWidthUnitwxChoice.GetSelection()) == '2': lw = lw * 25.4
         
-        if self.chamferBoardHeightUnitwxChoice.GetSelection() == '1': bh = bh * 0.0254
-        elif self.chamferBoardHeightUnitwxChoice.GetSelection() == '2': bh = bh * 25.4
+        if str(self.chamferBoardHeightUnitwxChoice.GetSelection()) == '1': bh = bh * 0.0254
+        elif str(self.chamferBoardHeightUnitwxChoice.GetSelection()) == '2': bh = bh * 25.4
         
-        if self.chamferUnitwxChoice.GetSelection() == '1': ca = ca * 57.2958
+        if str(self.chamferUnitwxChoice.GetSelection()) == '1': ca = ca * 57.2958
+
+        errors = chamfer.Chamfer.CheckParameters(lw, bh, ca)
+        if len(errors) >= 1: menu_dialog('Errors:\n%s' % errors)
 
         cut = chamfer.Chamfer(lw, bh, ca, None, None).OptimalMiter()
         self.chamferCutStaticText.SetLabel(' '*63 + 'Cut: {0:.2f}%'.format(cut*100))
@@ -264,6 +267,8 @@ class SettingsDialog(ChamferTab):
         elif oldUnit == '2' and newUnit == '1':
             self.chamferLineWidthSpinCtrlDouble.SetValue(self.chamferLineWidthSpinCtrlDouble.GetValue()*1000.0)
             self.cfgSettings.lineUnit = '1'
+        
+        self.OnChamferSpinCtrlDouble(None)
 
     def OnChamferBoardHeightUnit(self, event):
         oldUnit = self.cfgSettings.heightUnit
@@ -293,6 +298,8 @@ class SettingsDialog(ChamferTab):
             # in to mils
             self.chamferHeightSpinCtrlDouble.SetValue(self.chamferHeightSpinCtrlDouble.GetValue()*1000.0)
             self.cfgSettings.heightUnit = '1'
+        
+        self.OnChamferSpinCtrlDouble(None)
 
     def OnChamferAngleUnit(self, event):
         oldUnit = self.cfgSettings.angleUnit
@@ -306,6 +313,8 @@ class SettingsDialog(ChamferTab):
             # rad to deg
             self.chamferAngleSpinCtrlDouble.SetValue(round(m.degrees(self.chamferAngleSpinCtrlDouble.GetValue()), 2))
             self.cfgSettings.angleUnit = '0'
+
+        self.OnChamferSpinCtrlDouble(None)
     
     def OnOKSettingsButtonClick(self, event):
         # Save settings from user

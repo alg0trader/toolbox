@@ -222,7 +222,7 @@ class SettingsDialogBase ( wx.Dialog ):
 
 		_chamferfgSizer.Add( self.chamferAngleStaticText, 0, wx.ALL, 5 )
 
-		self.chamferAngleSpinCtrlDouble = wx.SpinCtrlDouble( self.chamferTrackPanel, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, wx.SP_ARROW_KEYS, 0, 100, 0, 1 )
+		self.chamferAngleSpinCtrlDouble = wx.SpinCtrlDouble( self.chamferTrackPanel, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, wx.SP_ARROW_KEYS, 0, 90, 0, 1 )
 		self.chamferAngleSpinCtrlDouble.SetDigits( 0 )
 		_chamferfgSizer.Add( self.chamferAngleSpinCtrlDouble, 0, wx.ALL, 5 )
 
@@ -236,6 +236,11 @@ class SettingsDialogBase ( wx.Dialog ):
 
 
 		_chamferbSizer.Add( _chamferfgSizer, 0, wx.ALL|wx.ALIGN_CENTER_VERTICAL|wx.EXPAND, 5 )
+
+		self.chamferErrorStaticText = wx.StaticText( self.chamferTrackPanel, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.chamferErrorStaticText.Wrap( -1 )
+
+		_chamferbSizer.Add( self.chamferErrorStaticText, 0, wx.ALL|wx.EXPAND, 5 )
 
 		_chamferImgbSizer = wx.BoxSizer( wx.VERTICAL )
 
