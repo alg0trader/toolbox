@@ -196,11 +196,14 @@ class Chamfer:
         size_pad = pcbnew.wxSize(pad_l, self.width)
         self.module.Add(self.smdRectPad(self.module, size_pad, pcbnew.wxPoint(posx, posy), "2", (self.angle_deg-90)*10))
 
-        if self.layer == pcbnew.B_Cu: self.module.Flip(self.module.GetCenter())
+        self.module.MoveAnchorPosition(pcbnew.wxPoint(-w/2, (-y45/2 - w/2)))
+        self.module.Rotate(self.module.GetPosition(), (90 + self.angle_deg)*100)
 
-        # Find center of canvas for placement
-        # if center != pcbnew.wxPoint(0,0): self.module.SetPosition(center)
-        # self.module.SetPosition(pcbnew.GetBoard().GetBoundingBox().Centre())
+        if self.layer == pcbnew.B_Cu: self.module.Flip(self.module.GetCenter())
+        elif self.layer == pcbnew.F_Cu: self.module.Rotate(self.module.GetPosition(), (90 + self.angle_deg)*100)
+
+        # Find center of bounding box for placement
+        self.module.SetPosition(center)
         
         # Add to Pcbnew
         pcbnew.GetBoard().Add(self.module)
