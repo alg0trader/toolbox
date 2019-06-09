@@ -13,12 +13,12 @@ class Layout:
         if board is None:
             board = pcbnew.GetBoard()
         
-        return [p for p in board.GetPads() if p.IsSelected()]
+        return list(filter(lambda p: p.IsSelected(), board.GetPads()))
     
     @staticmethod
     def get_pad_coord(pads):
         '''Obtain wxPoint(x,y) coordinates of pads.'''
-        return [p.GetPosition() for p in pads]
+        return list(filter(lambda p: p.GetPosition(), pads))
     
     @staticmethod
     def get_track_width():
@@ -50,4 +50,4 @@ class Layout:
         if board is None:
             board = pcbnew.GetBoard()
         
-        return [t for t in board.GetTracks() if t.IsSelected()]
+        return list(filter(lambda t: t.IsSelected(), board.GetTracks()))

@@ -2,6 +2,7 @@ import wx
 import wx.aui
 
 import gui
+import pcbnew
 import chamfer
 import settings
 from layout import Layout
@@ -26,6 +27,7 @@ def chamfer_callback(event):
     # Check if two pads or if multiple tracks are selected
     net = None
     layer = None
+    center_brd = pcbnew.BOARD()
     spads = Layout.get_selected_pads()
     stracks = Layout.get_selected_tracks()
     
@@ -36,10 +38,9 @@ def chamfer_callback(event):
         
         net = spads[0].GetNet()
         layer = spads[0].GetParent().GetLayer()
-        # Grab open-endpoints of tracks
-        # Place chamfer
-        # Potentially autoroute
-        pass
+
+        # center_brd.Add(spads[0].GetParent())        # this fails...?
+        # center_brd.Add(spads[1].GetParent())
     elif len(stracks) == 2:
         if stracks[0].GetNetname() != stracks[1].GetNetname():
             gui.menu_dialog('Tracks must be assigned\nto the same net.')
@@ -47,10 +48,9 @@ def chamfer_callback(event):
         
         net = stracks[0].GetNet()
         layer = stracks[0].GetLayer()
-        # Find intersection of line vectors (using pad-vector algorithm)
-        # Place chamfer
-        # Potentially autoroute
-        pass
+
+        center_brd.Add(stracks[0])
+        center_brd.Add(stracks[1])
     else:
         gui.menu_dialog('Select two or more tracks, or two pads.')
         return
@@ -71,6 +71,7 @@ def chamfer_callback(event):
     if cfgSettings.angleUnit == '1': ca = ca * 57.2958
 
     c = chamfer.Chamfer(lw, bh, ca, net, layer)
+    # c.ChamferFootprint(center_brd.GetBoundingBox().Centre())
     c.ChamferFootprint()
 
 def settings_callback(event):

@@ -4,6 +4,7 @@
 
 import pcbnew
 import math as m
+from layout import Layout
 
 
 class Chamfer:
@@ -119,7 +120,7 @@ class Chamfer:
         if len(errors) >= 1: return '\n'.join(errors)
         else: return ''        
     
-    def ChamferFootprint(self):
+    def ChamferFootprint(self, center=pcbnew.wxPoint(0,0)):
         self.module = pcbnew.MODULE(None)   # Create new module
         # TODO self.module.SetPosition()
 
@@ -177,7 +178,7 @@ class Chamfer:
 
         points = [pcbnew.wxPoint(*point) for point in points]
 
-        self.Polygon(points, pcbnew.F_Cu)       # TODO get active layer
+        self.Polygon(points, pcbnew.F_Cu)
 
         # Create pads
         pad_l = self.width/10
@@ -195,8 +196,12 @@ class Chamfer:
         size_pad = pcbnew.wxSize(pad_l, self.width)
         self.module.Add(self.smdRectPad(self.module, size_pad, pcbnew.wxPoint(posx, posy), "2", (self.angle_deg-90)*10))
 
-        if self.layer == 31: self.module.Flip(self.module.GetCenter())
+        if self.layer == pcbnew.B_Cu: self.module.Flip(self.module.GetCenter())
 
+        # Find center of canvas for placement
+        # if center != pcbnew.wxPoint(0,0): self.module.SetPosition(center)
+        # self.module.SetPosition(pcbnew.GetBoard().GetBoundingBox().Centre())
+        
         # Add to Pcbnew
         pcbnew.GetBoard().Add(self.module)
         pcbnew.Refresh()

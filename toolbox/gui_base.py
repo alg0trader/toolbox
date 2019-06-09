@@ -49,7 +49,7 @@ class SettingsDialogBase ( wx.Dialog ):
 		self.arcRadius_spinCtrlDouble.SetDigits( 0 )
 		_arcRadiusStaticSizer.Add( self.arcRadius_spinCtrlDouble, 0, wx.ALL|wx.ALIGN_CENTER_VERTICAL, 5 )
 
-		arcRadiusUnitsChoiceChoices = [ u"mm", u"in", u"mil" ]
+		arcRadiusUnitsChoiceChoices = [ u"mm", u"mil", u"in" ]
 		self.arcRadiusUnitsChoice = wx.Choice( _arcRadiusStaticSizer.GetStaticBox(), wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, arcRadiusUnitsChoiceChoices, 0 )
 		self.arcRadiusUnitsChoice.SetSelection( 0 )
 		_arcRadiusStaticSizer.Add( self.arcRadiusUnitsChoice, 0, wx.ALL|wx.ALIGN_CENTER_VERTICAL, 5 )
@@ -236,11 +236,6 @@ class SettingsDialogBase ( wx.Dialog ):
 
 
 		_chamferbSizer.Add( _chamferfgSizer, 0, wx.ALL|wx.ALIGN_CENTER_VERTICAL|wx.EXPAND, 5 )
-
-		self.chamferErrorStaticText = wx.StaticText( self.chamferTrackPanel, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, 0 )
-		self.chamferErrorStaticText.Wrap( -1 )
-
-		_chamferbSizer.Add( self.chamferErrorStaticText, 0, wx.ALL|wx.EXPAND, 5 )
 
 		_chamferImgbSizer = wx.BoxSizer( wx.VERTICAL )
 

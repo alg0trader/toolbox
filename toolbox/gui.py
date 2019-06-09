@@ -236,7 +236,7 @@ class SettingsDialog(ChamferTab):
         if str(self.chamferBoardHeightUnitwxChoice.GetSelection()) == '1': bh = bh * 0.0254
         elif str(self.chamferBoardHeightUnitwxChoice.GetSelection()) == '2': bh = bh * 25.4
         
-        if str(self.chamferUnitwxChoice.GetSelection()) == '1': ca = ca * 57.2958
+        if str(self.chamferUnitwxChoice.GetSelection()) == '1': ca = round(ca * 57.2958, 3)
 
         errors = chamfer.Chamfer.CheckParameters(lw, bh, ca)
         if len(errors) >= 1: menu_dialog('Errors:\n%s' % errors)
@@ -252,21 +252,27 @@ class SettingsDialog(ChamferTab):
         if oldUnit == '0' and newUnit == '1':
             self.chamferLineWidthSpinCtrlDouble.SetValue(self.chamferLineWidthSpinCtrlDouble.GetValue()*39.3701)
             self.cfgSettings.lineUnit = '1'
+            self.chamferLineWidthSpinCtrlDouble.SetIncrement(1)
         elif oldUnit == '0' and newUnit == '2':
             self.chamferLineWidthSpinCtrlDouble.SetValue(self.chamferLineWidthSpinCtrlDouble.GetValue()*0.0393701)
             self.cfgSettings.lineUnit = '2'
+            self.chamferLineWidthSpinCtrlDouble.SetIncrement(0.001)
         elif oldUnit == '1' and newUnit == '0':
             self.chamferLineWidthSpinCtrlDouble.SetValue(self.chamferLineWidthSpinCtrlDouble.GetValue()*0.0254)
             self.cfgSettings.lineUnit = '0'
+            self.chamferLineWidthSpinCtrlDouble.SetIncrement(0.01)
         elif oldUnit == '1' and newUnit == '2':
             self.chamferLineWidthSpinCtrlDouble.SetValue(self.chamferLineWidthSpinCtrlDouble.GetValue()*0.001)
             self.cfgSettings.lineUnit = '2'
+            self.chamferLineWidthSpinCtrlDouble.SetIncrement(0.001)
         elif oldUnit == '2' and newUnit == '0':
             self.chamferLineWidthSpinCtrlDouble.SetValue(self.chamferLineWidthSpinCtrlDouble.GetValue()*25.4)
             self.cfgSettings.lineUnit = '0'
+            self.chamferLineWidthSpinCtrlDouble.SetIncrement(0.01)
         elif oldUnit == '2' and newUnit == '1':
             self.chamferLineWidthSpinCtrlDouble.SetValue(self.chamferLineWidthSpinCtrlDouble.GetValue()*1000.0)
             self.cfgSettings.lineUnit = '1'
+            self.chamferLineWidthSpinCtrlDouble.SetIncrement(1)
         
         self.OnChamferSpinCtrlDouble(None)
 
@@ -278,26 +284,32 @@ class SettingsDialog(ChamferTab):
             # mm to mils
             self.chamferHeightSpinCtrlDouble.SetValue(self.chamferHeightSpinCtrlDouble.GetValue()*39.3701)
             self.cfgSettings.heightUnit = '1'
+            self.chamferHeightSpinCtrlDouble.SetIncrement(1)
         elif oldUnit == '0' and newUnit == '2':
             # mm to in
             self.chamferHeightSpinCtrlDouble.SetValue(self.chamferHeightSpinCtrlDouble.GetValue()*0.0393701)
             self.cfgSettings.heightUnit = '2'
+            self.chamferHeightSpinCtrlDouble.SetIncrement(0.001)
         elif oldUnit == '1' and newUnit == '0':
             # mils to mm
             self.chamferHeightSpinCtrlDouble.SetValue(self.chamferHeightSpinCtrlDouble.GetValue()*0.0254)
             self.cfgSettings.heightUnit = '0'
+            self.chamferHeightSpinCtrlDouble.SetIncrement(0.01)
         elif oldUnit == '1' and newUnit == '2':
             # mils to in
             self.chamferHeightSpinCtrlDouble.SetValue(self.chamferHeightSpinCtrlDouble.GetValue()*0.001)
             self.cfgSettings.heightUnit = '2'
+            self.chamferHeightSpinCtrlDouble.SetIncrement(0.001)
         elif oldUnit == '2' and newUnit == '0':
             # in to mm
             self.chamferHeightSpinCtrlDouble.SetValue(self.chamferHeightSpinCtrlDouble.GetValue()*25.4)
             self.cfgSettings.heightUnit = '0'
+            self.chamferHeightSpinCtrlDouble.SetIncrement(0.01)
         elif oldUnit == '2' and newUnit == '1':
             # in to mils
             self.chamferHeightSpinCtrlDouble.SetValue(self.chamferHeightSpinCtrlDouble.GetValue()*1000.0)
             self.cfgSettings.heightUnit = '1'
+            self.chamferHeightSpinCtrlDouble.SetIncrement(1)
         
         self.OnChamferSpinCtrlDouble(None)
 
@@ -309,10 +321,12 @@ class SettingsDialog(ChamferTab):
             # deg to rad
             self.chamferAngleSpinCtrlDouble.SetValue(m.radians(self.chamferAngleSpinCtrlDouble.GetValue()))
             self.cfgSettings.angleUnit = '1'
+            self.chamferAngleSpinCtrlDouble.SetIncrement(0.01)
         elif oldUnit == '1' and newUnit == '0':
             # rad to deg
             self.chamferAngleSpinCtrlDouble.SetValue(round(m.degrees(self.chamferAngleSpinCtrlDouble.GetValue()), 2))
             self.cfgSettings.angleUnit = '0'
+            self.chamferAngleSpinCtrlDouble.SetIncrement(1)
 
         self.OnChamferSpinCtrlDouble(None)
     
