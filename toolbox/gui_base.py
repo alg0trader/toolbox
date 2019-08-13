@@ -255,6 +255,83 @@ class SettingsDialogBase ( wx.Dialog ):
 		self.chamferTrackPanel.Layout()
 		_chamferbSizer.Fit( self.chamferTrackPanel )
 		self.settingsNotebook.AddPage( self.chamferTrackPanel, u"Chamfer", False )
+		self.taperTrackPanel = wx.Panel( self.settingsNotebook, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.TAB_TRAVERSAL )
+		_chamferbSizer1 = wx.BoxSizer( wx.VERTICAL )
+
+		_chamferfgSizer1 = wx.FlexGridSizer( 0, 4, 0, 0 )
+		_chamferfgSizer1.SetFlexibleDirection( wx.BOTH )
+		_chamferfgSizer1.SetNonFlexibleGrowMode( wx.FLEX_GROWMODE_SPECIFIED )
+
+		self.taperW1StaticText = wx.StaticText( self.taperTrackPanel, wx.ID_ANY, u"W1", wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.taperW1StaticText.Wrap( -1 )
+
+		_chamferfgSizer1.Add( self.taperW1StaticText, 0, wx.ALL|wx.ALIGN_CENTER_VERTICAL|wx.ALIGN_RIGHT, 5 )
+
+		self.chamferLineWidthSpinCtrlDouble1 = wx.SpinCtrlDouble( self.taperTrackPanel, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, wx.SP_ARROW_KEYS, 0, 100, 0, 1 )
+		self.chamferLineWidthSpinCtrlDouble1.SetDigits( 0 )
+		_chamferfgSizer1.Add( self.chamferLineWidthSpinCtrlDouble1, 0, wx.ALL, 5 )
+
+		chamferLineWidthUnitwxChoice1Choices = [ u"mm", u"mil", u"in" ]
+		self.chamferLineWidthUnitwxChoice1 = wx.Choice( self.taperTrackPanel, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, chamferLineWidthUnitwxChoice1Choices, 0 )
+		self.chamferLineWidthUnitwxChoice1.SetSelection( 0 )
+		_chamferfgSizer1.Add( self.chamferLineWidthUnitwxChoice1, 0, wx.ALL|wx.ALIGN_CENTER_VERTICAL, 5 )
+
+		self.taperW1CheckBox = wx.CheckBox( self.taperTrackPanel, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.taperW1CheckBox.SetValue(True)
+		_chamferfgSizer1.Add( self.taperW1CheckBox, 1, wx.ALIGN_CENTER_VERTICAL|wx.ALL|wx.EXPAND|wx.ALIGN_RIGHT, 5 )
+
+		self.taperW2StaticText = wx.StaticText( self.taperTrackPanel, wx.ID_ANY, u"W2", wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.taperW2StaticText.Wrap( -1 )
+
+		_chamferfgSizer1.Add( self.taperW2StaticText, 0, wx.ALL|wx.ALIGN_CENTER_VERTICAL|wx.ALIGN_RIGHT, 5 )
+
+		self.chamferHeightSpinCtrlDouble1 = wx.SpinCtrlDouble( self.taperTrackPanel, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, wx.SP_ARROW_KEYS, 0, 100, 0, 1 )
+		self.chamferHeightSpinCtrlDouble1.SetDigits( 0 )
+		_chamferfgSizer1.Add( self.chamferHeightSpinCtrlDouble1, 0, wx.ALL, 5 )
+
+		chamferBoardHeightUnitwxChoice1Choices = [ u"mm", u"mil", u"in" ]
+		self.chamferBoardHeightUnitwxChoice1 = wx.Choice( self.taperTrackPanel, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, chamferBoardHeightUnitwxChoice1Choices, 0 )
+		self.chamferBoardHeightUnitwxChoice1.SetSelection( 0 )
+		_chamferfgSizer1.Add( self.chamferBoardHeightUnitwxChoice1, 0, wx.ALL, 5 )
+
+		self.taperW2CheckBox = wx.CheckBox( self.taperTrackPanel, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.taperW2CheckBox.SetValue(True)
+		_chamferfgSizer1.Add( self.taperW2CheckBox, 0, wx.ALL, 5 )
+
+		self.taperLStaticText = wx.StaticText( self.taperTrackPanel, wx.ID_ANY, u"L", wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.taperLStaticText.Wrap( -1 )
+
+		_chamferfgSizer1.Add( self.taperLStaticText, 0, wx.ALL|wx.ALIGN_RIGHT, 5 )
+
+		self.chamferAngleSpinCtrlDouble1 = wx.SpinCtrlDouble( self.taperTrackPanel, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, wx.SP_ARROW_KEYS, 0, 90, 0, 1 )
+		self.chamferAngleSpinCtrlDouble1.SetDigits( 0 )
+		_chamferfgSizer1.Add( self.chamferAngleSpinCtrlDouble1, 0, wx.ALL, 5 )
+
+		chamferUnitwxChoice1Choices = [ u"mm", u"mil", u"in" ]
+		self.chamferUnitwxChoice1 = wx.Choice( self.taperTrackPanel, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, chamferUnitwxChoice1Choices, 0 )
+		self.chamferUnitwxChoice1.SetSelection( 0 )
+		_chamferfgSizer1.Add( self.chamferUnitwxChoice1, 0, wx.ALL, 5 )
+
+		self.taperLCheckBox = wx.CheckBox( self.taperTrackPanel, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.taperLCheckBox.SetValue(True)
+		_chamferfgSizer1.Add( self.taperLCheckBox, 0, wx.ALL, 5 )
+
+
+		_chamferbSizer1.Add( _chamferfgSizer1, 0, wx.ALL|wx.ALIGN_CENTER_VERTICAL|wx.EXPAND, 5 )
+
+		_chamferImgbSizer1 = wx.BoxSizer( wx.VERTICAL )
+
+		self.taperImg = wx.StaticBitmap( self.taperTrackPanel, wx.ID_ANY, wx.NullBitmap, wx.DefaultPosition, wx.Size( 295,150 ), 0 )
+		_chamferImgbSizer1.Add( self.taperImg, 1, wx.ALL|wx.ALIGN_CENTER_HORIZONTAL, 5 )
+
+
+		_chamferbSizer1.Add( _chamferImgbSizer1, 1, wx.EXPAND|wx.ALL, 5 )
+
+
+		self.taperTrackPanel.SetSizer( _chamferbSizer1 )
+		self.taperTrackPanel.Layout()
+		_chamferbSizer1.Fit( self.taperTrackPanel )
+		self.settingsNotebook.AddPage( self.taperTrackPanel, u"Taper", False )
 		self.viaStitchPanel = wx.Panel( self.settingsNotebook, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.TAB_TRAVERSAL )
 		self.settingsNotebook.AddPage( self.viaStitchPanel, u"Via Stitch", False )
 		self.routePanel = wx.Panel( self.settingsNotebook, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.TAB_TRAVERSAL )
@@ -305,6 +382,12 @@ class SettingsDialogBase ( wx.Dialog ):
 		self.chamferBoardHeightUnitwxChoice.Bind( wx.EVT_CHOICE, self.OnChamferBoardHeightUnit )
 		self.chamferAngleSpinCtrlDouble.Bind( wx.EVT_SPINCTRLDOUBLE, self.OnChamferSpinCtrlDouble )
 		self.chamferUnitwxChoice.Bind( wx.EVT_CHOICE, self.OnChamferAngleUnit )
+		self.chamferLineWidthSpinCtrlDouble1.Bind( wx.EVT_SPINCTRLDOUBLE, self.OnChamferSpinCtrlDouble )
+		self.chamferLineWidthUnitwxChoice1.Bind( wx.EVT_CHOICE, self.OnChamferLineWidthUnit )
+		self.chamferHeightSpinCtrlDouble1.Bind( wx.EVT_SPINCTRLDOUBLE, self.OnChamferSpinCtrlDouble )
+		self.chamferBoardHeightUnitwxChoice1.Bind( wx.EVT_CHOICE, self.OnChamferBoardHeightUnit )
+		self.chamferAngleSpinCtrlDouble1.Bind( wx.EVT_SPINCTRLDOUBLE, self.OnChamferSpinCtrlDouble )
+		self.chamferUnitwxChoice1.Bind( wx.EVT_CHOICE, self.OnChamferAngleUnit )
 		self.settingsButtonSizerOK.Bind( wx.EVT_BUTTON, self.OnOKSettingsButtonClick )
 
 	def __del__( self ):
@@ -379,6 +462,12 @@ class SettingsDialogBase ( wx.Dialog ):
 
 	def OnChamferAngleUnit( self, event ):
 		event.Skip()
+
+
+
+
+
+
 
 	def OnOKSettingsButtonClick( self, event ):
 		event.Skip()

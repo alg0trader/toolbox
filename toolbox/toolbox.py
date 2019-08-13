@@ -36,14 +36,26 @@ class ChamferPlugin(pcbnew.ActionPlugin):
     def Run(self):
         callback.chamfer_callback(None)
 
+class TaperPlugin(pcbnew.ActionPlugin):
+    def defaults(self):
+        self.name = "Taper"
+        self.category = "Layout"
+        self.pcbnew_icon_support = hasattr(self, "show_toolbar_button")
+        self.show_toolbar_button = True
+        self.icon_file_name = get_path() + '/toolbox_icons/taper.png'
+        self.description = "Route tapered tracks in Pcbnew."
+    
+    def Run(self):
+        callback.taper_callback(None)
+
 class SettingsPlugin(pcbnew.ActionPlugin):
     def defaults(self):
-        self.name = "Toolbox Settings"
+        self.name = "Settings"
         self.category = "Layout"
         self.pcbnew_icon_support = hasattr(self, "show_toolbar_button")
         self.show_toolbar_button = True
         self.icon_file_name = get_path() + '/toolbox_icons/settings.png'
-        self.description = "Adjust Toolboxsettings."
+        self.description = "Adjust Toolbox settings."
     
     def Run(self):
         callback.settings_callback(None)

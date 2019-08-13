@@ -77,6 +77,9 @@ def chamfer_callback(event):
     c = chamfer.Chamfer(lw, bh, ca, net, layer)
     c.ChamferFootprint(center)
 
+def taper_callback(event):
+    pass
+
 def settings_callback(event):
     '''Initiates the settings panel for edit.'''
     dlg = False

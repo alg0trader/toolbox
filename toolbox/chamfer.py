@@ -197,6 +197,7 @@ class Chamfer:
         self.module.Add(self.smdRectPad(self.module, size_pad, pcbnew.wxPoint(posx, posy), "2", (self.angle_deg-90)*10))
 
         self.module.MoveAnchorPosition(pcbnew.wxPoint(-w/2, (-y45/2 - w/2)))
+        # self.module.MoveAnchorPosition(self.module.GetBoundingBox().Centre())
         self.module.Rotate(self.module.GetPosition(), (90 + self.angle_deg)*100)
 
         if self.layer == pcbnew.B_Cu: self.module.Flip(self.module.GetCenter())

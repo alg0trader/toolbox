@@ -62,6 +62,7 @@ from .toolbox import *
 #             top_tb.Bind(wx.EVT_TOOL, callback.chamfer_callback, id=settings_button_id)
 #             top_tb.Realize()
 
+# TODO: Figure out why the taper button, while registered before settings, is last in the menu...
 
 # Register curve plugin
 curvePlugin = CurvePlugin()
@@ -73,11 +74,15 @@ chamferPlugin = ChamferPlugin()
 chamferPlugin.defaults()
 chamferPlugin.register()
 
+# Register taper plugin
+taperPlugin = TaperPlugin()
+taperPlugin.defaults()
+taperPlugin.register()
+
 # Register settings plugin
 settingsPlugin = SettingsPlugin()
 settingsPlugin.defaults()
 settingsPlugin.register()
-
 
 # # Add a button the hacky way if plugin button is not supported
 # # in pcbnew, unless this is linux.

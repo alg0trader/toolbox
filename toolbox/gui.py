@@ -18,7 +18,7 @@ def menu_dialog(msg, e=None):
 
 class CurveTab(gui_base.SettingsDialogBase):
     """
-    Class for methods relative to the curve-tab in the settings dialog window.
+    Class for methods associated with the curve-tab in the settings dialog window.
     """
 
     def __init__(self):
@@ -166,7 +166,7 @@ class CurveTab(gui_base.SettingsDialogBase):
 
 class ChamferTab(CurveTab):
     """
-    Class for methods relative to the curve-tab in the settings dialog window.
+    Class for methods associated with the curve-tab in the settings dialog window.
     """
     def __init__(self):
         # Load Chamfer-Tab Settings
@@ -176,14 +176,25 @@ class ChamferTab(CurveTab):
         self.chamferImg.SetBitmap(wx.Bitmap(get_path() + '/toolbox_icons/arbitrary_chamfer.png'))
     
     # Override chamfer methods
+
+class TaperTab(ChamferTab):
+    """
+    Class for methods associated with the taper-tab in the settings dialog window.
+    """
+    def __init__(self):
+        # Load Taper-Tab Settings
+        ChamferTab.__init__(self)
+
+        # Load arbitrary taper guide image
+        self.taperImg.SetBitmap(wx.Bitmap(get_path() + '/toolbox_icons/arbitrary_taper.png'))
     
 
-class SettingsDialog(ChamferTab):
+class SettingsDialog(TaperTab):
     """
     Class for inheriting dialog base class.
     """
     def __init__(self):
-        ChamferTab.__init__(self)
+        TaperTab.__init__(self)
 
         self.Centre()
 
