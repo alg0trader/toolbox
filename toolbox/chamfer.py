@@ -18,39 +18,6 @@ class Chamfer:
         self.net = net
         self.layer = layer
     
-    def smdRectPad(self, module, size, pos, name, angle):
-        '''Build a rectangular pad.'''
-        pad = pcbnew.D_PAD(module)
-        pad.SetSize(size)
-        pad.SetShape(pcbnew.PAD_SHAPE_RECT)
-        pad.SetAttribute(pcbnew.PAD_ATTRIB_SMD)
-        # Set only the copper layer without mask
-        # since nothing is mounted on these pads
-        pad.SetLayerSet(pcbnew.LSET(pcbnew.F_Cu))       # Get active layer
-        pad.SetPos0(pos)
-        pad.SetPosition(pos)
-        pad.SetPadName(name)
-        pad.Rotate(pos, angle)
-        # Set clearance to small value, because
-        # pads can be very close together.
-        # If distance is smaller than clearance
-        # DRC doesn't allow routing the pads
-        pad.SetLocalClearance(1)
-        pad.SetNet(self.net)
-
-        return pad
-    
-    def Polygon(self, points, layer):
-        '''Draw a polygon through specified points.'''
-
-        polygon = pcbnew.EDGE_MODULE(self.module)
-        polygon.SetWidth(0)         # Disables outline
-        polygon.SetLayer(layer)
-        polygon.SetShape(pcbnew.S_POLYGON)
-        polygon.SetPolyPoints(points)
-
-        self.module.Add(polygon)
-    
     def bilinear_interpolation(self, x, y, points):
         '''
         http://stackoverflow.com/questions/8661537/how-to-perform-bilinear-interpolation-in-python
@@ -93,14 +60,13 @@ class Chamfer:
             [0, 19, 41, 63, 92],
             [0, 7, 31, 56, 79]
         ]
+        
         for i, x in enumerate(whs):
-            if x > wh:
-                break
+            if x > wh: break
         for j, y in enumerate(angles):
-            if y > angle:
-                break
-        i = min(i-1,1)
-        j = min(j-1,3)
+            if y > angle: break
+        i = min(i-1, 1)
+        j = min(j-1, 3)
         px = lambda ii,jj: (whs[ii],angles[jj],table[ii][jj])
         x1 = px(i,j)
         x2 = px(i+1,j)
@@ -178,12 +144,12 @@ class Chamfer:
 
         points = [pcbnew.wxPoint(*point) for point in points]
 
-        self.Polygon(points, pcbnew.F_Cu)
+        self.module = Layout.Polygon(self.module, points, pcbnew.F_Cu)
 
         # Create pads
         pad_l = self.width/10
         size_pad = pcbnew.wxSize(self.width,pad_l)
-        self.module.Add(self.smdRectPad(self.module, size_pad, pcbnew.wxPoint(self.width/2, -pad_l/2), "1", 0))
+        self.module.Add(Layout.smdRectPad(self.module, size_pad, pcbnew.wxPoint(self.width/2, -pad_l/2), "1", 0, self.net))
         size_pad = pcbnew.wxSize(pad_l,self.width)
 
         # Halfway between points 4 and 5
@@ -194,7 +160,8 @@ class Chamfer:
         posx += (pad_l/2)*m.sin(self.angle)
         posy += (pad_l/2)*m.cos(self.angle)
         size_pad = pcbnew.wxSize(pad_l, self.width)
-        self.module.Add(self.smdRectPad(self.module, size_pad, pcbnew.wxPoint(posx, posy), "2", (self.angle_deg-90)*10))
+        self.module.Add(Layout.smdRectPad(self.module, size_pad, pcbnew.wxPoint(posx, posy), "2", (self.angle_deg-90)*10, self.net))
+
 
         self.module.MoveAnchorPosition(pcbnew.wxPoint(-w/2, (-y45/2 - w/2)))
         # self.module.MoveAnchorPosition(self.module.GetBoundingBox().Centre())

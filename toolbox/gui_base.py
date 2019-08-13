@@ -296,7 +296,7 @@ class SettingsDialogBase ( wx.Dialog ):
 
 		self.taperW2CheckBox = wx.CheckBox( self.taperTrackPanel, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, 0 )
 		self.taperW2CheckBox.SetValue(True)
-		_chamferfgSizer1.Add( self.taperW2CheckBox, 0, wx.ALL, 5 )
+		_chamferfgSizer1.Add( self.taperW2CheckBox, 0, wx.ALL|wx.ALIGN_CENTER_VERTICAL|wx.ALIGN_RIGHT, 5 )
 
 		self.taperLStaticText = wx.StaticText( self.taperTrackPanel, wx.ID_ANY, u"L", wx.DefaultPosition, wx.DefaultSize, 0 )
 		self.taperLStaticText.Wrap( -1 )
@@ -314,7 +314,7 @@ class SettingsDialogBase ( wx.Dialog ):
 
 		self.taperLCheckBox = wx.CheckBox( self.taperTrackPanel, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, 0 )
 		self.taperLCheckBox.SetValue(True)
-		_chamferfgSizer1.Add( self.taperLCheckBox, 0, wx.ALL, 5 )
+		_chamferfgSizer1.Add( self.taperLCheckBox, 0, wx.ALL|wx.ALIGN_CENTER_VERTICAL|wx.ALIGN_RIGHT, 5 )
 
 
 		_chamferbSizer1.Add( _chamferfgSizer1, 0, wx.ALL|wx.ALIGN_CENTER_VERTICAL|wx.EXPAND, 5 )
