@@ -382,12 +382,6 @@ class SettingsDialogBase ( wx.Dialog ):
 		self.chamferBoardHeightUnitwxChoice.Bind( wx.EVT_CHOICE, self.OnChamferBoardHeightUnit )
 		self.chamferAngleSpinCtrlDouble.Bind( wx.EVT_SPINCTRLDOUBLE, self.OnChamferSpinCtrlDouble )
 		self.chamferUnitwxChoice.Bind( wx.EVT_CHOICE, self.OnChamferAngleUnit )
-		self.taperWidth1SpinCtrlDouble.Bind( wx.EVT_SPINCTRLDOUBLE, self.OnChamferSpinCtrlDouble )
-		self.taperW1UnitwxChoice.Bind( wx.EVT_CHOICE, self.OnChamferLineWidthUnit )
-		self.taperWidth2SpinCtrlDouble.Bind( wx.EVT_SPINCTRLDOUBLE, self.OnChamferSpinCtrlDouble )
-		self.taperW2UnitwxChoice.Bind( wx.EVT_CHOICE, self.OnChamferBoardHeightUnit )
-		self.taperLengthSpinCtrlDouble.Bind( wx.EVT_SPINCTRLDOUBLE, self.OnChamferSpinCtrlDouble )
-		self.taperLengthUnitwxChoice.Bind( wx.EVT_CHOICE, self.OnChamferAngleUnit )
 		self.settingsButtonSizerOK.Bind( wx.EVT_BUTTON, self.OnOKSettingsButtonClick )
 
 	def __del__( self ):
@@ -462,12 +456,6 @@ class SettingsDialogBase ( wx.Dialog ):
 
 	def OnChamferAngleUnit( self, event ):
 		event.Skip()
-
-
-
-
-
-
 
 	def OnOKSettingsButtonClick( self, event ):
 		event.Skip()
