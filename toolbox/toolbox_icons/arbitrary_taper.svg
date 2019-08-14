@@ -277,8 +277,8 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="4"
-     inkscape:cx="147.41442"
-     inkscape:cy="70.587414"
+     inkscape:cx="136.53942"
+     inkscape:cy="72.837414"
      inkscape:document-units="mm"
      inkscape:current-layer="g2627"
      showgrid="false"
@@ -300,7 +300,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -313,45 +313,44 @@
        id="g2627"
        transform="translate(-0.03307651,1.1192037e-6)">
       <g
-         id="g2647"
-         transform="translate(0,4.2994792)">
+         id="g1117">
         <text
            xml:space="preserve"
            style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.9375px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif Italic';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.19843748"
            x="66.783951"
-           y="157.12273"
+           y="161.42221"
            id="text12617"><tspan
              sodipodi:role="line"
              id="tspan12615"
              x="66.783951"
-             y="157.12273"
+             y="161.42221"
              style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:5.64444447px;font-family:'cambria math';-inkscape-font-specification:'cambria math Italic';stroke-width:0.19843748">W<tspan
    style="font-size:5.64444447px;baseline-shift:sub"
    id="tspan1067">1</tspan></tspan></text>
         <rect
-           style="fill:#840000;fill-opacity:0.47058824;fill-rule:evenodd;stroke:#840000;stroke-width:0.60000002;stroke-linecap:square;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:1.80000009, 0.60000003;stroke-dashoffset:0.60000002;stroke-opacity:1;paint-order:normal"
+           style="fill:#840000;fill-opacity:0.47058824;fill-rule:evenodd;stroke:#840000;stroke-width:0.755;stroke-linecap:square;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:2.265,0.755;stroke-dashoffset:0.755;stroke-opacity:1;paint-order:normal"
            id="rect1048"
            width="24.245436"
            height="24.245436"
            x="59.018589"
-           y="127.75255" />
+           y="132.05203" />
         <rect
            style="fill:#840000;fill-opacity:0.47058824;fill-rule:evenodd;stroke:#840000;stroke-width:0.755;stroke-linecap:square;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;paint-order:normal"
            id="rect1048-4"
            width="9.6981745"
            height="9.6981745"
            x="108.3905"
-           y="135.02618" />
+           y="139.32567" />
         <text
            xml:space="preserve"
            style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.9375px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif Italic';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.19843748"
            x="49.829163"
-           y="141.19185"
+           y="145.49133"
            id="text12617-7"><tspan
              sodipodi:role="line"
              id="tspan12615-0"
              x="49.829163"
-             y="141.19185"
+             y="145.49133"
              style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:5.64444447px;font-family:'cambria math';-inkscape-font-specification:'cambria math Italic';stroke-width:0.19843748">W<tspan
    style="font-size:5.64444447px;baseline-shift:sub;stroke-width:0.19843748"
    id="tspan1067-2">1</tspan></tspan></text>
@@ -359,12 +358,12 @@
            xml:space="preserve"
            style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.9375px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif Italic';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.19843748"
            x="108.62904"
-           y="150.04964"
+           y="154.34912"
            id="text12617-3"><tspan
              sodipodi:role="line"
              id="tspan12615-3"
              x="108.62904"
-             y="150.04964"
+             y="154.34912"
              style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:5.64444447px;font-family:'cambria math';-inkscape-font-specification:'cambria math Italic';stroke-width:0.19843748">W<tspan
    style="font-size:5.64444447px;baseline-shift:sub"
    id="tspan1113">2</tspan></tspan></text>
@@ -372,34 +371,34 @@
            xml:space="preserve"
            style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.9375px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif Italic';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.19843748"
            x="118.48277"
-           y="141.19185"
+           y="145.49133"
            id="text12617-3-8"><tspan
              sodipodi:role="line"
              id="tspan12615-3-2"
              x="118.48277"
-             y="141.19185"
+             y="145.49133"
              style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:5.64444447px;font-family:'cambria math';-inkscape-font-specification:'cambria math Italic';stroke-width:0.19843748">W<tspan
    style="font-size:5.64444447px;baseline-shift:sub;stroke-width:0.19843748"
    id="tspan1113-6">2</tspan></tspan></text>
         <path
            style="fill:#840000;fill-opacity:0.47058824;stroke:#840000;stroke-width:0.755;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-           d="m 83.26402,127.75255 25.12649,7.27363 v 9.69818 l -25.12649,7.27363 z"
+           d="m 83.26402,132.05203 25.12649,7.27363 v 9.69818 l -25.12649,7.27363 z"
            id="path1136"
            inkscape:connector-curvature="0" />
         <text
            xml:space="preserve"
            style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.9375px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif Italic';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.19843748"
            x="94.132935"
-           y="138.33046"
+           y="142.62994"
            id="text12617-34"><tspan
              sodipodi:role="line"
              id="tspan12615-2"
              x="94.132935"
-             y="138.33046"
+             y="142.62994"
              style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:5.64444447px;font-family:'cambria math';-inkscape-font-specification:'cambria math Italic';stroke-width:0.19843748">L</tspan></text>
         <path
            style="fill:none;stroke:#000000;stroke-width:0.58129585;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:0;stroke-dasharray:1.74388751, 0.58129584;stroke-dashoffset:0.77312344;stroke-opacity:1;marker-start:url(#marker10476);marker-mid:url(#marker11558-9)"
-           d="m 84.141374,139.85246 h 23.403436 v 0"
+           d="m 84.141374,144.15194 h 23.403436 v 0"
            id="path1159"
            inkscape:connector-curvature="0" />
       </g>
