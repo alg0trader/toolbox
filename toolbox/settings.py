@@ -28,7 +28,7 @@ class BaseSettings:
         self.Write()
 
     def Write(self):
-        with open(self.settingsFile, 'w+') as cfgFile:
+        with open(self.settingsFile, 'wb') as cfgFile:
             self.config.write(cfgFile)
     
     def Read(self):
@@ -84,6 +84,7 @@ class CurveSettings(BaseSettings):
         self.SetValue(self._CURVE_SECTION, self._MAX_ARC_CHECK_CFG['Key'], self.maxArcCheck)
         self.SetValue(self._CURVE_SECTION, self._FROM_PAD_CFG['Key'], self.fromPad)
         self.SetValue(self._CURVE_SECTION, self._TO_PAD_CFG['Key'], self.toPad)
+        
         self.Write()
     
     def Load(self):
@@ -152,7 +153,6 @@ class ChamferSettings(BaseSettings):
             self.chamferAngle = self.GetValue(self._CHAMFER_SECTION, self._CHAMFER_ANGLE['Key'])
             self.angleUnit = self.GetValue(self._CHAMFER_SECTION, self._CHAMFER_ANGLE_UNIT['Key'])
             self.chamferAutoroute = self.GetValue(self._CHAMFER_SECTION, self._CHAMFER_AUTOROUTE['Key'])
-        
         except:
             self.Defaults()
             self.Write()
@@ -194,13 +194,13 @@ class TaperSettings(BaseSettings):
     def Save(self):
         self.SetValue(self._TAPER_SECTION, self._TAPER_WIDTH1['Key'], self.width1)
         self.SetValue(self._TAPER_SECTION, self._TAPER_WIDTH1_UNIT['Key'], self.width1Unit)
-        self.SetValue(self._TAPER_SECTION, self._TAPER_WIDTH1_AUTO['Key'], self.width1Auto)
+        # self.SetValue(self._TAPER_SECTION, self._TAPER_WIDTH1_AUTO['Key'], self.width1Auto)
         self.SetValue(self._TAPER_SECTION, self._TAPER_WIDTH2['Key'], self.width2)
         self.SetValue(self._TAPER_SECTION, self._TAPER_WIDTH2_UNIT['Key'], self.width2Unit)
-        self.SetValue(self._TAPER_SECTION, self._TAPER_WIDTH2_AUTO['Key'], self.width2Auto)
+        # self.SetValue(self._TAPER_SECTION, self._TAPER_WIDTH2_AUTO['Key'], self.width2Auto)
         self.SetValue(self._TAPER_SECTION, self._TAPER_LENGTH['Key'], self.length)
         self.SetValue(self._TAPER_SECTION, self._TAPER_LENGTH_UNIT['Key'], self.lengthUnit)
-        self.SetValue(self._TAPER_SECTION, self._TAPER_LENGTH_AUTO['Key'], self.lengthAuto)
+        # self.SetValue(self._TAPER_SECTION, self._TAPER_LENGTH_AUTO['Key'], self.lengthAuto)
         
         self.Write()
 
@@ -210,14 +210,13 @@ class TaperSettings(BaseSettings):
 
             self.width1 = self.GetValue(self._TAPER_SECTION, self._TAPER_WIDTH1['Key'])
             self.width1Unit = self.GetValue(self._TAPER_SECTION, self._TAPER_WIDTH1_UNIT['Key'])
-            self.width1Auto = self.GetValue(self._TAPER_SECTION, self._TAPER_WIDTH1_AUTO['Key'])
+            # self.width1Auto = self.GetValue(self._TAPER_SECTION, self._TAPER_WIDTH1_AUTO['Key'])
             self.width2 = self.GetValue(self._TAPER_SECTION, self._TAPER_WIDTH2['Key'])
             self.width2Unit = self.GetValue(self._TAPER_SECTION, self._TAPER_WIDTH2_UNIT['Key'])
-            self.width2Auto = self.GetValue(self._TAPER_SECTION, self._TAPER_WIDTH2_AUTO['Key'])
+            # self.width2Auto = self.GetValue(self._TAPER_SECTION, self._TAPER_WIDTH2_AUTO['Key'])
             self.length = self.GetValue(self._TAPER_SECTION, self._TAPER_LENGTH['Key'])
             self.lengthUnit = self.GetValue(self._TAPER_SECTION, self._TAPER_LENGTH_UNIT['Key'])
-            self.lengthAuto = self.GetValue(self._TAPER_SECTION, self._TAPER_LENGTH_AUTO['Key'])
-        
+            # self.lengthAuto = self.GetValue(self._TAPER_SECTION, self._TAPER_LENGTH_AUTO['Key'])
         except:
             self.Defaults()
             self.Write()

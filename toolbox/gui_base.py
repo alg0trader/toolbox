@@ -276,9 +276,9 @@ class SettingsDialogBase ( wx.Dialog ):
 		self.taperW1UnitwxChoice.SetSelection( 0 )
 		_chamferfgSizer1.Add( self.taperW1UnitwxChoice, 0, wx.ALL|wx.ALIGN_CENTER_VERTICAL, 5 )
 
-		self.taperW1CheckBox = wx.CheckBox( self.taperTrackPanel, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.taperW1CheckBox = wx.CheckBox( self.taperTrackPanel, wx.ID_ANY, u"Auto", wx.DefaultPosition, wx.DefaultSize, 0 )
 		self.taperW1CheckBox.SetValue(True)
-		_chamferfgSizer1.Add( self.taperW1CheckBox, 1, wx.ALIGN_CENTER_VERTICAL|wx.ALL|wx.EXPAND|wx.ALIGN_RIGHT, 5 )
+		_chamferfgSizer1.Add( self.taperW1CheckBox, 1, wx.ALIGN_CENTER_VERTICAL|wx.ALL|wx.EXPAND, 5 )
 
 		self.taperW2StaticText = wx.StaticText( self.taperTrackPanel, wx.ID_ANY, u"W2", wx.DefaultPosition, wx.DefaultSize, 0 )
 		self.taperW2StaticText.Wrap( -1 )
@@ -294,7 +294,7 @@ class SettingsDialogBase ( wx.Dialog ):
 		self.taperW2UnitwxChoice.SetSelection( 0 )
 		_chamferfgSizer1.Add( self.taperW2UnitwxChoice, 0, wx.ALL, 5 )
 
-		self.taperW2CheckBox = wx.CheckBox( self.taperTrackPanel, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.taperW2CheckBox = wx.CheckBox( self.taperTrackPanel, wx.ID_ANY, u"Auto", wx.DefaultPosition, wx.DefaultSize, 0 )
 		self.taperW2CheckBox.SetValue(True)
 		_chamferfgSizer1.Add( self.taperW2CheckBox, 0, wx.ALL|wx.ALIGN_CENTER_VERTICAL|wx.ALIGN_RIGHT, 5 )
 
@@ -312,9 +312,9 @@ class SettingsDialogBase ( wx.Dialog ):
 		self.taperLengthUnitwxChoice.SetSelection( 0 )
 		_chamferfgSizer1.Add( self.taperLengthUnitwxChoice, 0, wx.ALL, 5 )
 
-		self.taperLCheckBox = wx.CheckBox( self.taperTrackPanel, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.taperLCheckBox = wx.CheckBox( self.taperTrackPanel, wx.ID_ANY, u"Auto", wx.DefaultPosition, wx.DefaultSize, 0 )
 		self.taperLCheckBox.SetValue(True)
-		_chamferfgSizer1.Add( self.taperLCheckBox, 0, wx.ALL|wx.ALIGN_CENTER_VERTICAL|wx.ALIGN_RIGHT, 5 )
+		_chamferfgSizer1.Add( self.taperLCheckBox, 0, wx.ALL|wx.ALIGN_CENTER_VERTICAL, 5 )
 
 
 		_chamferbSizer1.Add( _chamferfgSizer1, 0, wx.ALL|wx.ALIGN_CENTER_VERTICAL|wx.EXPAND, 5 )

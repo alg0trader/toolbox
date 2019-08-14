@@ -9,9 +9,9 @@
    xmlns="http://www.w3.org/2000/svg"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="295"
-   height="150"
-   viewBox="0 0 78.052084 39.687501"
+   width="288.39212"
+   height="116.69884"
+   viewBox="0 0 76.303749 30.876568"
    version="1.1"
    id="svg8"
    inkscape:export-filename="D:\Program Files\KiCad\share\kicad\scripting\plugins\toolbox\toolbox\toolbox_icons\arbitrary_taper.png"
@@ -277,8 +277,8 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="4"
-     inkscape:cx="136.53942"
-     inkscape:cy="72.837414"
+     inkscape:cx="127.62762"
+     inkscape:cy="68.885645"
      inkscape:document-units="mm"
      inkscape:current-layer="g2627"
      showgrid="false"
@@ -300,7 +300,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
+        <dc:title></dc:title>
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -308,12 +308,12 @@
      inkscape:label="Layer 1"
      inkscape:groupmode="layer"
      id="layer1"
-     transform="translate(-49.707402,-122.96959)">
+     transform="translate(-50.581568,-131.67453)">
     <g
        id="g2627"
        transform="translate(-0.03307651,1.1192037e-6)">
       <g
-         id="g1117">
+         id="g1179">
         <text
            xml:space="preserve"
            style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.9375px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif Italic';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.19843748"
@@ -328,7 +328,7 @@
    style="font-size:5.64444447px;baseline-shift:sub"
    id="tspan1067">1</tspan></tspan></text>
         <rect
-           style="fill:#840000;fill-opacity:0.47058824;fill-rule:evenodd;stroke:#840000;stroke-width:0.755;stroke-linecap:square;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:2.265,0.755;stroke-dashoffset:0.755;stroke-opacity:1;paint-order:normal"
+           style="fill:#840000;fill-opacity:0.47058824;fill-rule:evenodd;stroke:#840000;stroke-width:0.755;stroke-linecap:square;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:2.265, 0.755;stroke-dashoffset:0.755;stroke-opacity:1;paint-order:normal"
            id="rect1048"
            width="24.245436"
            height="24.245436"
