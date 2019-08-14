@@ -187,7 +187,7 @@ class SettingsDialogBase ( wx.Dialog ):
 
 		_chamferfgSizer.Add( self.chamferLineWidthStaticText, 0, wx.ALL|wx.ALIGN_CENTER_VERTICAL, 5 )
 
-		self.chamferLineWidthSpinCtrlDouble = wx.SpinCtrlDouble( self.chamferTrackPanel, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, wx.SP_ARROW_KEYS, 0, 100, 0, 1 )
+		self.chamferLineWidthSpinCtrlDouble = wx.SpinCtrlDouble( self.chamferTrackPanel, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, wx.SP_ARROW_KEYS, 0, 254, 0, 1 )
 		self.chamferLineWidthSpinCtrlDouble.SetDigits( 0 )
 		_chamferfgSizer.Add( self.chamferLineWidthSpinCtrlDouble, 0, wx.ALL, 5 )
 
@@ -205,7 +205,7 @@ class SettingsDialogBase ( wx.Dialog ):
 
 		_chamferfgSizer.Add( self.chamferBoardHeightStaticText, 0, wx.ALL|wx.ALIGN_CENTER_VERTICAL, 5 )
 
-		self.chamferHeightSpinCtrlDouble = wx.SpinCtrlDouble( self.chamferTrackPanel, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, wx.SP_ARROW_KEYS, 0, 100, 0, 1 )
+		self.chamferHeightSpinCtrlDouble = wx.SpinCtrlDouble( self.chamferTrackPanel, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, wx.SP_ARROW_KEYS, 0, 254, 0, 1 )
 		self.chamferHeightSpinCtrlDouble.SetDigits( 0 )
 		_chamferfgSizer.Add( self.chamferHeightSpinCtrlDouble, 0, wx.ALL, 5 )
 
@@ -265,9 +265,9 @@ class SettingsDialogBase ( wx.Dialog ):
 		self.taperW1StaticText = wx.StaticText( self.taperTrackPanel, wx.ID_ANY, u"W1", wx.DefaultPosition, wx.DefaultSize, 0 )
 		self.taperW1StaticText.Wrap( -1 )
 
-		_chamferfgSizer1.Add( self.taperW1StaticText, 0, wx.ALL|wx.ALIGN_CENTER_VERTICAL|wx.ALIGN_RIGHT, 5 )
+		_chamferfgSizer1.Add( self.taperW1StaticText, 0, wx.ALL|wx.ALIGN_CENTER_VERTICAL, 5 )
 
-		self.taperWidth1SpinCtrlDouble = wx.SpinCtrlDouble( self.taperTrackPanel, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, wx.SP_ARROW_KEYS, 0, 100, 0, 1 )
+		self.taperWidth1SpinCtrlDouble = wx.SpinCtrlDouble( self.taperTrackPanel, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, wx.SP_ARROW_KEYS, 0, 254, 0, 1 )
 		self.taperWidth1SpinCtrlDouble.SetDigits( 0 )
 		_chamferfgSizer1.Add( self.taperWidth1SpinCtrlDouble, 0, wx.ALL, 5 )
 
@@ -277,15 +277,14 @@ class SettingsDialogBase ( wx.Dialog ):
 		_chamferfgSizer1.Add( self.taperW1UnitwxChoice, 0, wx.ALL|wx.ALIGN_CENTER_VERTICAL, 5 )
 
 		self.taperW1CheckBox = wx.CheckBox( self.taperTrackPanel, wx.ID_ANY, u"Auto", wx.DefaultPosition, wx.DefaultSize, 0 )
-		self.taperW1CheckBox.SetValue(True)
 		_chamferfgSizer1.Add( self.taperW1CheckBox, 1, wx.ALIGN_CENTER_VERTICAL|wx.ALL|wx.EXPAND, 5 )
 
 		self.taperW2StaticText = wx.StaticText( self.taperTrackPanel, wx.ID_ANY, u"W2", wx.DefaultPosition, wx.DefaultSize, 0 )
 		self.taperW2StaticText.Wrap( -1 )
 
-		_chamferfgSizer1.Add( self.taperW2StaticText, 0, wx.ALL|wx.ALIGN_CENTER_VERTICAL|wx.ALIGN_RIGHT, 5 )
+		_chamferfgSizer1.Add( self.taperW2StaticText, 0, wx.ALL|wx.ALIGN_CENTER_VERTICAL, 5 )
 
-		self.taperWidth2SpinCtrlDouble = wx.SpinCtrlDouble( self.taperTrackPanel, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, wx.SP_ARROW_KEYS, 0, 100, 0, 1 )
+		self.taperWidth2SpinCtrlDouble = wx.SpinCtrlDouble( self.taperTrackPanel, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, wx.SP_ARROW_KEYS, 0, 254, 0, 1 )
 		self.taperWidth2SpinCtrlDouble.SetDigits( 0 )
 		_chamferfgSizer1.Add( self.taperWidth2SpinCtrlDouble, 0, wx.ALL, 5 )
 
@@ -295,15 +294,14 @@ class SettingsDialogBase ( wx.Dialog ):
 		_chamferfgSizer1.Add( self.taperW2UnitwxChoice, 0, wx.ALL, 5 )
 
 		self.taperW2CheckBox = wx.CheckBox( self.taperTrackPanel, wx.ID_ANY, u"Auto", wx.DefaultPosition, wx.DefaultSize, 0 )
-		self.taperW2CheckBox.SetValue(True)
 		_chamferfgSizer1.Add( self.taperW2CheckBox, 0, wx.ALL|wx.ALIGN_CENTER_VERTICAL|wx.ALIGN_RIGHT, 5 )
 
 		self.taperLStaticText = wx.StaticText( self.taperTrackPanel, wx.ID_ANY, u"L", wx.DefaultPosition, wx.DefaultSize, 0 )
 		self.taperLStaticText.Wrap( -1 )
 
-		_chamferfgSizer1.Add( self.taperLStaticText, 0, wx.ALL|wx.ALIGN_RIGHT, 5 )
+		_chamferfgSizer1.Add( self.taperLStaticText, 0, wx.ALL, 5 )
 
-		self.taperLengthSpinCtrlDouble = wx.SpinCtrlDouble( self.taperTrackPanel, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, wx.SP_ARROW_KEYS, 0, 90, 0, 1 )
+		self.taperLengthSpinCtrlDouble = wx.SpinCtrlDouble( self.taperTrackPanel, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, wx.SP_ARROW_KEYS, 0, 254, 0, 1 )
 		self.taperLengthSpinCtrlDouble.SetDigits( 0 )
 		_chamferfgSizer1.Add( self.taperLengthSpinCtrlDouble, 0, wx.ALL, 5 )
 
@@ -313,7 +311,6 @@ class SettingsDialogBase ( wx.Dialog ):
 		_chamferfgSizer1.Add( self.taperLengthUnitwxChoice, 0, wx.ALL, 5 )
 
 		self.taperLCheckBox = wx.CheckBox( self.taperTrackPanel, wx.ID_ANY, u"Auto", wx.DefaultPosition, wx.DefaultSize, 0 )
-		self.taperLCheckBox.SetValue(True)
 		_chamferfgSizer1.Add( self.taperLCheckBox, 0, wx.ALL|wx.ALIGN_CENTER_VERTICAL, 5 )
 
 
@@ -382,6 +379,15 @@ class SettingsDialogBase ( wx.Dialog ):
 		self.chamferBoardHeightUnitwxChoice.Bind( wx.EVT_CHOICE, self.OnChamferBoardHeightUnit )
 		self.chamferAngleSpinCtrlDouble.Bind( wx.EVT_SPINCTRLDOUBLE, self.OnChamferSpinCtrlDouble )
 		self.chamferUnitwxChoice.Bind( wx.EVT_CHOICE, self.OnChamferAngleUnit )
+		self.taperWidth1SpinCtrlDouble.Bind( wx.EVT_SPINCTRLDOUBLE, self.OnTaperW1SpinCtrlDouble )
+		self.taperW1UnitwxChoice.Bind( wx.EVT_CHOICE, self.OnTaperW1Unit )
+		self.taperW1CheckBox.Bind( wx.EVT_CHECKBOX, self.OnTaperW1Auto )
+		self.taperWidth2SpinCtrlDouble.Bind( wx.EVT_SPINCTRLDOUBLE, self.OnTaperW2SpinCtrlDouble )
+		self.taperW2UnitwxChoice.Bind( wx.EVT_CHOICE, self.OnTaperW2Unit )
+		self.taperW2CheckBox.Bind( wx.EVT_CHECKBOX, self.OnTaperW2Auto )
+		self.taperLengthSpinCtrlDouble.Bind( wx.EVT_SPINCTRLDOUBLE, self.OnTaperLengthSpinCtrlDouble )
+		self.taperLengthUnitwxChoice.Bind( wx.EVT_CHOICE, self.OnTaperLengthUnit )
+		self.taperLCheckBox.Bind( wx.EVT_CHECKBOX, self.OnTaperLengthAuto )
 		self.settingsButtonSizerOK.Bind( wx.EVT_BUTTON, self.OnOKSettingsButtonClick )
 
 	def __del__( self ):
@@ -455,6 +461,33 @@ class SettingsDialogBase ( wx.Dialog ):
 
 
 	def OnChamferAngleUnit( self, event ):
+		event.Skip()
+
+	def OnTaperW1SpinCtrlDouble( self, event ):
+		event.Skip()
+
+	def OnTaperW1Unit( self, event ):
+		event.Skip()
+
+	def OnTaperW1Auto( self, event ):
+		event.Skip()
+
+	def OnTaperW2SpinCtrlDouble( self, event ):
+		event.Skip()
+
+	def OnTaperW2Unit( self, event ):
+		event.Skip()
+
+	def OnTaperW2Auto( self, event ):
+		event.Skip()
+
+	def OnTaperLengthSpinCtrlDouble( self, event ):
+		event.Skip()
+
+	def OnTaperLengthUnit( self, event ):
+		event.Skip()
+
+	def OnTaperLengthAuto( self, event ):
 		event.Skip()
 
 	def OnOKSettingsButtonClick( self, event ):

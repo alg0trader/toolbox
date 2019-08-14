@@ -236,6 +236,10 @@ class SettingsDialog(TaperTab):
         self.taperLengthSpinCtrlDouble.SetValue(float(self.taperCfgSettings.length))
         self.taperLengthUnitwxChoice.SetSelection(int(self.taperCfgSettings.lengthUnit))
         #self.SetTaperLengthAuto()
+
+        # Set max ranges
+        # get current units -> set max
+
     
     # Hack for new wxFormBuilder generating code incompatible with old wxPython
     # no inspection PyMethodOverriding
@@ -273,30 +277,31 @@ class SettingsDialog(TaperTab):
     def OnChamferLineWidthUnit(self, event):
         oldUnit = self.chamferCfgSettings.lineUnit
         newUnit = str(self.chamferLineWidthUnitwxChoice.GetSelection())
+        self.chamferCfgSettings.lineUnit = newUnit
 
         if oldUnit == '0' and newUnit == '1':
+            self.chamferLineWidthSpinCtrlDouble.SetMax(10000)    # 10,000 mils max
             self.chamferLineWidthSpinCtrlDouble.SetValue(self.chamferLineWidthSpinCtrlDouble.GetValue()*39.3701)
-            self.chamferCfgSettings.lineUnit = '1'
             self.chamferLineWidthSpinCtrlDouble.SetIncrement(1)
         elif oldUnit == '0' and newUnit == '2':
+            self.chamferLineWidthSpinCtrlDouble.SetMax(10)       # 10 in max
             self.chamferLineWidthSpinCtrlDouble.SetValue(self.chamferLineWidthSpinCtrlDouble.GetValue()*0.0393701)
-            self.chamferCfgSettings.lineUnit = '2'
-            self.chamferLineWidthSpinCtrlDouble.SetIncrement(0.001)
+            self.chamferLineWidthSpinCtrlDouble.SetIncrement(0.1)
         elif oldUnit == '1' and newUnit == '0':
+            self.chamferLineWidthSpinCtrlDouble.SetMax(254)      # 254 mm max
             self.chamferLineWidthSpinCtrlDouble.SetValue(self.chamferLineWidthSpinCtrlDouble.GetValue()*0.0254)
-            self.chamferCfgSettings.lineUnit = '0'
             self.chamferLineWidthSpinCtrlDouble.SetIncrement(0.01)
         elif oldUnit == '1' and newUnit == '2':
+            self.chamferLineWidthSpinCtrlDouble.SetMax(10)       # 10 in max
             self.chamferLineWidthSpinCtrlDouble.SetValue(self.chamferLineWidthSpinCtrlDouble.GetValue()*0.001)
-            self.chamferCfgSettings.lineUnit = '2'
-            self.chamferLineWidthSpinCtrlDouble.SetIncrement(0.001)
+            self.chamferLineWidthSpinCtrlDouble.SetIncrement(0.1)
         elif oldUnit == '2' and newUnit == '0':
+            self.chamferLineWidthSpinCtrlDouble.SetMax(254)      # 254 mm max
             self.chamferLineWidthSpinCtrlDouble.SetValue(self.chamferLineWidthSpinCtrlDouble.GetValue()*25.4)
-            self.chamferCfgSettings.lineUnit = '0'
             self.chamferLineWidthSpinCtrlDouble.SetIncrement(0.01)
         elif oldUnit == '2' and newUnit == '1':
+            self.chamferLineWidthSpinCtrlDouble.SetMax(10000)    # 10,000 mils max
             self.chamferLineWidthSpinCtrlDouble.SetValue(self.chamferLineWidthSpinCtrlDouble.GetValue()*1000.0)
-            self.chamferCfgSettings.lineUnit = '1'
             self.chamferLineWidthSpinCtrlDouble.SetIncrement(1)
         
         self.OnChamferSpinCtrlDouble(None)
@@ -304,36 +309,37 @@ class SettingsDialog(TaperTab):
     def OnChamferBoardHeightUnit(self, event):
         oldUnit = self.chamferCfgSettings.heightUnit
         newUnit = str(self.chamferBoardHeightUnitwxChoice.GetSelection())
+        self.chamferCfgSettings.heightUnit = newUnit
 
         if oldUnit == '0' and newUnit == '1':
             # mm to mils
+            self.chamferHeightSpinCtrlDouble.SetMax(10000)    # 10,000 mils max
             self.chamferHeightSpinCtrlDouble.SetValue(self.chamferHeightSpinCtrlDouble.GetValue()*39.3701)
-            self.chamferCfgSettings.heightUnit = '1'
-            self.chamferHeightSpinCtrlDouble.SetIncrement(1)
+            self.chamferHeightSpinCtrlDouble.SetIncrement(0.01)
         elif oldUnit == '0' and newUnit == '2':
             # mm to in
+            self.chamferHeightSpinCtrlDouble.SetMax(10)       # 10 in max
             self.chamferHeightSpinCtrlDouble.SetValue(self.chamferHeightSpinCtrlDouble.GetValue()*0.0393701)
-            self.chamferCfgSettings.heightUnit = '2'
-            self.chamferHeightSpinCtrlDouble.SetIncrement(0.001)
+            self.chamferHeightSpinCtrlDouble.SetIncrement(0.1)
         elif oldUnit == '1' and newUnit == '0':
             # mils to mm
+            self.chamferHeightSpinCtrlDouble.SetMax(254)       # 254 mm max
             self.chamferHeightSpinCtrlDouble.SetValue(self.chamferHeightSpinCtrlDouble.GetValue()*0.0254)
-            self.chamferCfgSettings.heightUnit = '0'
             self.chamferHeightSpinCtrlDouble.SetIncrement(0.01)
         elif oldUnit == '1' and newUnit == '2':
             # mils to in
+            self.chamferHeightSpinCtrlDouble.SetMax(10)       # 10 in max
             self.chamferHeightSpinCtrlDouble.SetValue(self.chamferHeightSpinCtrlDouble.GetValue()*0.001)
-            self.chamferCfgSettings.heightUnit = '2'
-            self.chamferHeightSpinCtrlDouble.SetIncrement(0.001)
+            self.chamferHeightSpinCtrlDouble.SetIncrement(0.1)
         elif oldUnit == '2' and newUnit == '0':
             # in to mm
+            self.chamferHeightSpinCtrlDouble.SetMax(254)      # 254 mm max
             self.chamferHeightSpinCtrlDouble.SetValue(self.chamferHeightSpinCtrlDouble.GetValue()*25.4)
-            self.chamferCfgSettings.heightUnit = '0'
             self.chamferHeightSpinCtrlDouble.SetIncrement(0.01)
         elif oldUnit == '2' and newUnit == '1':
             # in to mils
+            self.chamferHeightSpinCtrlDouble.SetMax(10000)    # 10,000 mils max
             self.chamferHeightSpinCtrlDouble.SetValue(self.chamferHeightSpinCtrlDouble.GetValue()*1000.0)
-            self.chamferCfgSettings.heightUnit = '1'
             self.chamferHeightSpinCtrlDouble.SetIncrement(1)
         
         self.OnChamferSpinCtrlDouble(None)
@@ -344,16 +350,168 @@ class SettingsDialog(TaperTab):
 
         if oldUnit == '0' and newUnit == '1':
             # deg to rad
+            self.chamferAngleSpinCtrlDouble.SetMax(1.5708)
             self.chamferAngleSpinCtrlDouble.SetValue(m.radians(self.chamferAngleSpinCtrlDouble.GetValue()))
-            self.chamferCfgSettings.angleUnit = '1'
             self.chamferAngleSpinCtrlDouble.SetIncrement(0.01)
+            self.chamferCfgSettings.angleUnit = '1'
         elif oldUnit == '1' and newUnit == '0':
             # rad to deg
+            self.chamferAngleSpinCtrlDouble.SetMax(90)
             self.chamferAngleSpinCtrlDouble.SetValue(round(m.degrees(self.chamferAngleSpinCtrlDouble.GetValue()), 2))
-            self.chamferCfgSettings.angleUnit = '0'
             self.chamferAngleSpinCtrlDouble.SetIncrement(1)
+            self.chamferCfgSettings.angleUnit = '0'
 
         self.OnChamferSpinCtrlDouble(None)
+    
+    def OnTaperW1SpinCtrlDouble(self, event):
+        w1 = self.taperWidth1SpinCtrlDouble.GetValue()
+        if str(self.taperW1UnitwxChoice.GetSelection()) == '1': w1 = w1 * 0.0254
+        elif str(self.taperW1UnitwxChoice.GetSelection()) == '2': w1 = w1 * 25.4
+
+        # errors = chamfer.Taper.CheckParameters(lw, bh, ca)
+        # if len(errors) >= 1: menu_dialog('Errors:\n%s' % errors
+    
+    def OnTaperW1Unit(self, event):
+        oldUnit = self.taperCfgSettings.width1Unit
+        newUnit = str(self.taperW1UnitwxChoice.GetSelection())
+        self.taperCfgSettings.width1Unit = newUnit
+
+        if oldUnit == '0' and newUnit == '1':
+            self.taperLengthSpinCtrlDouble.SetMax(10000)    # 10,000 mils max
+            self.taperWidth1SpinCtrlDouble.SetValue(self.taperWidth1SpinCtrlDouble.GetValue()*39.3701)
+            self.taperWidth1SpinCtrlDouble.SetIncrement(1)
+        elif oldUnit == '0' and newUnit == '2':
+            self.taperLengthSpinCtrlDouble.SetMax(10)       # 10 in max
+            self.taperWidth1SpinCtrlDouble.SetValue(self.taperWidth1SpinCtrlDouble.GetValue()*0.0393701)
+            self.taperWidth1SpinCtrlDouble.SetIncrement(0.1)
+        elif oldUnit == '1' and newUnit == '0':
+            self.taperLengthSpinCtrlDouble.SetMax(254)       # 254 mm max
+            self.taperWidth1SpinCtrlDouble.SetValue(self.taperWidth1SpinCtrlDouble.GetValue()*0.0254)
+            self.taperWidth1SpinCtrlDouble.SetIncrement(0.01)
+        elif oldUnit == '1' and newUnit == '2':
+            self.taperLengthSpinCtrlDouble.SetMax(10)       # 10 in max
+            self.taperWidth1SpinCtrlDouble.SetValue(self.taperWidth1SpinCtrlDouble.GetValue()*0.001)
+            self.taperWidth1SpinCtrlDouble.SetIncrement(0.1)
+        elif oldUnit == '2' and newUnit == '0':
+            self.taperLengthSpinCtrlDouble.SetMax(254)      # 254 mm max
+            self.taperWidth1SpinCtrlDouble.SetValue(self.taperWidth1SpinCtrlDouble.GetValue()*25.4)
+            self.taperWidth1SpinCtrlDouble.SetIncrement(0.01)
+        elif oldUnit == '2' and newUnit == '1':
+            self.taperLengthSpinCtrlDouble.SetMax(10000)    # 10,000 mils max
+            self.taperWidth1SpinCtrlDouble.SetValue(self.taperWidth1SpinCtrlDouble.GetValue()*1000.0)
+            self.taperWidth1SpinCtrlDouble.SetIncrement(1)
+        
+        self.OnTaperW1SpinCtrlDouble(None)
+
+    def OnTaperW1Auto(self, event):
+        if self.taperW1CheckBox.IsChecked():
+            self.taperW1StaticText.Enable(False)
+            self.taperWidth1SpinCtrlDouble.Enable(False)
+            self.taperW1UnitwxChoice.Enable(False)
+        else:
+            self.taperW1StaticText.Enable(True)
+            self.taperWidth1SpinCtrlDouble.Enable(True)
+            self.taperW1UnitwxChoice.Enable(True)
+
+    def OnTaperW2SpinCtrlDouble(self, event):
+        w2 = self.taperWidth2SpinCtrlDouble.GetValue()
+        if str(self.taperW2UnitwxChoice.GetSelection()) == '1': w2 = w2 * 0.0254
+        elif str(self.taperW2UnitwxChoice.GetSelection()) == '2': w2 = w2 * 25.4
+
+        # errors = chamfer.Taper.CheckParameters(lw, bh, ca)
+        # if len(errors) >= 1: menu_dialog('Errors:\n%s' % errors
+
+    def OnTaperW2Unit(self, event):
+        oldUnit = self.taperCfgSettings.width2Unit
+        newUnit = str(self.taperW2UnitwxChoice.GetSelection())
+        self.taperCfgSettings.width2Unit = newUnit
+
+        if oldUnit == '0' and newUnit == '1':
+            self.taperLengthSpinCtrlDouble.SetMax(10000)    # 10,000 mils max
+            self.taperWidth2SpinCtrlDouble.SetValue(self.taperWidth2SpinCtrlDouble.GetValue()*39.3701)
+            self.taperWidth1SpinCtrlDouble.SetIncrement(1)
+        elif oldUnit == '0' and newUnit == '2':
+            self.taperLengthSpinCtrlDouble.SetMax(10)       # 10 in max
+            self.taperWidth2SpinCtrlDouble.SetValue(self.taperWidth2SpinCtrlDouble.GetValue()*0.0393701)
+            self.taperWidth2SpinCtrlDouble.SetIncrement(0.1)
+        elif oldUnit == '1' and newUnit == '0':
+            self.taperLengthSpinCtrlDouble.SetMax(254)       # 254 mm max
+            self.taperWidth2SpinCtrlDouble.SetValue(self.taperWidth2SpinCtrlDouble.GetValue()*0.0254)
+            self.taperWidth2SpinCtrlDouble.SetIncrement(0.01)
+        elif oldUnit == '1' and newUnit == '2':
+            self.taperLengthSpinCtrlDouble.SetMax(10)       # 10 in max
+            self.taperWidth2SpinCtrlDouble.SetValue(self.taperWidth2SpinCtrlDouble.GetValue()*0.001)
+            self.taperWidth2SpinCtrlDouble.SetIncrement(0.1)
+        elif oldUnit == '2' and newUnit == '0':
+            self.taperWidth2SpinCtrlDouble.SetValue(self.taperWidth2SpinCtrlDouble.GetValue()*25.4)
+            self.taperLengthSpinCtrlDouble.SetMax(254)      # 254 mm max
+            self.taperWidth2SpinCtrlDouble.SetIncrement(0.01)
+        elif oldUnit == '2' and newUnit == '1':
+            self.taperLengthSpinCtrlDouble.SetMax(10000)    # 10,000 mils max
+            self.taperWidth2SpinCtrlDouble.SetValue(self.taperWidth2SpinCtrlDouble.GetValue()*1000.0)
+            self.taperWidth2SpinCtrlDouble.SetIncrement(1)
+        
+        self.OnTaperW2SpinCtrlDouble(None)
+    
+    def OnTaperW2Auto(self, event):
+        if self.taperW2CheckBox.IsChecked():
+            self.taperW2StaticText.Enable(False)
+            self.taperWidth2SpinCtrlDouble.Enable(False)
+            self.taperW2UnitwxChoice.Enable(False)
+        else:
+            self.taperW2StaticText.Enable(True)
+            self.taperWidth2SpinCtrlDouble.Enable(True)
+            self.taperW2UnitwxChoice.Enable(True)
+    
+    def OnTaperLengthSpinCtrlDouble(self, event):
+        length = self.taperLengthSpinCtrlDouble.GetValue()
+        if str(self.taperLengthUnitwxChoice.GetSelection()) == '1': length = length * 0.0254
+        elif str(self.taperLengthUnitwxChoice.GetSelection()) == '2': length = length * 25.4
+
+        # errors = chamfer.Taper.CheckParameters(lw, bh, ca)
+        # if len(errors) >= 1: menu_dialog('Errors:\n%s' % errors
+
+    def OnTaperLengthUnit(self, event):
+        oldUnit = self.taperCfgSettings.lengthUnit
+        newUnit = str(self.taperLengthUnitwxChoice.GetSelection())
+        self.taperCfgSettings.lengthUnit = newUnit
+
+        if oldUnit == '0' and newUnit == '1':
+            self.taperLengthSpinCtrlDouble.SetMax(10000)    # 10,000 mils max
+            self.taperLengthSpinCtrlDouble.SetValue(self.taperLengthSpinCtrlDouble.GetValue()*39.3701)
+            self.taperLengthSpinCtrlDouble.SetIncrement(1)
+        elif oldUnit == '0' and newUnit == '2':
+            self.taperLengthSpinCtrlDouble.SetValue(self.taperLengthSpinCtrlDouble.GetValue()*0.0393701)
+            self.taperLengthSpinCtrlDouble.SetMax(10)       # 10 in max
+            self.taperLengthSpinCtrlDouble.SetIncrement(0.1)
+        elif oldUnit == '1' and newUnit == '0':
+            self.taperLengthSpinCtrlDouble.SetValue(self.taperLengthSpinCtrlDouble.GetValue()*0.0254)
+            self.taperLengthSpinCtrlDouble.SetMax(254)       # 254 mm max
+            self.taperLengthSpinCtrlDouble.SetIncrement(0.01)
+        elif oldUnit == '1' and newUnit == '2':
+            self.taperLengthSpinCtrlDouble.SetValue(self.taperLengthSpinCtrlDouble.GetValue()*0.001)
+            self.taperLengthSpinCtrlDouble.SetMax(10)       # 10 in max
+            self.taperLengthSpinCtrlDouble.SetIncrement(0.1)
+        elif oldUnit == '2' and newUnit == '0':
+            self.taperLengthSpinCtrlDouble.SetMax(254)      # 254 mm max
+            self.taperLengthSpinCtrlDouble.SetValue(self.taperLengthSpinCtrlDouble.GetValue()*25.4)
+            self.taperLengthSpinCtrlDouble.SetIncrement(0.01)
+        elif oldUnit == '2' and newUnit == '1':
+            self.taperLengthSpinCtrlDouble.SetValue(self.taperLengthSpinCtrlDouble.GetValue()*1000.0)
+            self.taperLengthSpinCtrlDouble.SetMax(10000)    # 10,000 mils max
+            self.taperLengthSpinCtrlDouble.SetIncrement(1)
+        
+        self.OnTaperLengthSpinCtrlDouble(None)
+
+    def OnTaperLengthAuto(self, event):
+        if self.taperLCheckBox.IsChecked():
+            self.taperLStaticText.Enable(False)
+            self.taperLengthSpinCtrlDouble.Enable(False)
+            self.taperLengthUnitwxChoice.Enable(False)
+        else:
+            self.taperLStaticText.Enable(True)
+            self.taperLengthSpinCtrlDouble.Enable(True)
+            self.taperLengthUnitwxChoice.Enable(True)
 
     def OnOKSettingsButtonClick(self, event):
         # Save settings from user

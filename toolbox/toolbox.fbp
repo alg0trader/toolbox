@@ -118,7 +118,7 @@
                         <object class="notebookpage" expanded="1">
                             <property name="bitmap"></property>
                             <property name="label">Curve</property>
-                            <property name="select">1</property>
+                            <property name="select">0</property>
                             <object class="wxPanel" expanded="0">
                                 <property name="BottomDockable">1</property>
                                 <property name="LeftDockable">1</property>
@@ -1994,7 +1994,7 @@
                                                     <property name="id">wxID_ANY</property>
                                                     <property name="inc">1</property>
                                                     <property name="initial">0</property>
-                                                    <property name="max">100</property>
+                                                    <property name="max">254</property>
                                                     <property name="max_size"></property>
                                                     <property name="maximize_button">0</property>
                                                     <property name="maximum_size"></property>
@@ -2249,7 +2249,7 @@
                                                     <property name="id">wxID_ANY</property>
                                                     <property name="inc">1</property>
                                                     <property name="initial">0</property>
-                                                    <property name="max">100</property>
+                                                    <property name="max">254</property>
                                                     <property name="max_size"></property>
                                                     <property name="maximize_button">0</property>
                                                     <property name="maximum_size"></property>
@@ -2693,7 +2693,7 @@
                         <object class="notebookpage" expanded="1">
                             <property name="bitmap"></property>
                             <property name="label">Taper</property>
-                            <property name="select">0</property>
+                            <property name="select">1</property>
                             <object class="wxPanel" expanded="0">
                                 <property name="BottomDockable">1</property>
                                 <property name="LeftDockable">1</property>
@@ -2768,7 +2768,7 @@
                                             <property name="vgap">0</property>
                                             <object class="sizeritem" expanded="0">
                                                 <property name="border">5</property>
-                                                <property name="flag">wxALL|wxALIGN_CENTER_VERTICAL|wxALIGN_RIGHT</property>
+                                                <property name="flag">wxALL|wxALIGN_CENTER_VERTICAL</property>
                                                 <property name="proportion">0</property>
                                                 <object class="wxStaticText" expanded="0">
                                                     <property name="BottomDockable">1</property>
@@ -2862,7 +2862,7 @@
                                                     <property name="id">wxID_ANY</property>
                                                     <property name="inc">1</property>
                                                     <property name="initial">0</property>
-                                                    <property name="max">100</property>
+                                                    <property name="max">254</property>
                                                     <property name="max_size"></property>
                                                     <property name="maximize_button">0</property>
                                                     <property name="maximum_size"></property>
@@ -2889,6 +2889,7 @@
                                                     <property name="window_extra_style"></property>
                                                     <property name="window_name"></property>
                                                     <property name="window_style"></property>
+                                                    <event name="OnSpinCtrlDouble">OnTaperW1SpinCtrlDouble</event>
                                                 </object>
                                             </object>
                                             <object class="sizeritem" expanded="0">
@@ -2953,6 +2954,7 @@
                                                     <property name="window_extra_style"></property>
                                                     <property name="window_name"></property>
                                                     <property name="window_style"></property>
+                                                    <event name="OnChoice">OnTaperW1Unit</event>
                                                 </object>
                                             </object>
                                             <object class="sizeritem" expanded="0">
@@ -2973,7 +2975,7 @@
                                                     <property name="caption"></property>
                                                     <property name="caption_visible">1</property>
                                                     <property name="center_pane">0</property>
-                                                    <property name="checked">1</property>
+                                                    <property name="checked">0</property>
                                                     <property name="close_button">1</property>
                                                     <property name="context_help"></property>
                                                     <property name="context_menu">1</property>
@@ -3017,11 +3019,12 @@
                                                     <property name="window_extra_style"></property>
                                                     <property name="window_name"></property>
                                                     <property name="window_style"></property>
+                                                    <event name="OnCheckBox">OnTaperW1Auto</event>
                                                 </object>
                                             </object>
                                             <object class="sizeritem" expanded="0">
                                                 <property name="border">5</property>
-                                                <property name="flag">wxALL|wxALIGN_CENTER_VERTICAL|wxALIGN_RIGHT</property>
+                                                <property name="flag">wxALL|wxALIGN_CENTER_VERTICAL</property>
                                                 <property name="proportion">0</property>
                                                 <object class="wxStaticText" expanded="0">
                                                     <property name="BottomDockable">1</property>
@@ -3115,7 +3118,7 @@
                                                     <property name="id">wxID_ANY</property>
                                                     <property name="inc">1</property>
                                                     <property name="initial">0</property>
-                                                    <property name="max">100</property>
+                                                    <property name="max">254</property>
                                                     <property name="max_size"></property>
                                                     <property name="maximize_button">0</property>
                                                     <property name="maximum_size"></property>
@@ -3142,6 +3145,7 @@
                                                     <property name="window_extra_style"></property>
                                                     <property name="window_name"></property>
                                                     <property name="window_style"></property>
+                                                    <event name="OnSpinCtrlDouble">OnTaperW2SpinCtrlDouble</event>
                                                 </object>
                                             </object>
                                             <object class="sizeritem" expanded="0">
@@ -3206,6 +3210,7 @@
                                                     <property name="window_extra_style"></property>
                                                     <property name="window_name"></property>
                                                     <property name="window_style"></property>
+                                                    <event name="OnChoice">OnTaperW2Unit</event>
                                                 </object>
                                             </object>
                                             <object class="sizeritem" expanded="1">
@@ -3226,7 +3231,7 @@
                                                     <property name="caption"></property>
                                                     <property name="caption_visible">1</property>
                                                     <property name="center_pane">0</property>
-                                                    <property name="checked">1</property>
+                                                    <property name="checked">0</property>
                                                     <property name="close_button">1</property>
                                                     <property name="context_help"></property>
                                                     <property name="context_menu">1</property>
@@ -3270,11 +3275,12 @@
                                                     <property name="window_extra_style"></property>
                                                     <property name="window_name"></property>
                                                     <property name="window_style"></property>
+                                                    <event name="OnCheckBox">OnTaperW2Auto</event>
                                                 </object>
                                             </object>
                                             <object class="sizeritem" expanded="0">
                                                 <property name="border">5</property>
-                                                <property name="flag">wxALL|wxALIGN_RIGHT</property>
+                                                <property name="flag">wxALL</property>
                                                 <property name="proportion">0</property>
                                                 <object class="wxStaticText" expanded="0">
                                                     <property name="BottomDockable">1</property>
@@ -3368,7 +3374,7 @@
                                                     <property name="id">wxID_ANY</property>
                                                     <property name="inc">1</property>
                                                     <property name="initial">0</property>
-                                                    <property name="max">90</property>
+                                                    <property name="max">254</property>
                                                     <property name="max_size"></property>
                                                     <property name="maximize_button">0</property>
                                                     <property name="maximum_size"></property>
@@ -3395,6 +3401,7 @@
                                                     <property name="window_extra_style"></property>
                                                     <property name="window_name"></property>
                                                     <property name="window_style"></property>
+                                                    <event name="OnSpinCtrlDouble">OnTaperLengthSpinCtrlDouble</event>
                                                 </object>
                                             </object>
                                             <object class="sizeritem" expanded="0">
@@ -3459,6 +3466,7 @@
                                                     <property name="window_extra_style"></property>
                                                     <property name="window_name"></property>
                                                     <property name="window_style"></property>
+                                                    <event name="OnChoice">OnTaperLengthUnit</event>
                                                 </object>
                                             </object>
                                             <object class="sizeritem" expanded="1">
@@ -3479,7 +3487,7 @@
                                                     <property name="caption"></property>
                                                     <property name="caption_visible">1</property>
                                                     <property name="center_pane">0</property>
-                                                    <property name="checked">1</property>
+                                                    <property name="checked">0</property>
                                                     <property name="close_button">1</property>
                                                     <property name="context_help"></property>
                                                     <property name="context_menu">1</property>
@@ -3523,6 +3531,7 @@
                                                     <property name="window_extra_style"></property>
                                                     <property name="window_name"></property>
                                                     <property name="window_style"></property>
+                                                    <event name="OnCheckBox">OnTaperLengthAuto</event>
                                                 </object>
                                             </object>
                                         </object>
