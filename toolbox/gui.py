@@ -222,6 +222,20 @@ class SettingsDialog(TaperTab):
         self.chamferUnitwxChoice.SetSelection(int(self.cfgSettings.angleUnit))
         self.SetChamferAutorouteCheck(self.cfgSettings.chamferAutoroute)
         self.OnChamferSpinCtrlDouble(None)
+
+        # Load Taper-Tab settings
+        self.cfgSettings = settings.TaperSettings()
+        self.cfgSettings.Load()
+
+        self.taperWidth1SpinCtrlDouble.SetValue(float(self.cfgSettings.width1))
+        self.taperW1UnitwxChoice.SetSelection(int(self.cfgSettings.width1Unit))
+        #self.SetTaperW1Auto()
+        self.taperWidth2SpinCtrlDouble.SetValue(float(self.cfgSettings.width2))
+        self.taperW2UnitwxChoice.SetSelection(int(self.cfgSettings.width2Unit))
+        #self.SetTaperW2Auto()
+        self.taperLengthSpinCtrlDouble.SetValue(float(self.cfgSettings.length))
+        self.taperLengthUnitwxChoice.SetSelection(int(self.cfgSettings.lengthUnit))
+        #self.SetTaperLengthAuto()
     
     # Hack for new wxFormBuilder generating code incompatible with old wxPython
     # no inspection PyMethodOverriding
@@ -366,5 +380,20 @@ class SettingsDialog(TaperTab):
             self.cfgSettings.angleUnit = self.chamferUnitwxChoice.GetSelection()
             self.cfgSettings.chamferAutoroute = self.GetChamferAutorouteCheck()
             self.cfgSettings.Save()
+
+            # Taper-Tab settings
+            cfgSettings = settings.TaperSettings()
+            self.cfgSettings.width1 = self.taperWidth1SpinCtrlDouble.GetValue()
+            self.cfgSettings.width1Unit = self.taperW1UnitwxChoice.GetSelection()
+            # self.cfgSettings.width1Auto = self.GetTaperW1AutoCheck()
+            self.cfgSettings.width2 = self.taperWidth2SpinCtrlDouble.GetValue()
+            self.cfgSettings.width2Unit = self.taperW2UnitwxChoice.GetSelection()
+            # self.cfgSettings.width2Auto = self.GetTaperW2AutoCheck()
+            self.cfgSettings.length = self.taperLengthSpinCtrlDouble.GetValue()
+            self.cfgSettings.lengthUnit = self.taperLengthUnitwxChoice.GetSelection()
+            self.cfgSettings.Save()
+        # except Exception as e:
+        #     menu_dialog('Error: %s' % str(e))
+
         finally:
             self.Destroy()

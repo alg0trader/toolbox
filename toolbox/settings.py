@@ -21,7 +21,7 @@ class BaseSettings:
     def SetValue(self, section, key, value):
         try:
             self.config.set(section, str(key), value)
-        except Exception as e:
+        except Exception:
             self.config.add_section(section)
             self.config.set(section, str(key), value)
         
@@ -138,6 +138,7 @@ class ChamferSettings(BaseSettings):
         self.SetValue(self._CHAMFER_SECTION, self._CHAMFER_ANGLE['Key'], self.chamferAngle)
         self.SetValue(self._CHAMFER_SECTION, self._CHAMFER_ANGLE_UNIT['Key'], self.angleUnit)
         self.SetValue(self._CHAMFER_SECTION, self._CHAMFER_AUTOROUTE['Key'], self.chamferAutoroute)
+
         self.Write()
     
     def Load(self):
@@ -151,6 +152,71 @@ class ChamferSettings(BaseSettings):
             self.chamferAngle = self.GetValue(self._CHAMFER_SECTION, self._CHAMFER_ANGLE['Key'])
             self.angleUnit = self.GetValue(self._CHAMFER_SECTION, self._CHAMFER_ANGLE_UNIT['Key'])
             self.chamferAutoroute = self.GetValue(self._CHAMFER_SECTION, self._CHAMFER_AUTOROUTE['Key'])
+        
+        except:
+            self.Defaults()
+            self.Write()
+            self.Load()
+
+
+class TaperSettings(BaseSettings):
+    """
+    Class for taper-specific settings.
+    """
+    _TAPER_SECTION = 'taper_tab'
+    _TAPER_WIDTH1 = {'Key':'0'}
+    _TAPER_WIDTH1_UNIT = {'Key':'1', 'Value':{'mm':'0', 'mil':'1', 'in':'2'}}
+    _TAPER_WIDTH1_AUTO = {'Key':'2'}
+    _TAPER_WIDTH2 = {'Key':'3'}
+    _TAPER_WIDTH2_UNIT = {'Key':'4', 'Value':{'mm':'0', 'mil':'1', 'in':'2'}}
+    _TAPER_WIDTH2_AUTO = {'Key':'5'}
+    _TAPER_LENGTH = {'Key':'6'}
+    _TAPER_LENGTH_UNIT = {'Key':'7', 'Value':{'mm':'0', 'mil':'1', 'in':'2'}}
+    _TAPER_LENGTH_AUTO = {'Key':'8'}
+
+    def __init__(self):
+        BaseSettings.__init__(self)     # Call CurveSettings instead?
+
+    def Defaults(self):
+        self.width1 = 0.5334        # 21 mils by default
+        self.width1Unit = self._TAPER_WIDTH1_UNIT['Value']['mm']
+        self.width1Auto = True
+        self.width2 = 0.254         # 10 mils by default
+        self.width2Unit = self._TAPER_WIDTH2_UNIT['Value']['mm']
+        self.width2Auto = True
+        self.length = 1.016         # 40 mils by default
+        self.lengthUnit = self._TAPER_LENGTH_UNIT['Value']['mm']
+        self.lengthAuto = True
+
+        self.Save()
+
+
+    def Save(self):
+        self.SetValue(self._TAPER_SECTION, self._TAPER_WIDTH1['Key'], self.width1)
+        self.SetValue(self._TAPER_SECTION, self._TAPER_WIDTH1_UNIT['Key'], self.width1Unit)
+        self.SetValue(self._TAPER_SECTION, self._TAPER_WIDTH1_AUTO['Key'], self.width1Auto)
+        self.SetValue(self._TAPER_SECTION, self._TAPER_WIDTH2['Key'], self.width2)
+        self.SetValue(self._TAPER_SECTION, self._TAPER_WIDTH2_UNIT['Key'], self.width2Unit)
+        self.SetValue(self._TAPER_SECTION, self._TAPER_WIDTH2_AUTO['Key'], self.width2Auto)
+        self.SetValue(self._TAPER_SECTION, self._TAPER_LENGTH['Key'], self.length)
+        self.SetValue(self._TAPER_SECTION, self._TAPER_LENGTH_UNIT['Key'], self.lengthUnit)
+        self.SetValue(self._TAPER_SECTION, self._TAPER_LENGTH_AUTO['Key'], self.lengthAuto)
+        
+        self.Write()
+
+    def Load(self):
+        try:
+            self.Read()
+
+            self.width1 = self.GetValue(self._TAPER_SECTION, self._TAPER_WIDTH1['Key'])
+            self.width1Unit = self.GetValue(self._TAPER_SECTION, self._TAPER_WIDTH1_UNIT['Key'])
+            self.width1Auto = self.GetValue(self._TAPER_SECTION, self._TAPER_WIDTH1_AUTO['Key'])
+            self.width2 = self.GetValue(self._TAPER_SECTION, self._TAPER_WIDTH2['Key'])
+            self.width2Unit = self.GetValue(self._TAPER_SECTION, self._TAPER_WIDTH2_UNIT['Key'])
+            self.width2Auto = self.GetValue(self._TAPER_SECTION, self._TAPER_WIDTH2_AUTO['Key'])
+            self.length = self.GetValue(self._TAPER_SECTION, self._TAPER_LENGTH['Key'])
+            self.lengthUnit = self.GetValue(self._TAPER_SECTION, self._TAPER_LENGTH_UNIT['Key'])
+            self.lengthAuto = self.GetValue(self._TAPER_SECTION, self._TAPER_LENGTH_AUTO['Key'])
         
         except:
             self.Defaults()

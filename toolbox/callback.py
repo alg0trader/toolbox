@@ -55,8 +55,10 @@ def chamfer_callback(event):
         p1 = stracks[1].GetPosition()
 
         center = pcbnew.wxPoint((p0.x + p1.x)/2, (p0.y + p1.y)/2)
+    elif len(stracks) == 1 and len(spads) == 1:
+        pass
     else:
-        gui.menu_dialog('Select two or more tracks, or two pads.')
+        gui.menu_dialog('Select two tracks, two pads, or a track and pad.')
         return
 
     cfgSettings = settings.ChamferSettings()
@@ -78,7 +80,58 @@ def chamfer_callback(event):
     c.ChamferFootprint(center)
 
 def taper_callback(event):
-    pass
+    # Check if two pads or two tracks are selected
+    net = None
+    layer = None
+    center = pcbnew.wxPoint(0, 0)
+    spads = Layout.get_selected_pads()
+    stracks = Layout.get_selected_tracks()
+    
+    if len(spads) == 2:
+        if spads[0].GetNetname() != spads[1].GetNetname():
+            gui.menu_dialog('Pads must be assigned\nto the same net.')
+            return
+        
+        # net = spads[0].GetNet()
+        # layer = spads[0].GetParent().GetLayer()
+
+        # p0 = spads[0].GetPosition()
+        # p1 = spads[1].GetPosition()
+
+        # center = pcbnew.wxPoint((p0.x + p1.x)/2, (p0.y + p1.y)/2)
+    elif len(stracks) == 2:
+        if stracks[0].GetNetname() != stracks[1].GetNetname():
+            gui.menu_dialog('Tracks must be assigned\nto the same net.')
+            return
+        
+        # net = stracks[0].GetNet()
+        # layer = stracks[0].GetLayer()
+
+        # p0 = stracks[0].GetPosition()
+        # p1 = stracks[1].GetPosition()
+
+        # center = pcbnew.wxPoint((p0.x + p1.x)/2, (p0.y + p1.y)/2)
+    elif len(stracks) == 1 and len(spads) == 1:
+        pass
+    else:
+        gui.menu_dialog('Select two tracks, two pads, or a track and pad.')
+        return
+
+    cfgSettings = settings.TaperSettings()
+    cfgSettings.Load()
+    
+    w1 = float(cfgSettings.width1)
+    w2 = float(cfgSettings.width2)
+    length = float(cfgSettings.length)
+    
+    if cfgSettings.width1Unit == '1': w1 = w1 * 0.0254
+    elif cfgSettings.width1Unit == '2': w1 = w1 * 25.4
+    
+    if cfgSettings.width2Unit == '1': w2 = w2 * 0.0254
+    elif cfgSettings.width2Unit == '2': w2 = w2 * 25.4
+    
+    if cfgSettings.lengthUnit == '1': length = length * 0.0254
+    elif cfgSettings.lengthUnit == '2': length = length * 25.4
 
 def settings_callback(event):
     '''Initiates the settings panel for edit.'''
