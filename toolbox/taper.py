@@ -19,10 +19,9 @@ class Taper:
     def CheckParameters():
         pass
 
-    def TaperFootprint(self, center=pcbnew.wxPoint(0,0), orientation=0):
+    def TaperFootprint(self, center=pcbnew.wxPoint(0,0), angle=0):
         self.module = pcbnew.MODULE(None)
 
-        # Create polygon points
         #                6
         # 5 +------------+
         #   |            |\
@@ -35,17 +34,25 @@ class Taper:
         # 4 +------------+
         #                3
         points = [(self.w2/2, -self.w2/2), (self.w2/2, self.w2/2), (-self.w2/2, self.w2/2), \
-                  (-self.w2/2 - self.tlen, self.w1/2), (-(self.w1 + self.tlen + self.w2/2), self.w1/2), \
-                  (-(self.w1 + self.tlen + self.w2/2), -self.w1/2), (-self.w2/2 - self.tlen, -self.w1/2), \
+                  (-self.w2/2 - self.tlen, self.w1/2), (-(self.w1/2 + self.tlen + self.w2/2), self.w1/2), \
+                  (-(self.w1/2 + self.tlen + self.w2/2), -self.w1/2), (-self.w2/2 - self.tlen, -self.w1/2), \
                   (-self.w2/2, -self.w2/2)]
 
         points = [pcbnew.wxPoint(*point) for point in points]
-        self.module = Layout.Polygon(self.module, points, pcbnew.F_Cu)
 
-        # Create pads
-        angle = 0
-        self.module.Add(Layout.smdRectPad(self.module, pcbnew.wxSize(self.w2, self.w2), pcbnew.wxPoint(0,0), "1", angle, self.net))
-        self.module.Add(Layout.smdRectPad(self.module, pcbnew.wxSize(self.w1, self.w1), pcbnew.wxPoint(-(self.w1/2 + self.tlen + self.w2/2), 0), "2", angle, self.net))
+        # Custom pad for smaller W2 x W2 pad
+        cs_pad = pcbnew.D_PAD(self.module)
+        cs_pad.SetSize(pcbnew.wxSize(self.w2, self.w2))
+        cs_pad.SetShape(pcbnew.PAD_SHAPE_CUSTOM)
+        cs_pad.SetAttribute(pcbnew.PAD_ATTRIB_SMD)
+        cs_pad.SetLayerSet(pcbnew.LSET(pcbnew.F_Cu))
+        cs_pad.AddPrimitive(points, 0)
+        cs_pad.SetLocalClearance(1)
+        cs_pad.SetNet(self.net)
+        cs_pad.SetPadName("1")
+
+        self.module.Add(cs_pad)
+        self.module.Add(Layout.smdRectPad(self.module, pcbnew.wxSize(self.w1, self.w1), pcbnew.wxPoint(-(self.w1/2 + self.tlen + self.w2/2), 0), "1", angle, self.net))
 
         self.module.SetPosition(center)
 

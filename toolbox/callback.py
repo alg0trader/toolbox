@@ -79,9 +79,9 @@ def chamfer_callback(event):
     c.ChamferFootprint(center)
 
 def taper_callback(event):
-    # net = None
-    # layer = None
-    # center = pcbnew.wxPoint(0, 0)
+    net = None
+    layer = None
+    center = pcbnew.wxPoint(0, 0)
     spads = Layout.get_selected_pads()
     stracks = Layout.get_selected_tracks()
     
@@ -106,13 +106,13 @@ def taper_callback(event):
             gui.menu_dialog('Tracks must be assigned\nto the same net.')
             return
         
-        # net = stracks[0].GetNet()
-        # layer = stracks[0].GetLayer()
+        net = stracks[0].GetNet()
+        layer = stracks[0].GetLayer()
 
-        # p0 = stracks[0].GetPosition()
-        # p1 = stracks[1].GetPosition()
+        p0 = stracks[0].GetPosition()
+        p1 = stracks[1].GetPosition()
 
-        # center = pcbnew.wxPoint((p0.x + p1.x)/2, (p0.y + p1.y)/2)
+        center = pcbnew.wxPoint((p0.x + p1.x)/2, (p0.y + p1.y)/2)
     elif len(stracks) == 1 and len(spads) == 1:
         pass
     else:
@@ -144,7 +144,7 @@ def taper_callback(event):
     elif cfgSettings.lengthUnit == '2': length = length * 25.4
 
     t = taper.Taper(w1, w2, length, spads[0].GetNet(), spads[0].GetParent().GetLayer())
-    t.TaperFootprint()
+    t.TaperFootprint(center)
 
 def settings_callback(event):
     '''Initiates the settings panel for edit.'''

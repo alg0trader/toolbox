@@ -64,7 +64,7 @@ class Layout:
         pad.SetLayerSet(pcbnew.LSET(pcbnew.F_Cu))       # Get active layer
         pad.SetPos0(pos)
         pad.SetPosition(pos)
-        pad.SetPadName(name)
+        
         pad.Rotate(pos, angle)
         # Set clearance to small value, because
         # pads can be very close together.
@@ -78,12 +78,11 @@ class Layout:
     @staticmethod
     def Polygon(module, points, layer):
         '''Draw a polygon through specified points.'''
-
         polygon = pcbnew.EDGE_MODULE(module)
         polygon.SetWidth(0)         # Disables outline
         polygon.SetLayer(layer)
         polygon.SetShape(pcbnew.S_POLYGON)
         polygon.SetPolyPoints(points)
         module.Add(polygon)
-        
+
         return module
