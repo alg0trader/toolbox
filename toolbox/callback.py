@@ -4,6 +4,7 @@ import wx.aui
 import gui
 import pcbnew
 import chamfer
+import taper
 import settings
 from layout import Layout
 
@@ -23,8 +24,6 @@ def curve_callback(event):
 
 def chamfer_callback(event):
     '''Initiates the chamfer tool based on existing settings.'''
-
-    # Check if two pads or two tracks are selected
     net = None
     layer = None
     center = pcbnew.wxPoint(0, 0)
@@ -80,10 +79,9 @@ def chamfer_callback(event):
     c.ChamferFootprint(center)
 
 def taper_callback(event):
-    # Check if two pads or two tracks are selected
-    net = None
-    layer = None
-    center = pcbnew.wxPoint(0, 0)
+    # net = None
+    # layer = None
+    # center = pcbnew.wxPoint(0, 0)
     spads = Layout.get_selected_pads()
     stracks = Layout.get_selected_tracks()
     
@@ -92,13 +90,17 @@ def taper_callback(event):
             gui.menu_dialog('Pads must be assigned\nto the same net.')
             return
         
-        # net = spads[0].GetNet()
-        # layer = spads[0].GetParent().GetLayer()
+        net = spads[0].GetNet()
+        layer = spads[0].GetParent().GetLayer()
 
-        # p0 = spads[0].GetPosition()
-        # p1 = spads[1].GetPosition()
+        p0 = spads[0].GetPosition()
+        p1 = spads[1].GetPosition()
 
-        # center = pcbnew.wxPoint((p0.x + p1.x)/2, (p0.y + p1.y)/2)
+        center = pcbnew.wxPoint((p0.x + p1.x)/2, (p0.y + p1.y)/2)
+        
+        # if spads[0].GetSize()
+        
+
     elif len(stracks) == 2:
         if stracks[0].GetNetname() != stracks[1].GetNetname():
             gui.menu_dialog('Tracks must be assigned\nto the same net.')
@@ -119,10 +121,18 @@ def taper_callback(event):
 
     cfgSettings = settings.TaperSettings()
     cfgSettings.Load()
-    
+
     w1 = float(cfgSettings.width1)
     w2 = float(cfgSettings.width2)
     length = float(cfgSettings.length)
+    
+    # if not cfgSettings.width1Auto:
+    #     # w1 should be extracted from the largest pad
+    # if not cfgSettings.width2Auto:
+    #     # w2 should be extracted from the largest pad
+    # if not cfgSettings.lengthAuto:
+    #     # length should be calculated from the distance from pad/track to pad/track
+    #     # need to figure out track endpoint; it will be closest to other object
     
     if cfgSettings.width1Unit == '1': w1 = w1 * 0.0254
     elif cfgSettings.width1Unit == '2': w1 = w1 * 25.4
@@ -132,6 +142,9 @@ def taper_callback(event):
     
     if cfgSettings.lengthUnit == '1': length = length * 0.0254
     elif cfgSettings.lengthUnit == '2': length = length * 25.4
+
+    t = taper.Taper(w1, w2, length, spads[0].GetNet(), spads[0].GetParent().GetLayer())
+    t.TaperFootprint()
 
 def settings_callback(event):
     '''Initiates the settings panel for edit.'''
