@@ -64,6 +64,7 @@ class Layout:
         pad.SetLayerSet(pcbnew.LSET(pcbnew.F_Cu))       # Get active layer
         pad.SetPos0(pos)
         pad.SetPosition(pos)
+        pad.SetPadName(name)
         
         pad.Rotate(pos, angle)
         # Set clearance to small value, because
