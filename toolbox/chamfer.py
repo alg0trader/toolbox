@@ -110,7 +110,7 @@ class Chamfer:
         # and track connected to other pad overlaps the other one.
         # Rounded trace end can also stick out of the cut area
         # if a is too small.
-        a = max(cut-self.width*m.tan(self.angle/2),w/2)
+        a = max(cut-self.width*m.tan(self.angle/2), w/2)
 
         # Distance between points 3 and 4
         x34 = a*m.sin(self.angle)
@@ -120,23 +120,25 @@ class Chamfer:
         x45 = self.width*m.cos(self.angle)
         y45 = self.width*m.sin(self.angle)
 
+        # Distance from point 7 to 1 (no x-component)
+        d71 = a + self.width*m.tan(self.angle/2)-cut
+
         #   1  2
-        # 8 +--+
+        #   +--+
         #   |  |3
         # 7 \  --+ 4
         #    \   |
         #     \--+ 5
         #     6
-
         points = [
-                (0,0),
-                (w,0),
-                (w,a),
-                (w+x34,a+y34),
-                (w+x34-x45,a+y34+y45),
-                (cut*m.sin(self.angle),a+self.width*m.tan(self.angle/2)+cut*m.cos(self.angle)),
-                (0,a+self.width*m.tan(self.angle/2)-cut),
-                (0,0)]
+                (-w/2, -d71/2),
+                (w/2, -d71/2),
+                (w/2, a - d71/2),
+                (w/2+x34-(d71/2-d71/1e5)*m.sin(self.angle), a+y34-d71/2-(d71/2-d71/1e5)*m.cos(self.angle)),
+                (w/2+x34-x45-(d71/2-d71/1e5)*m.sin(self.angle), a+y34+y45-d71/2-(d71/2-d71/1e5)*m.cos(self.angle)),
+                (cut*m.sin(self.angle) - w/2, a+self.width*m.tan(self.angle/2)+cut*m.cos(self.angle)-d71/2),
+                (-w/2, a+self.width*m.tan(self.angle/2)-cut-d71/2)
+                ]
 
         # Last two points can be equal
         if points[-2] == points[-1]:
@@ -144,27 +146,31 @@ class Chamfer:
 
         points = [pcbnew.wxPoint(*point) for point in points]
 
-        self.module = Layout.Polygon(self.module, points, pcbnew.F_Cu)
+        # Custom pad
+        cs_pad = pcbnew.D_PAD(self.module)
+        cs_pad.SetSize(pcbnew.wxSize(w, d71))
+        cs_pad.SetShape(pcbnew.PAD_SHAPE_CUSTOM)
+        cs_pad.SetAnchorPadShape(pcbnew.PAD_SHAPE_RECT)
+        cs_pad.SetAttribute(pcbnew.PAD_ATTRIB_SMD)
+        cs_pad.SetLayerSet(pcbnew.LSET(pcbnew.F_Cu))
+        cs_pad.AddPrimitive(points, 0)
+        cs_pad.SetLocalClearance(1)
+        cs_pad.SetNet(self.net)
+        cs_pad.SetPadName("1")
 
-        # Create pads
-        pad_l = self.width/10
-        size_pad = pcbnew.wxSize(self.width,pad_l)
-        self.module.Add(Layout.smdRectPad(self.module, size_pad, pcbnew.wxPoint(self.width/2, -pad_l/2), "1", 0, self.net))
-        size_pad = pcbnew.wxSize(pad_l,self.width)
+        self.module.Add(cs_pad)
 
         # Halfway between points 4 and 5
-        posx = ((w+x34) + (w+x34-x45))/2
-        posy = ((a+y34) + (a+y34+y45))/2
+        posx = ((w/2+x34) + (w/2+x34-x45))/2
+        posy = ((a+y34-d71/2) + (a+y34+y45-d71/2))/2
 
         # Position pad so that pad edge touches polygon edge
-        posx += (pad_l/2)*m.sin(self.angle)
-        posy += (pad_l/2)*m.cos(self.angle)
-        size_pad = pcbnew.wxSize(pad_l, self.width)
-        self.module.Add(Layout.smdRectPad(self.module, size_pad, pcbnew.wxPoint(posx, posy), "2", (self.angle_deg-90)*10, self.net))
-
-
-        self.module.MoveAnchorPosition(pcbnew.wxPoint(-w/2, (-y45/2 - w/2)))
-        # self.module.MoveAnchorPosition(self.module.GetBoundingBox().Centre())
+        posx -= (d71/2)*m.sin(self.angle)
+        posy -= (d71/2)*m.cos(self.angle)
+        size_pad = pcbnew.wxSize(d71, w)
+        # self.module.Add(Layout.smdRectPad(self.module, pcbnew.wxSize(w, d71), pcbnew.wxPoint(0, 0), "1", 0, self.net))      # Alignment pad
+        self.module.Add(Layout.smdRectPad(self.module, size_pad, pcbnew.wxPoint(posx, posy), "1", (self.angle_deg-90)*10, self.net))
+        
         self.module.Rotate(self.module.GetPosition(), (90 + self.angle_deg)*100)
 
         if self.layer == pcbnew.B_Cu: self.module.Flip(self.module.GetCenter())
