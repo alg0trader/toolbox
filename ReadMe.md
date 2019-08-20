@@ -3,11 +3,11 @@ KiCad Toolbox
 A KiCad action plugin that allows for the following features in Pcbnew:
 
  - [x] Tapers
- -  [x] Chamfers, or mitered-bends
- -  Rounded tracks
- -  Via stitching
- -  Profile routing based on the Edge.Cuts layer
- -  DXF to KiCad footprint conversion
+ - [x] Chamfers, or mitered-bends
+ - [ ] Rounded tracks
+ - [ ] Via stitching
+ - [ ] Profile routing based on the Edge.Cuts layer
+ - [ ] DXF to KiCad footprint conversion
 
 
 Installation
