@@ -196,9 +196,8 @@ class SettingsDialogBase ( wx.Dialog ):
 		self.chamferLineWidthUnitwxChoice.SetSelection( 0 )
 		_chamferfgSizer.Add( self.chamferLineWidthUnitwxChoice, 0, wx.ALL|wx.ALIGN_CENTER_VERTICAL, 5 )
 
-		self.chamferRouteTracksCheckBox = wx.CheckBox( self.chamferTrackPanel, wx.ID_ANY, u"Autoroute", wx.DefaultPosition, wx.DefaultSize, 0 )
-		self.chamferRouteTracksCheckBox.SetValue(True)
-		_chamferfgSizer.Add( self.chamferRouteTracksCheckBox, 1, wx.ALIGN_CENTER_VERTICAL|wx.ALL|wx.EXPAND|wx.ALIGN_RIGHT, 5 )
+		self.chamferAutoLineWidthCheckBox = wx.CheckBox( self.chamferTrackPanel, wx.ID_ANY, u"Auto", wx.DefaultPosition, wx.DefaultSize, 0 )
+		_chamferfgSizer.Add( self.chamferAutoLineWidthCheckBox, 1, wx.ALIGN_CENTER_VERTICAL|wx.ALL|wx.EXPAND|wx.ALIGN_RIGHT, 5 )
 
 		self.chamferBoardHeightStaticText = wx.StaticText( self.chamferTrackPanel, wx.ID_ANY, u"Board Height", wx.DefaultPosition, wx.DefaultSize, 0 )
 		self.chamferBoardHeightStaticText.Wrap( -1 )
@@ -214,8 +213,8 @@ class SettingsDialogBase ( wx.Dialog ):
 		self.chamferBoardHeightUnitwxChoice.SetSelection( 0 )
 		_chamferfgSizer.Add( self.chamferBoardHeightUnitwxChoice, 0, wx.ALL, 5 )
 
-
-		_chamferfgSizer.Add( ( 0, 0), 1, wx.EXPAND, 5 )
+		self.chamferAutoBoardHeightCheckBox = wx.CheckBox( self.chamferTrackPanel, wx.ID_ANY, u"Auto", wx.DefaultPosition, wx.DefaultSize, 0 )
+		_chamferfgSizer.Add( self.chamferAutoBoardHeightCheckBox, 0, wx.ALL|wx.ALIGN_CENTER_VERTICAL, 5 )
 
 		self.chamferAngleStaticText = wx.StaticText( self.chamferTrackPanel, wx.ID_ANY, u"Angle", wx.DefaultPosition, wx.DefaultSize, 0 )
 		self.chamferAngleStaticText.Wrap( -1 )
@@ -231,8 +230,8 @@ class SettingsDialogBase ( wx.Dialog ):
 		self.chamferUnitwxChoice.SetSelection( 0 )
 		_chamferfgSizer.Add( self.chamferUnitwxChoice, 0, wx.ALL, 5 )
 
-
-		_chamferfgSizer.Add( ( 0, 0), 1, wx.EXPAND, 5 )
+		self.chamferAutoAngleCheckBox = wx.CheckBox( self.chamferTrackPanel, wx.ID_ANY, u"Auto", wx.DefaultPosition, wx.DefaultSize, 0 )
+		_chamferfgSizer.Add( self.chamferAutoAngleCheckBox, 0, wx.ALL|wx.ALIGN_CENTER_VERTICAL, 5 )
 
 
 		_chamferbSizer.Add( _chamferfgSizer, 0, wx.ALL|wx.ALIGN_CENTER_VERTICAL|wx.EXPAND, 5 )
@@ -375,10 +374,13 @@ class SettingsDialogBase ( wx.Dialog ):
 		self.toBottomRightRadioBtn.Bind( wx.EVT_RADIOBUTTON, self.OnToBottomRightRadioBtn )
 		self.chamferLineWidthSpinCtrlDouble.Bind( wx.EVT_SPINCTRLDOUBLE, self.OnChamferSpinCtrlDouble )
 		self.chamferLineWidthUnitwxChoice.Bind( wx.EVT_CHOICE, self.OnChamferLineWidthUnit )
+		self.chamferAutoLineWidthCheckBox.Bind( wx.EVT_CHECKBOX, self.OnChamferWidthAuto )
 		self.chamferHeightSpinCtrlDouble.Bind( wx.EVT_SPINCTRLDOUBLE, self.OnChamferSpinCtrlDouble )
 		self.chamferBoardHeightUnitwxChoice.Bind( wx.EVT_CHOICE, self.OnChamferBoardHeightUnit )
+		self.chamferAutoBoardHeightCheckBox.Bind( wx.EVT_CHECKBOX, self.OnChamferHeightAuto )
 		self.chamferAngleSpinCtrlDouble.Bind( wx.EVT_SPINCTRLDOUBLE, self.OnChamferSpinCtrlDouble )
 		self.chamferUnitwxChoice.Bind( wx.EVT_CHOICE, self.OnChamferAngleUnit )
+		self.chamferAutoAngleCheckBox.Bind( wx.EVT_CHECKBOX, self.OnChamferAngleAuto )
 		self.taperWidth1SpinCtrlDouble.Bind( wx.EVT_SPINCTRLDOUBLE, self.OnTaperW1SpinCtrlDouble )
 		self.taperW1UnitwxChoice.Bind( wx.EVT_CHOICE, self.OnTaperW1Unit )
 		self.taperW1CheckBox.Bind( wx.EVT_CHECKBOX, self.OnTaperW1Auto )
@@ -455,12 +457,21 @@ class SettingsDialogBase ( wx.Dialog ):
 	def OnChamferLineWidthUnit( self, event ):
 		event.Skip()
 
+	def OnChamferWidthAuto( self, event ):
+		event.Skip()
+
 
 	def OnChamferBoardHeightUnit( self, event ):
 		event.Skip()
 
+	def OnChamferHeightAuto( self, event ):
+		event.Skip()
+
 
 	def OnChamferAngleUnit( self, event ):
+		event.Skip()
+
+	def OnChamferAngleAuto( self, event ):
 		event.Skip()
 
 	def OnTaperW1SpinCtrlDouble( self, event ):

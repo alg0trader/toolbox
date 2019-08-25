@@ -220,7 +220,7 @@ class SettingsDialog(TaperTab):
         self.chamferBoardHeightUnitwxChoice.SetSelection(int(self.chamferCfgSettings.heightUnit))
         self.chamferAngleSpinCtrlDouble.SetValue(float(self.chamferCfgSettings.chamferAngle))
         self.chamferUnitwxChoice.SetSelection(int(self.chamferCfgSettings.angleUnit))
-        self.SetChamferAutorouteCheck(self.chamferCfgSettings.chamferAutoroute)
+        # self.SetChamferAutorouteCheck(self.chamferCfgSettings.chamferAutoroute)
         self.OnChamferSpinCtrlDouble(None)
 
         # Load Taper-Tab settings
@@ -246,13 +246,13 @@ class SettingsDialog(TaperTab):
     def SetSizeHints(self, sz1, sz2):
         self.SetSizeHintsSz(sz1, sz2)
     
-    def GetChamferAutorouteCheck(self):
-        if self.chamferRouteTracksCheckBox.GetValue(): return '1'
-        else: return '0'
+    # def GetChamferAutorouteCheck(self):
+    #     if self.chamferRouteTracksCheckBox.GetValue(): return '1'
+    #     else: return '0'
 
-    def SetChamferAutorouteCheck(self, value):
-        if value == '1': self.chamferRouteTracksCheckBox.SetValue(True)
-        else: self.chamferRouteTracksCheckBox.SetValue(False)
+    # def SetChamferAutoCheck(self, value):
+    #     if value == '1': self.chamferRouteTracksCheckBox.SetValue(True)
+    #     else: self.chamferRouteTracksCheckBox.SetValue(False)
     
     def OnChamferSpinCtrlDouble(self, event):
         lw = self.chamferLineWidthSpinCtrlDouble.GetValue()
@@ -305,6 +305,16 @@ class SettingsDialog(TaperTab):
             self.chamferLineWidthSpinCtrlDouble.SetIncrement(1)
         
         self.OnChamferSpinCtrlDouble(None)
+    
+    def OnChamferWidthAuto( self, event ):
+        if self.chamferAutoLineWidthCheckBox.IsChecked():
+            self.chamferLineWidthStaticText.Enable(False)
+            self.chamferLineWidthSpinCtrlDouble.Enable(False)
+            self.chamferLineWidthUnitwxChoice.Enable(False)
+        else:
+            self.chamferLineWidthStaticText.Enable(True)
+            self.chamferLineWidthSpinCtrlDouble.Enable(True)
+            self.chamferLineWidthUnitwxChoice.Enable(True)
 
     def OnChamferBoardHeightUnit(self, event):
         oldUnit = self.chamferCfgSettings.heightUnit
@@ -343,6 +353,16 @@ class SettingsDialog(TaperTab):
             self.chamferHeightSpinCtrlDouble.SetIncrement(1)
         
         self.OnChamferSpinCtrlDouble(None)
+    
+    def OnChamferHeightAuto( self, event ):
+        if self.chamferAutoBoardHeightCheckBox.IsChecked():
+            self.chamferBoardHeightStaticText.Enable(False)
+            self.chamferHeightSpinCtrlDouble.Enable(False)
+            self.chamferBoardHeightUnitwxChoice.Enable(False)
+        else:
+            self.chamferBoardHeightStaticText.Enable(True)
+            self.chamferHeightSpinCtrlDouble.Enable(True)
+            self.chamferBoardHeightUnitwxChoice.Enable(True)
 
     def OnChamferAngleUnit(self, event):
         oldUnit = self.chamferCfgSettings.angleUnit
@@ -363,6 +383,16 @@ class SettingsDialog(TaperTab):
 
         self.OnChamferSpinCtrlDouble(None)
     
+    def OnChamferAngleAuto(self, event):
+        if self.chamferAutoLineWidthCheckBox.IsChecked():
+            self.chamferAngleStaticText.Enable(False)
+            self.chamferAngleSpinCtrlDouble.Enable(False)
+            self.chamferUnitwxChoice.Enable(False)
+        else:
+            self.chamferAngleStaticText.Enable(True)
+            self.chamferAngleSpinCtrlDouble.Enable(True)
+            self.chamferUnitwxChoice.Enable(True)
+
     def OnTaperW1SpinCtrlDouble(self, event):
         w1 = self.taperWidth1SpinCtrlDouble.GetValue()
         if str(self.taperW1UnitwxChoice.GetSelection()) == '1': w1 = w1 * 0.0254
@@ -538,7 +568,7 @@ class SettingsDialog(TaperTab):
             self.chamferCfgSettings.heightUnit = self.chamferBoardHeightUnitwxChoice.GetSelection()
             self.chamferCfgSettings.chamferAngle = self.chamferAngleSpinCtrlDouble.GetValue()
             self.chamferCfgSettings.angleUnit = self.chamferUnitwxChoice.GetSelection()
-            self.chamferCfgSettings.chamferAutoroute = self.GetChamferAutorouteCheck()
+            # self.chamferCfgSettings.chamferAutoroute = self.GetChamferAutorouteCheck()
             self.chamferCfgSettings.Save()
 
             # Taper-Tab settings
