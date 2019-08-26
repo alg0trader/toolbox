@@ -51,6 +51,37 @@ class Layout:
             board = pcbnew.GetBoard()
         
         return list(filter(lambda t: t.IsSelected(), board.GetTracks()))
+    
+    @staticmethod
+    def dist(points):
+        '''Distance between two points'''
+        p0, p1 = points
+        return m.sqrt((p0[0] - p1[0])**2 + (p0[1] - p1[1])**2)
+    
+    @staticmethod
+    def closest_track_endpoints(tracks):
+        p0, p1 = tracks[0].GetStart(), tracks[0].GetEnd()
+        p2, p3 = tracks[1].GetStart(), tracks[1].GetEnd()
+        distances = [Layout.dist([p0, p2]), Layout.dist([p0, p3]), \
+                        Layout.dist([p1, p2]), Layout.dist([p1, p3])]
+        if distances[0] == min(distances):
+            return (p0, p2)
+        elif distances[1] == min(distances):
+            return (p0, p3)
+        elif distances[2] == min(distances):
+            return (p1, p2)
+        elif distances[3] == min(distances):
+            return (p1, p3)
+    
+    @staticmethod
+    def closest_track_pad_endpoints(pad, track):
+        p0, p1 = track.GetStart(), track.GetEnd()
+        distances = [Layout.dist([p0, pad.GetPosition()]), \
+                     Layout.dist([p1, pad.GetPosition()])]
+        if distances[0] == min(distances):
+            return (p0, pad.GetPosition())
+        elif distances[1] == min(distances):
+            return (p1, pad.GetPosition())        
 
     @staticmethod
     def smdRectPad(module, size, pos, name, angle, net):

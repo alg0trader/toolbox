@@ -50,12 +50,16 @@ def chamfer_callback(event):
         net = stracks[0].GetNet()
         layer = stracks[0].GetLayer()
 
-        p0 = stracks[0].GetPosition()
-        p1 = stracks[1].GetPosition()
-
+        # Find closest selected endpoints
+        p0, p1 = Layout.closest_track_endpoints(stracks)
         center = pcbnew.wxPoint((p0.x + p1.x)/2, (p0.y + p1.y)/2)
     elif len(stracks) == 1 and len(spads) == 1:
-        pass
+        net = stracks[0].GetNet()
+        layer = stracks[0].GetLayer()
+
+        # Find closest endpoints
+        p0, p1 = Layout.closest_track_pad_endpoints(spads[0], stracks[0])
+        center = pcbnew.wxPoint((p0.x + p1.x)/2, (p0.y + p1.y)/2)
     else:
         gui.menu_dialog('Select two tracks, two pads, or a track and pad.')
         return
@@ -97,10 +101,6 @@ def taper_callback(event):
         p1 = spads[1].GetPosition()
 
         center = pcbnew.wxPoint((p0.x + p1.x)/2, (p0.y + p1.y)/2)
-        
-        # if spads[0].GetSize()
-        
-
     elif len(stracks) == 2:
         if stracks[0].GetNetname() != stracks[1].GetNetname():
             gui.menu_dialog('Tracks must be assigned\nto the same net.')
@@ -109,12 +109,16 @@ def taper_callback(event):
         net = stracks[0].GetNet()
         layer = stracks[0].GetLayer()
 
-        p0 = stracks[0].GetPosition()
-        p1 = stracks[1].GetPosition()
-
+        # Find closest selected endpoints
+        p0, p1 = Layout.closest_track_endpoints(stracks)
         center = pcbnew.wxPoint((p0.x + p1.x)/2, (p0.y + p1.y)/2)
     elif len(stracks) == 1 and len(spads) == 1:
-        pass
+        net = stracks[0].GetNet()
+        layer = stracks[0].GetLayer()
+
+        # Find closest endpoints
+        p0, p1 = Layout.closest_track_pad_endpoints(spads[0], stracks[0])
+        center = pcbnew.wxPoint((p0.x + p1.x)/2, (p0.y + p1.y)/2)
     else:
         gui.menu_dialog('Select two tracks, two pads, or a track and pad.')
         return
@@ -143,7 +147,7 @@ def taper_callback(event):
     if cfgSettings.lengthUnit == '1': length = length * 0.0254
     elif cfgSettings.lengthUnit == '2': length = length * 25.4
 
-    t = taper.Taper(w1, w2, length, spads[0].GetNet(), spads[0].GetParent().GetLayer())
+    t = taper.Taper(w1, w2, length, net, layer)
     t.TaperFootprint(center)
 
 def settings_callback(event):

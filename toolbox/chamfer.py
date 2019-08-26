@@ -122,7 +122,7 @@ class Chamfer:
         d71 = a + self.width*m.tan(self.angle/2)-cut
 
         #   1  2
-        # 8 +--+
+        #   +--+
         #   |  |3
         # 7 \  --+ 4
         #    \   |
@@ -167,15 +167,19 @@ class Chamfer:
         posx -= (d71/2 - dW)*m.sin(self.angle)
         posy -= (d71/2 - dW)*m.cos(self.angle)-dW
         size_pad = pcbnew.wxSize(d71, w)
+        self.module.Add(Layout.smdRectPad(self.module, pcbnew.wxSize(w, d71), pcbnew.wxPoint(0, 0), "1", 0, self.net))      # Alignment pad
         self.module.Add(Layout.smdRectPad(self.module, size_pad, pcbnew.wxPoint(posx, posy), "1", (self.angle_deg-90)*10, self.net))
         
         self.module.Rotate(self.module.GetPosition(), (90 + self.angle_deg)*100)
+
+        # self.module.MoveAnchorPosition(pcbnew.wxPoint((d71/2 - a - w/2)*m.sin(self.angle), \
+        #                                (d71/2 - a - w/2)*m.cos(self.angle)))
+        self.module.SetPosition(center)
 
         if self.layer == pcbnew.B_Cu: self.module.Flip(self.module.GetCenter())
         elif self.layer == pcbnew.F_Cu: self.module.Rotate(self.module.GetPosition(), (90 + self.angle_deg)*100)
 
         # Find center of bounding box for placement
-        self.module.SetPosition(center)
         
         # Add to Pcbnew
         pcbnew.GetBoard().Add(self.module)
