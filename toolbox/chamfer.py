@@ -48,8 +48,8 @@ class Chamfer:
         '''
         Calculate optimal miter by interpolating from table.
         https://awrcorp.com/download/faq/english/docs/Elements/MBENDA.htm
+        "Transmission Line Design Handbook", by Brian C. Wadell (pg. 292-293)
         '''
-
         w, h, angle = self.width, self.height, self.angle_deg
 
         wh = w/h
@@ -88,8 +88,6 @@ class Chamfer:
     
     def ChamferFootprint(self, center=pcbnew.wxPoint(0,0)):
         self.module = pcbnew.MODULE(None)   # Create new module
-        # TODO self.module.SetPosition()
-
         self.angle = m.radians(self.angle_deg)
 
         # Calculate the miter
@@ -124,20 +122,21 @@ class Chamfer:
         d71 = a + self.width*m.tan(self.angle/2)-cut
 
         #   1  2
-        #   +--+
+        # 8 +--+
         #   |  |3
         # 7 \  --+ 4
         #    \   |
         #     \--+ 5
         #     6
+        dW = w/55       # To prevent tracks from over-extending
         points = [
                 (-w/2, -d71/2),
                 (w/2, -d71/2),
-                (w/2, a - d71/2),
-                (w/2+x34-(d71/2-d71/1e5)*m.sin(self.angle), a+y34-d71/2-(d71/2-d71/1e5)*m.cos(self.angle)),
-                (w/2+x34-x45-(d71/2-d71/1e5)*m.sin(self.angle), a+y34+y45-d71/2-(d71/2-d71/1e5)*m.cos(self.angle)),
-                (cut*m.sin(self.angle) - w/2, a+self.width*m.tan(self.angle/2)+cut*m.cos(self.angle)-d71/2),
-                (-w/2, a+self.width*m.tan(self.angle/2)-cut-d71/2)
+                (w/2, a - d71/2 + dW),
+                (w/2+x34-(d71/2-d71/1e5-dW)*m.sin(self.angle), a+y34-d71/2-(d71/2-d71/1e5-dW)*m.cos(self.angle) + dW),
+                (w/2+x34-x45-(d71/2-d71/1e5-dW)*m.sin(self.angle), a+y34+y45-d71/2-(d71/2-d71/1e5-dW)*m.cos(self.angle)+dW),
+                (cut*m.sin(self.angle) - w/2, a+self.width*m.tan(self.angle/2)+cut*m.cos(self.angle)-d71/2+dW),
+                (-w/2, a+self.width*m.tan(self.angle/2)-cut-d71/2+dW)
                 ]
 
         # Last two points can be equal
@@ -165,10 +164,9 @@ class Chamfer:
         posy = ((a+y34-d71/2) + (a+y34+y45-d71/2))/2
 
         # Position pad so that pad edge touches polygon edge
-        posx -= (d71/2)*m.sin(self.angle)
-        posy -= (d71/2)*m.cos(self.angle)
+        posx -= (d71/2 - dW)*m.sin(self.angle)
+        posy -= (d71/2 - dW)*m.cos(self.angle)-dW
         size_pad = pcbnew.wxSize(d71, w)
-        # self.module.Add(Layout.smdRectPad(self.module, pcbnew.wxSize(w, d71), pcbnew.wxPoint(0, 0), "1", 0, self.net))      # Alignment pad
         self.module.Add(Layout.smdRectPad(self.module, size_pad, pcbnew.wxPoint(posx, posy), "1", (self.angle_deg-90)*10, self.net))
         
         self.module.Rotate(self.module.GetPosition(), (90 + self.angle_deg)*100)
