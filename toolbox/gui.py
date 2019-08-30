@@ -354,7 +354,7 @@ class SettingsDialog(TaperTab):
         
         self.OnChamferSpinCtrlDouble(None)
     
-    def OnChamferHeightAuto( self, event ):
+    def OnChamferHeightAuto(self, event):
         if self.chamferAutoBoardHeightCheckBox.IsChecked():
             self.chamferBoardHeightStaticText.Enable(False)
             self.chamferHeightSpinCtrlDouble.Enable(False)
@@ -384,7 +384,7 @@ class SettingsDialog(TaperTab):
         self.OnChamferSpinCtrlDouble(None)
     
     def OnChamferAngleAuto(self, event):
-        if self.chamferAutoLineWidthCheckBox.IsChecked():
+        if self.chamferAutoAngleCheckBox.IsChecked():
             self.chamferAngleStaticText.Enable(False)
             self.chamferAngleSpinCtrlDouble.Enable(False)
             self.chamferUnitwxChoice.Enable(False)

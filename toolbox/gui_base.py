@@ -178,76 +178,96 @@ class SettingsDialogBase ( wx.Dialog ):
 		self.chamferTrackPanel = wx.Panel( self.settingsNotebook, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.TAB_TRAVERSAL )
 		_chamferbSizer = wx.BoxSizer( wx.VERTICAL )
 
+		self.chamferPanelwxNotebook = wx.Notebook( self.chamferTrackPanel, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.chamfer90DegPanel = wx.Panel( self.chamferPanelwxNotebook, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.TAB_TRAVERSAL )
+		_chamfer90bSizer = wx.BoxSizer( wx.VERTICAL )
+
 		_chamferfgSizer = wx.FlexGridSizer( 0, 4, 0, 0 )
 		_chamferfgSizer.SetFlexibleDirection( wx.BOTH )
 		_chamferfgSizer.SetNonFlexibleGrowMode( wx.FLEX_GROWMODE_SPECIFIED )
 
-		self.chamferLineWidthStaticText = wx.StaticText( self.chamferTrackPanel, wx.ID_ANY, u"Line Width", wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.chamferLineWidthStaticText = wx.StaticText( self.chamfer90DegPanel, wx.ID_ANY, u"Line Width", wx.DefaultPosition, wx.DefaultSize, 0 )
 		self.chamferLineWidthStaticText.Wrap( -1 )
 
 		_chamferfgSizer.Add( self.chamferLineWidthStaticText, 0, wx.ALL|wx.ALIGN_CENTER_VERTICAL, 5 )
 
-		self.chamferLineWidthSpinCtrlDouble = wx.SpinCtrlDouble( self.chamferTrackPanel, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, wx.SP_ARROW_KEYS, 0, 254, 0, 1 )
+		self.chamferLineWidthSpinCtrlDouble = wx.SpinCtrlDouble( self.chamfer90DegPanel, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, wx.SP_ARROW_KEYS, 0, 254, 0, 1 )
 		self.chamferLineWidthSpinCtrlDouble.SetDigits( 0 )
 		_chamferfgSizer.Add( self.chamferLineWidthSpinCtrlDouble, 0, wx.ALL, 5 )
 
 		chamferLineWidthUnitwxChoiceChoices = [ u"mm", u"mil", u"in" ]
-		self.chamferLineWidthUnitwxChoice = wx.Choice( self.chamferTrackPanel, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, chamferLineWidthUnitwxChoiceChoices, 0 )
+		self.chamferLineWidthUnitwxChoice = wx.Choice( self.chamfer90DegPanel, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, chamferLineWidthUnitwxChoiceChoices, 0 )
 		self.chamferLineWidthUnitwxChoice.SetSelection( 0 )
 		_chamferfgSizer.Add( self.chamferLineWidthUnitwxChoice, 0, wx.ALL|wx.ALIGN_CENTER_VERTICAL, 5 )
 
-		self.chamferAutoLineWidthCheckBox = wx.CheckBox( self.chamferTrackPanel, wx.ID_ANY, u"Auto", wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.chamferAutoLineWidthCheckBox = wx.CheckBox( self.chamfer90DegPanel, wx.ID_ANY, u"Auto", wx.DefaultPosition, wx.DefaultSize, 0 )
 		_chamferfgSizer.Add( self.chamferAutoLineWidthCheckBox, 1, wx.ALIGN_CENTER_VERTICAL|wx.ALL|wx.EXPAND|wx.ALIGN_RIGHT, 5 )
 
-		self.chamferBoardHeightStaticText = wx.StaticText( self.chamferTrackPanel, wx.ID_ANY, u"Board Height", wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.chamferBoardHeightStaticText = wx.StaticText( self.chamfer90DegPanel, wx.ID_ANY, u"Board Height", wx.DefaultPosition, wx.DefaultSize, 0 )
 		self.chamferBoardHeightStaticText.Wrap( -1 )
 
 		_chamferfgSizer.Add( self.chamferBoardHeightStaticText, 0, wx.ALL|wx.ALIGN_CENTER_VERTICAL, 5 )
 
-		self.chamferHeightSpinCtrlDouble = wx.SpinCtrlDouble( self.chamferTrackPanel, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, wx.SP_ARROW_KEYS, 0, 254, 0, 1 )
+		self.chamferHeightSpinCtrlDouble = wx.SpinCtrlDouble( self.chamfer90DegPanel, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, wx.SP_ARROW_KEYS, 0, 254, 0, 1 )
 		self.chamferHeightSpinCtrlDouble.SetDigits( 0 )
 		_chamferfgSizer.Add( self.chamferHeightSpinCtrlDouble, 0, wx.ALL, 5 )
 
 		chamferBoardHeightUnitwxChoiceChoices = [ u"mm", u"mil", u"in" ]
-		self.chamferBoardHeightUnitwxChoice = wx.Choice( self.chamferTrackPanel, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, chamferBoardHeightUnitwxChoiceChoices, 0 )
+		self.chamferBoardHeightUnitwxChoice = wx.Choice( self.chamfer90DegPanel, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, chamferBoardHeightUnitwxChoiceChoices, 0 )
 		self.chamferBoardHeightUnitwxChoice.SetSelection( 0 )
 		_chamferfgSizer.Add( self.chamferBoardHeightUnitwxChoice, 0, wx.ALL, 5 )
 
-		self.chamferAutoBoardHeightCheckBox = wx.CheckBox( self.chamferTrackPanel, wx.ID_ANY, u"Auto", wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.chamferAutoBoardHeightCheckBox = wx.CheckBox( self.chamfer90DegPanel, wx.ID_ANY, u"Auto", wx.DefaultPosition, wx.DefaultSize, 0 )
 		_chamferfgSizer.Add( self.chamferAutoBoardHeightCheckBox, 0, wx.ALL|wx.ALIGN_CENTER_VERTICAL, 5 )
 
-		self.chamferAngleStaticText = wx.StaticText( self.chamferTrackPanel, wx.ID_ANY, u"Angle", wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.chamferAngleStaticText = wx.StaticText( self.chamfer90DegPanel, wx.ID_ANY, u"Angle", wx.DefaultPosition, wx.DefaultSize, 0 )
 		self.chamferAngleStaticText.Wrap( -1 )
 
 		_chamferfgSizer.Add( self.chamferAngleStaticText, 0, wx.ALL, 5 )
 
-		self.chamferAngleSpinCtrlDouble = wx.SpinCtrlDouble( self.chamferTrackPanel, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, wx.SP_ARROW_KEYS, 0, 90, 0, 1 )
+		self.chamferAngleSpinCtrlDouble = wx.SpinCtrlDouble( self.chamfer90DegPanel, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, wx.SP_ARROW_KEYS, 0, 90, 0, 1 )
 		self.chamferAngleSpinCtrlDouble.SetDigits( 0 )
 		_chamferfgSizer.Add( self.chamferAngleSpinCtrlDouble, 0, wx.ALL, 5 )
 
 		chamferUnitwxChoiceChoices = [ u"Deg", u"Rad" ]
-		self.chamferUnitwxChoice = wx.Choice( self.chamferTrackPanel, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, chamferUnitwxChoiceChoices, 0 )
+		self.chamferUnitwxChoice = wx.Choice( self.chamfer90DegPanel, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, chamferUnitwxChoiceChoices, 0 )
 		self.chamferUnitwxChoice.SetSelection( 0 )
 		_chamferfgSizer.Add( self.chamferUnitwxChoice, 0, wx.ALL, 5 )
 
-		self.chamferAutoAngleCheckBox = wx.CheckBox( self.chamferTrackPanel, wx.ID_ANY, u"Auto", wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.chamferAutoAngleCheckBox = wx.CheckBox( self.chamfer90DegPanel, wx.ID_ANY, u"Auto", wx.DefaultPosition, wx.DefaultSize, 0 )
 		_chamferfgSizer.Add( self.chamferAutoAngleCheckBox, 0, wx.ALL|wx.ALIGN_CENTER_VERTICAL, 5 )
 
 
-		_chamferbSizer.Add( _chamferfgSizer, 0, wx.ALL|wx.ALIGN_CENTER_VERTICAL|wx.EXPAND, 5 )
+		_chamfer90bSizer.Add( _chamferfgSizer, 0, wx.ALL|wx.ALIGN_CENTER_VERTICAL|wx.EXPAND, 5 )
 
 		_chamferImgbSizer = wx.BoxSizer( wx.VERTICAL )
 
-		self.chamferImg = wx.StaticBitmap( self.chamferTrackPanel, wx.ID_ANY, wx.NullBitmap, wx.DefaultPosition, wx.Size( 295,150 ), 0 )
+		self.chamferImg = wx.StaticBitmap( self.chamfer90DegPanel, wx.ID_ANY, wx.NullBitmap, wx.DefaultPosition, wx.Size( 295,150 ), 0 )
 		_chamferImgbSizer.Add( self.chamferImg, 1, wx.ALIGN_CENTER_HORIZONTAL|wx.ALL, 5 )
 
 
-		_chamferbSizer.Add( _chamferImgbSizer, 1, wx.EXPAND, 5 )
+		_chamfer90bSizer.Add( _chamferImgbSizer, 1, wx.EXPAND, 5 )
 
-		self.chamferCutStaticText = wx.StaticText( self.chamferTrackPanel, wx.ID_ANY, wx.EmptyString, wx.Point( -1,-1 ), wx.DefaultSize, 0 )
+		self.chamferCutStaticText = wx.StaticText( self.chamfer90DegPanel, wx.ID_ANY, wx.EmptyString, wx.Point( -1,-1 ), wx.DefaultSize, 0 )
 		self.chamferCutStaticText.Wrap( -1 )
 
-		_chamferbSizer.Add( self.chamferCutStaticText, 0, wx.ALL|wx.EXPAND, 5 )
+		_chamfer90bSizer.Add( self.chamferCutStaticText, 0, wx.ALL|wx.EXPAND, 5 )
+
+
+		self.chamfer90DegPanel.SetSizer( _chamfer90bSizer )
+		self.chamfer90DegPanel.Layout()
+		_chamfer90bSizer.Fit( self.chamfer90DegPanel )
+		self.chamferPanelwxNotebook.AddPage( self.chamfer90DegPanel, u"90", True )
+		self.chamfer180DegPanel = wx.Panel( self.chamferPanelwxNotebook, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.TAB_TRAVERSAL )
+		_chamfer180bSizer = wx.BoxSizer( wx.VERTICAL )
+
+
+		self.chamfer180DegPanel.SetSizer( _chamfer180bSizer )
+		self.chamfer180DegPanel.Layout()
+		_chamfer180bSizer.Fit( self.chamfer180DegPanel )
+		self.chamferPanelwxNotebook.AddPage( self.chamfer180DegPanel, u"180", False )
+
+		_chamferbSizer.Add( self.chamferPanelwxNotebook, 1, wx.EXPAND|wx.ALL, 5 )
 
 
 		self.chamferTrackPanel.SetSizer( _chamferbSizer )
@@ -255,85 +275,143 @@ class SettingsDialogBase ( wx.Dialog ):
 		_chamferbSizer.Fit( self.chamferTrackPanel )
 		self.settingsNotebook.AddPage( self.chamferTrackPanel, u"Chamfer", False )
 		self.taperTrackPanel = wx.Panel( self.settingsNotebook, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.TAB_TRAVERSAL )
-		_chamferbSizer1 = wx.BoxSizer( wx.VERTICAL )
+		_taperbSizer = wx.BoxSizer( wx.VERTICAL )
 
-		_chamferfgSizer1 = wx.FlexGridSizer( 0, 4, 0, 0 )
-		_chamferfgSizer1.SetFlexibleDirection( wx.BOTH )
-		_chamferfgSizer1.SetNonFlexibleGrowMode( wx.FLEX_GROWMODE_SPECIFIED )
+		self.taperPanelwxNotebook = wx.Notebook( self.taperTrackPanel, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.linearTaperPanel = wx.Panel( self.taperPanelwxNotebook, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.TAB_TRAVERSAL )
+		_linearTaperbSizer = wx.BoxSizer( wx.VERTICAL )
 
-		self.taperW1StaticText = wx.StaticText( self.taperTrackPanel, wx.ID_ANY, u"W1", wx.DefaultPosition, wx.DefaultSize, 0 )
+		_linearTaperSettingsbSizer = wx.FlexGridSizer( 0, 4, 0, 0 )
+		_linearTaperSettingsbSizer.SetFlexibleDirection( wx.BOTH )
+		_linearTaperSettingsbSizer.SetNonFlexibleGrowMode( wx.FLEX_GROWMODE_SPECIFIED )
+
+		self.taperW1StaticText = wx.StaticText( self.linearTaperPanel, wx.ID_ANY, u"W1", wx.DefaultPosition, wx.DefaultSize, 0 )
 		self.taperW1StaticText.Wrap( -1 )
 
-		_chamferfgSizer1.Add( self.taperW1StaticText, 0, wx.ALL|wx.ALIGN_CENTER_VERTICAL, 5 )
+		_linearTaperSettingsbSizer.Add( self.taperW1StaticText, 0, wx.ALL|wx.ALIGN_CENTER_VERTICAL, 5 )
 
-		self.taperWidth1SpinCtrlDouble = wx.SpinCtrlDouble( self.taperTrackPanel, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, wx.SP_ARROW_KEYS, 0, 254, 0, 1 )
+		self.taperWidth1SpinCtrlDouble = wx.SpinCtrlDouble( self.linearTaperPanel, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, wx.SP_ARROW_KEYS, 0, 254, 0, 1 )
 		self.taperWidth1SpinCtrlDouble.SetDigits( 0 )
-		_chamferfgSizer1.Add( self.taperWidth1SpinCtrlDouble, 0, wx.ALL, 5 )
+		_linearTaperSettingsbSizer.Add( self.taperWidth1SpinCtrlDouble, 0, wx.ALL, 5 )
 
 		taperW1UnitwxChoiceChoices = [ u"mm", u"mil", u"in" ]
-		self.taperW1UnitwxChoice = wx.Choice( self.taperTrackPanel, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, taperW1UnitwxChoiceChoices, 0 )
+		self.taperW1UnitwxChoice = wx.Choice( self.linearTaperPanel, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, taperW1UnitwxChoiceChoices, 0 )
 		self.taperW1UnitwxChoice.SetSelection( 0 )
-		_chamferfgSizer1.Add( self.taperW1UnitwxChoice, 0, wx.ALL|wx.ALIGN_CENTER_VERTICAL, 5 )
+		_linearTaperSettingsbSizer.Add( self.taperW1UnitwxChoice, 0, wx.ALL|wx.ALIGN_CENTER_VERTICAL, 5 )
 
-		self.taperW1CheckBox = wx.CheckBox( self.taperTrackPanel, wx.ID_ANY, u"Auto", wx.DefaultPosition, wx.DefaultSize, 0 )
-		_chamferfgSizer1.Add( self.taperW1CheckBox, 1, wx.ALIGN_CENTER_VERTICAL|wx.ALL|wx.EXPAND, 5 )
+		self.taperW1CheckBox = wx.CheckBox( self.linearTaperPanel, wx.ID_ANY, u"Auto", wx.DefaultPosition, wx.DefaultSize, 0 )
+		_linearTaperSettingsbSizer.Add( self.taperW1CheckBox, 1, wx.ALIGN_CENTER_VERTICAL|wx.ALL|wx.EXPAND, 5 )
 
-		self.taperW2StaticText = wx.StaticText( self.taperTrackPanel, wx.ID_ANY, u"W2", wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.taperW2StaticText = wx.StaticText( self.linearTaperPanel, wx.ID_ANY, u"W2", wx.DefaultPosition, wx.DefaultSize, 0 )
 		self.taperW2StaticText.Wrap( -1 )
 
-		_chamferfgSizer1.Add( self.taperW2StaticText, 0, wx.ALL|wx.ALIGN_CENTER_VERTICAL, 5 )
+		_linearTaperSettingsbSizer.Add( self.taperW2StaticText, 0, wx.ALL|wx.ALIGN_CENTER_VERTICAL, 5 )
 
-		self.taperWidth2SpinCtrlDouble = wx.SpinCtrlDouble( self.taperTrackPanel, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, wx.SP_ARROW_KEYS, 0, 254, 0, 1 )
+		self.taperWidth2SpinCtrlDouble = wx.SpinCtrlDouble( self.linearTaperPanel, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, wx.SP_ARROW_KEYS, 0, 254, 0, 1 )
 		self.taperWidth2SpinCtrlDouble.SetDigits( 0 )
-		_chamferfgSizer1.Add( self.taperWidth2SpinCtrlDouble, 0, wx.ALL, 5 )
+		_linearTaperSettingsbSizer.Add( self.taperWidth2SpinCtrlDouble, 0, wx.ALL, 5 )
 
 		taperW2UnitwxChoiceChoices = [ u"mm", u"mil", u"in" ]
-		self.taperW2UnitwxChoice = wx.Choice( self.taperTrackPanel, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, taperW2UnitwxChoiceChoices, 0 )
+		self.taperW2UnitwxChoice = wx.Choice( self.linearTaperPanel, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, taperW2UnitwxChoiceChoices, 0 )
 		self.taperW2UnitwxChoice.SetSelection( 0 )
-		_chamferfgSizer1.Add( self.taperW2UnitwxChoice, 0, wx.ALL, 5 )
+		_linearTaperSettingsbSizer.Add( self.taperW2UnitwxChoice, 0, wx.ALL, 5 )
 
-		self.taperW2CheckBox = wx.CheckBox( self.taperTrackPanel, wx.ID_ANY, u"Auto", wx.DefaultPosition, wx.DefaultSize, 0 )
-		_chamferfgSizer1.Add( self.taperW2CheckBox, 0, wx.ALL|wx.ALIGN_CENTER_VERTICAL|wx.ALIGN_RIGHT, 5 )
+		self.taperW2CheckBox = wx.CheckBox( self.linearTaperPanel, wx.ID_ANY, u"Auto", wx.DefaultPosition, wx.DefaultSize, 0 )
+		_linearTaperSettingsbSizer.Add( self.taperW2CheckBox, 0, wx.ALL|wx.ALIGN_CENTER_VERTICAL|wx.ALIGN_RIGHT, 5 )
 
-		self.taperLStaticText = wx.StaticText( self.taperTrackPanel, wx.ID_ANY, u"L", wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.taperLStaticText = wx.StaticText( self.linearTaperPanel, wx.ID_ANY, u"L", wx.DefaultPosition, wx.DefaultSize, 0 )
 		self.taperLStaticText.Wrap( -1 )
 
-		_chamferfgSizer1.Add( self.taperLStaticText, 0, wx.ALL, 5 )
+		_linearTaperSettingsbSizer.Add( self.taperLStaticText, 0, wx.ALL, 5 )
 
-		self.taperLengthSpinCtrlDouble = wx.SpinCtrlDouble( self.taperTrackPanel, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, wx.SP_ARROW_KEYS, 0, 254, 0, 1 )
+		self.taperLengthSpinCtrlDouble = wx.SpinCtrlDouble( self.linearTaperPanel, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, wx.SP_ARROW_KEYS, 0, 254, 0, 1 )
 		self.taperLengthSpinCtrlDouble.SetDigits( 0 )
-		_chamferfgSizer1.Add( self.taperLengthSpinCtrlDouble, 0, wx.ALL, 5 )
+		_linearTaperSettingsbSizer.Add( self.taperLengthSpinCtrlDouble, 0, wx.ALL, 5 )
 
 		taperLengthUnitwxChoiceChoices = [ u"mm", u"mil", u"in" ]
-		self.taperLengthUnitwxChoice = wx.Choice( self.taperTrackPanel, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, taperLengthUnitwxChoiceChoices, 0 )
+		self.taperLengthUnitwxChoice = wx.Choice( self.linearTaperPanel, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, taperLengthUnitwxChoiceChoices, 0 )
 		self.taperLengthUnitwxChoice.SetSelection( 0 )
-		_chamferfgSizer1.Add( self.taperLengthUnitwxChoice, 0, wx.ALL, 5 )
+		_linearTaperSettingsbSizer.Add( self.taperLengthUnitwxChoice, 0, wx.ALL, 5 )
 
-		self.taperLCheckBox = wx.CheckBox( self.taperTrackPanel, wx.ID_ANY, u"Auto", wx.DefaultPosition, wx.DefaultSize, 0 )
-		_chamferfgSizer1.Add( self.taperLCheckBox, 0, wx.ALL|wx.ALIGN_CENTER_VERTICAL, 5 )
-
-
-		_chamferbSizer1.Add( _chamferfgSizer1, 0, wx.ALL|wx.ALIGN_CENTER_VERTICAL|wx.EXPAND, 5 )
-
-		_chamferImgbSizer1 = wx.BoxSizer( wx.VERTICAL )
-
-		self.taperImg = wx.StaticBitmap( self.taperTrackPanel, wx.ID_ANY, wx.NullBitmap, wx.DefaultPosition, wx.Size( 295,150 ), 0 )
-		_chamferImgbSizer1.Add( self.taperImg, 1, wx.ALL|wx.ALIGN_CENTER_HORIZONTAL, 5 )
+		self.taperLCheckBox = wx.CheckBox( self.linearTaperPanel, wx.ID_ANY, u"Auto", wx.DefaultPosition, wx.DefaultSize, 0 )
+		_linearTaperSettingsbSizer.Add( self.taperLCheckBox, 0, wx.ALL|wx.ALIGN_CENTER_VERTICAL, 5 )
 
 
-		_chamferbSizer1.Add( _chamferImgbSizer1, 1, wx.EXPAND|wx.ALL, 5 )
+		_linearTaperbSizer.Add( _linearTaperSettingsbSizer, 0, wx.ALL|wx.ALIGN_CENTER_VERTICAL|wx.EXPAND, 5 )
+
+		_linearTaperImgbSizer = wx.BoxSizer( wx.VERTICAL )
+
+		self.taperImg = wx.StaticBitmap( self.linearTaperPanel, wx.ID_ANY, wx.NullBitmap, wx.DefaultPosition, wx.Size( 295,150 ), 0 )
+		_linearTaperImgbSizer.Add( self.taperImg, 1, wx.ALL|wx.ALIGN_CENTER_HORIZONTAL, 5 )
 
 
-		self.taperTrackPanel.SetSizer( _chamferbSizer1 )
+		_linearTaperbSizer.Add( _linearTaperImgbSizer, 1, wx.EXPAND|wx.ALL, 5 )
+
+
+		self.linearTaperPanel.SetSizer( _linearTaperbSizer )
+		self.linearTaperPanel.Layout()
+		_linearTaperbSizer.Fit( self.linearTaperPanel )
+		self.taperPanelwxNotebook.AddPage( self.linearTaperPanel, u"Linear", True )
+		self.exponentialTaperPanel = wx.Panel( self.taperPanelwxNotebook, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.TAB_TRAVERSAL )
+		_exponentialTaperbSizer = wx.BoxSizer( wx.VERTICAL )
+
+
+		self.exponentialTaperPanel.SetSizer( _exponentialTaperbSizer )
+		self.exponentialTaperPanel.Layout()
+		_exponentialTaperbSizer.Fit( self.exponentialTaperPanel )
+		self.taperPanelwxNotebook.AddPage( self.exponentialTaperPanel, u"Exponential", False )
+		self.klopfensteinTaperPanel = wx.Panel( self.taperPanelwxNotebook, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.TAB_TRAVERSAL )
+		_klopfensteinTaperbSizer = wx.BoxSizer( wx.VERTICAL )
+
+
+		self.klopfensteinTaperPanel.SetSizer( _klopfensteinTaperbSizer )
+		self.klopfensteinTaperPanel.Layout()
+		_klopfensteinTaperbSizer.Fit( self.klopfensteinTaperPanel )
+		self.taperPanelwxNotebook.AddPage( self.klopfensteinTaperPanel, u"Klopfenstein", False )
+
+		_taperbSizer.Add( self.taperPanelwxNotebook, 1, wx.EXPAND |wx.ALL, 5 )
+
+
+		self.taperTrackPanel.SetSizer( _taperbSizer )
 		self.taperTrackPanel.Layout()
-		_chamferbSizer1.Fit( self.taperTrackPanel )
+		_taperbSizer.Fit( self.taperTrackPanel )
 		self.settingsNotebook.AddPage( self.taperTrackPanel, u"Taper", False )
-		self.viaStitchPanel = wx.Panel( self.settingsNotebook, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.TAB_TRAVERSAL )
-		self.settingsNotebook.AddPage( self.viaStitchPanel, u"Via Stitch", False )
-		self.routePanel = wx.Panel( self.settingsNotebook, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.TAB_TRAVERSAL )
-		self.settingsNotebook.AddPage( self.routePanel, u"Route", False )
-		self.dxfToFootprintPanel = wx.Panel( self.settingsNotebook, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.TAB_TRAVERSAL )
-		self.settingsNotebook.AddPage( self.dxfToFootprintPanel, u"DXF", False )
+		self.junctionTrackPanel = wx.Panel( self.settingsNotebook, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.TAB_TRAVERSAL )
+		_junctionbSizer = wx.BoxSizer( wx.VERTICAL )
+
+		self.junctionPanelwxNotebook = wx.Notebook( self.junctionTrackPanel, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.teeJunctionPanel = wx.Panel( self.junctionPanelwxNotebook, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.TAB_TRAVERSAL )
+		_teeJunctionbSizer = wx.BoxSizer( wx.VERTICAL )
+
+
+		self.teeJunctionPanel.SetSizer( _teeJunctionbSizer )
+		self.teeJunctionPanel.Layout()
+		_teeJunctionbSizer.Fit( self.teeJunctionPanel )
+		self.junctionPanelwxNotebook.AddPage( self.teeJunctionPanel, u"Tee", True )
+		self.stepJunctionPanel = wx.Panel( self.junctionPanelwxNotebook, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.TAB_TRAVERSAL )
+		_stepJunctionbSizer = wx.BoxSizer( wx.VERTICAL )
+
+
+		self.stepJunctionPanel.SetSizer( _stepJunctionbSizer )
+		self.stepJunctionPanel.Layout()
+		_stepJunctionbSizer.Fit( self.stepJunctionPanel )
+		self.junctionPanelwxNotebook.AddPage( self.stepJunctionPanel, u"Step", False )
+		self.crossJunctionPanel = wx.Panel( self.junctionPanelwxNotebook, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.TAB_TRAVERSAL )
+		_crossJunctionbSizer = wx.BoxSizer( wx.VERTICAL )
+
+
+		self.crossJunctionPanel.SetSizer( _crossJunctionbSizer )
+		self.crossJunctionPanel.Layout()
+		_crossJunctionbSizer.Fit( self.crossJunctionPanel )
+		self.junctionPanelwxNotebook.AddPage( self.crossJunctionPanel, u"Cross", False )
+
+		_junctionbSizer.Add( self.junctionPanelwxNotebook, 1, wx.EXPAND |wx.ALL, 5 )
+
+
+		self.junctionTrackPanel.SetSizer( _junctionbSizer )
+		self.junctionTrackPanel.Layout()
+		_junctionbSizer.Fit( self.junctionTrackPanel )
+		self.settingsNotebook.AddPage( self.junctionTrackPanel, u"Junction", False )
 
 		mainbSizer.Add( self.settingsNotebook, 1, wx.EXPAND |wx.ALL, 5 )
 
