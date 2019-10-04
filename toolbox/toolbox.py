@@ -3,7 +3,7 @@ import wx
 import pcbnew
 import inspect
 
-import callback
+from . import callback
 
 
 def get_path():

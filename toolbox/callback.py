@@ -1,12 +1,11 @@
 import wx
 import wx.aui
 
-import gui
 import pcbnew
-import chamfer
-import taper
-import settings
-from layout import Layout
+from . import gui
+from . import chamfer
+from . import taper
+from .layout import Layout
 
 # Callback functions
 

@@ -4,7 +4,7 @@
 
 import pcbnew
 import math as m
-from layout import Layout
+from .layout import Layout
 
 
 class Chamfer:

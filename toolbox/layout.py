@@ -1,8 +1,8 @@
 
-import gui
 import pcbnew
 import math as m
-from linear import Linear as ln
+from . import gui
+from .linear import Linear
 
 class Layout:
     """

@@ -1,11 +1,10 @@
 
 import wx
 import wx.aui
-import gui_base
+from . import gui_base
 
-import chamfer
-import settings
 import math as m
+from . import chamfer
 from .toolbox import get_path
 
 
