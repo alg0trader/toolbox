@@ -221,3 +221,67 @@ class TaperSettings(BaseSettings):
             self.Defaults()
             self.Write()
             self.Load()
+
+
+class JunctionSettings(BaseSettings):
+    """
+    Class for junction-specific settings.
+    """
+    _JUNCTION_SECTION = 'junction_tab'
+    _JUNCTION_WIDTH1 = {'Key':'0'}
+    _JUNCTION_WIDTH1_UNIT = {'Key':'1', 'Value':{'mm':'0', 'mil':'1', 'in':'2'}}
+    _JUNCTION_WIDTH1_AUTOROUTE = {'Key':'2'}
+    _JUNCTION_WIDTH2 = {'Key':'3'}
+    _JUNCTION_WIDTH2_UNIT = {'Key':'4', 'Value':{'mm':'0', 'mil':'1', 'in':'2'}}
+    _JUNCTION_WIDTH2_AUTOROUTE = {'Key':'5'}
+    _JUNCTION_WIDTH3 = {'Key':'6'}
+    _JUNCTION_WIDTH3_UNIT = {'Key':'7', 'Value':{'mm':'0', 'mil':'1', 'in':'2'}}
+    _JUNCTION_WIDTH3_AUTOROUTE = {'Key':'8'}
+
+    def __init__(self):
+        BaseSettings.__init__(self)
+
+    def Defaults(self):
+        self.width1 = '0.5334'       # 21 mils by default
+        self.width1Unit = self._JUNCTION_WIDTH1_UNIT['Value']['mm']
+        self.width1Autoroute = True
+        self.width2 = '0.5334'       # 21 mils by default
+        self.width2Unit = self._JUNCTION_WIDTH2_UNIT['Value']['mm']
+        self.width2Autoroute = True
+        self.width3 = '0.5334'       # 21 mils by default
+        self.width3Unit = self._JUNCTION_WIDTH3_UNIT['Value']['mm']
+        self.width3Autoroute = True
+
+        self.Save()
+
+    def Save(self):
+        self.SetValue(self._JUNCTION_SECTION, self._JUNCTION_WIDTH1['Key'], self.width1)
+        self.SetValue(self._JUNCTION_SECTION, self._JUNCTION_WIDTH1_UNIT['Key'], self.width1Unit)
+        self.SetValue(self._JUNCTION_SECTION, self._JUNCTION_WIDTH1_AUTOROUTE['Key'], self.width1Autoroute)
+        self.SetValue(self._JUNCTION_SECTION, self._JUNCTION_WIDTH2['Key'], self.width2)
+        self.SetValue(self._JUNCTION_SECTION, self._JUNCTION_WIDTH2_UNIT['Key'], self.width2Unit)
+        self.SetValue(self._JUNCTION_SECTION, self._JUNCTION_WIDTH2_AUTOROUTE['Key'], self.width2Autoroute)
+        self.SetValue(self._JUNCTION_SECTION, self._JUNCTION_WIDTH3['Key'], self.width3)
+        self.SetValue(self._JUNCTION_SECTION, self._JUNCTION_WIDTH3_UNIT['Key'], self.width3Unit)
+        self.SetValue(self._JUNCTION_SECTION, self._JUNCTION_WIDTH3_AUTOROUTE['Key'], self.width3Autoroute)       
+
+        self.Write()
+    
+    def Load(self):
+        try:
+            self.Read()
+
+            self.width1 = self.GetValue(self._JUNCTION_SECTION, self._JUNCTION_WIDTH1['Key'])
+            self.width1Unit = self.GetValue(self._JUNCTION_SECTION, self._JUNCTION_WIDTH1_UNIT['Key'])
+            self.width1Autoroute = self.GetValue(self._JUNCTION_SECTION, self._JUNCTION_WIDTH1_AUTOROUTE['Key'])
+            self.width2 = self.GetValue(self._JUNCTION_SECTION, self._JUNCTION_WIDTH2['Key'])
+            self.width2Unit = self.GetValue(self._JUNCTION_SECTION, self._JUNCTION_WIDTH2_UNIT['Key'])
+            self.width2Autoroute = self.GetValue(self._JUNCTION_SECTION, self._JUNCTION_WIDTH2_AUTOROUTE['Key'])
+            self.width3 = self.GetValue(self._JUNCTION_SECTION, self._JUNCTION_WIDTH3['Key'])
+            self.width3Unit = self.GetValue(self._JUNCTION_SECTION, self._JUNCTION_WIDTH3_UNIT['Key'])
+            self.width3Autoroute = self.GetValue(self._JUNCTION_SECTION, self._JUNCTION_WIDTH3_AUTOROUTE['Key'])
+        except:
+            self.Defaults()
+            self.Write()
+            self.Load()
+        

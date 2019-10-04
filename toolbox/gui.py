@@ -237,6 +237,16 @@ class SettingsDialog(TaperTab):
         self.taperLengthUnitwxChoice.SetSelection(int(self.taperCfgSettings.lengthUnit))
         #self.SetTaperLengthAuto()
 
+        # load Junctions-Tab settings
+        # self.junctionCfgSettings = settings.JunctionSettings()
+        # self.junctionCfgSettings.Load()
+        # self.junctionW1spinCtrlDouble.SetValue(float(self.junctionCfgSettings.width1))
+        # self.junctionW1UnitwxChoice.SetSelection(int(self.junctionCfgSettings.width1Unit))
+        # self.junctionW2spinCtrlDouble.SetValue(float(self.junctionCfgSettings.width2))
+        # self.junctionW2UnitwxChoice.SetSelection(int(self.junctionCfgSettings.width2Unit))
+        # self.junctionW3spinCtrlDouble.SetValue(float(self.junctionCfgSettings.width3))
+        # self.junctionW3UnitwxChoice.SetSelection(int(self.junctionCfgSettings.width3Unit))
+
         # Set max ranges
         # get current units -> set max
 
@@ -583,6 +593,19 @@ class SettingsDialog(TaperTab):
             self.taperCfgSettings.length = self.taperLengthSpinCtrlDouble.GetValue()
             self.taperCfgSettings.lengthUnit = self.taperLengthUnitwxChoice.GetSelection()
             self.taperCfgSettings.Save()
+
+            # Junction-Tab settings
+            self.junctionCfgSettings = settings.JunctionSettings()
+            self.junctionCfgSettings.Load()
+            self.junctionCfgSettings.width1 = self.junctionW1spinCtrlDouble.GetValue()
+            self.junctionCfgSettings.width1Unit = self.junctionW1UnitwxChoice.GetSelection()
+            self.junctionCfgSettings.width2 = self.junctionW2spinCtrlDouble.GetValue()
+            self.junctionCfgSettings.width2Unit = self.junctionW2UnitwxChoice.GetSelection()
+            self.junctionCfgSettings.width3 = self.junctionW3spinCtrlDouble.GetValue()
+            self.junctionCfgSettings.width3Unit = self.junctionW3UnitwxChoice.GetSelection()
+            self.junctionCfgSettings.Save()
+
+
         except Exception as e:
             menu_dialog('Error: %s' % str(e))
         finally:

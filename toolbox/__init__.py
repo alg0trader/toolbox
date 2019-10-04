@@ -79,6 +79,11 @@ taperPlugin = TaperPlugin()
 taperPlugin.defaults()
 taperPlugin.register()
 
+# Register junction plugin
+junctionPlugin = JunctionPlugin()
+junctionPlugin.defaults()
+junctionPlugin.register()
+
 # Register settings plugin
 settingsPlugin = SettingsPlugin()
 settingsPlugin.defaults()

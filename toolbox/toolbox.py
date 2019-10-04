@@ -48,6 +48,18 @@ class TaperPlugin(pcbnew.ActionPlugin):
     def Run(self):
         callback.taper_callback(None)
 
+class JunctionPlugin(pcbnew.ActionPlugin):
+    def defaults(self):
+        self.name = "Junction"
+        self.catagory = "Layout"
+        self.pcbnew_icon_support = hasattr(self, "show_toolbar_button")
+        self.show_toolbar_button = True
+        self.icon_file_name = get_path() + '/toolbox_icons/junctions.png'
+        self.description = "Route a 3 way junction in Pcbnew."
+
+    def Run(self):
+        callback.junction_callback(None)
+
 class SettingsPlugin(pcbnew.ActionPlugin):
     def defaults(self):
         self.name = "Settings"

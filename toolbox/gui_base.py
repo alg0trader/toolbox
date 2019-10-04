@@ -174,7 +174,7 @@ class SettingsDialogBase ( wx.Dialog ):
 		self.curveTrackPanel.SetSizer( _curvebSizer )
 		self.curveTrackPanel.Layout()
 		_curvebSizer.Fit( self.curveTrackPanel )
-		self.settingsNotebook.AddPage( self.curveTrackPanel, u"Curve", True )
+		self.settingsNotebook.AddPage( self.curveTrackPanel, u"Curve", False )
 		self.chamferTrackPanel = wx.Panel( self.settingsNotebook, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.TAB_TRAVERSAL )
 		_chamferbSizer = wx.BoxSizer( wx.VERTICAL )
 
@@ -383,6 +383,64 @@ class SettingsDialogBase ( wx.Dialog ):
 		self.teeJunctionPanel = wx.Panel( self.junctionPanelwxNotebook, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, wx.TAB_TRAVERSAL )
 		_teeJunctionbSizer = wx.BoxSizer( wx.VERTICAL )
 
+		_teeJunctionfgSizer = wx.FlexGridSizer( 0, 4, 0, 0 )
+		_teeJunctionfgSizer.SetFlexibleDirection( wx.BOTH )
+		_teeJunctionfgSizer.SetNonFlexibleGrowMode( wx.FLEX_GROWMODE_SPECIFIED )
+
+		self.junctionW1StaticText = wx.StaticText( self.teeJunctionPanel, wx.ID_ANY, u"W1", wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.junctionW1StaticText.Wrap( -1 )
+
+		_teeJunctionfgSizer.Add( self.junctionW1StaticText, 0, wx.ALIGN_CENTER_VERTICAL|wx.ALL, 5 )
+
+		self.junctionW1spinCtrlDouble = wx.SpinCtrlDouble( self.teeJunctionPanel, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, wx.SP_ARROW_KEYS, 0, 100, 0.000000, 1 )
+		self.junctionW1spinCtrlDouble.SetDigits( 0 )
+		_teeJunctionfgSizer.Add( self.junctionW1spinCtrlDouble, 0, wx.ALL, 5 )
+
+		junctionW1UnitwxChoiceChoices = [ u"mm", u"mil", u"in" ]
+		self.junctionW1UnitwxChoice = wx.Choice( self.teeJunctionPanel, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, junctionW1UnitwxChoiceChoices, 0 )
+		self.junctionW1UnitwxChoice.SetSelection( 1 )
+		_teeJunctionfgSizer.Add( self.junctionW1UnitwxChoice, 0, wx.ALL, 5 )
+
+		self.junctionW1CheckBox = wx.CheckBox( self.teeJunctionPanel, wx.ID_ANY, u"Auto", wx.DefaultPosition, wx.DefaultSize, 0 )
+		_teeJunctionfgSizer.Add( self.junctionW1CheckBox, 0, wx.ALIGN_CENTER_VERTICAL|wx.ALL, 5 )
+
+		self.junctionW2StaticText = wx.StaticText( self.teeJunctionPanel, wx.ID_ANY, u"W2", wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.junctionW2StaticText.Wrap( -1 )
+
+		_teeJunctionfgSizer.Add( self.junctionW2StaticText, 0, wx.ALL, 5 )
+
+		self.junctionW2spinCtrlDouble = wx.SpinCtrlDouble( self.teeJunctionPanel, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, wx.SP_ARROW_KEYS, 0, 100, 0.000000, 1 )
+		self.junctionW2spinCtrlDouble.SetDigits( 0 )
+		_teeJunctionfgSizer.Add( self.junctionW2spinCtrlDouble, 0, wx.ALL, 5 )
+
+		junctionW2UnitwxChoiceChoices = [ u"mm", u"mil", u"in" ]
+		self.junctionW2UnitwxChoice = wx.Choice( self.teeJunctionPanel, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, junctionW2UnitwxChoiceChoices, 0 )
+		self.junctionW2UnitwxChoice.SetSelection( 1 )
+		_teeJunctionfgSizer.Add( self.junctionW2UnitwxChoice, 0, wx.ALL, 5 )
+
+		self.junctionW2CheckBox = wx.CheckBox( self.teeJunctionPanel, wx.ID_ANY, u"Auto", wx.DefaultPosition, wx.DefaultSize, 0 )
+		_teeJunctionfgSizer.Add( self.junctionW2CheckBox, 0, wx.ALL, 5 )
+
+		self.junctionW3StaticText = wx.StaticText( self.teeJunctionPanel, wx.ID_ANY, u"W3", wx.DefaultPosition, wx.DefaultSize, 0 )
+		self.junctionW3StaticText.Wrap( -1 )
+
+		_teeJunctionfgSizer.Add( self.junctionW3StaticText, 0, wx.ALL, 5 )
+
+		self.junctionW3spinCtrlDouble = wx.SpinCtrlDouble( self.teeJunctionPanel, wx.ID_ANY, wx.EmptyString, wx.DefaultPosition, wx.DefaultSize, wx.SP_ARROW_KEYS, 0, 100, 0.000000, 1 )
+		self.junctionW3spinCtrlDouble.SetDigits( 0 )
+		_teeJunctionfgSizer.Add( self.junctionW3spinCtrlDouble, 0, wx.ALL, 5 )
+
+		junctionW3UnitwxChoiceChoices = [ u"mm", u"mil", u"in" ]
+		self.junctionW3UnitwxChoice = wx.Choice( self.teeJunctionPanel, wx.ID_ANY, wx.DefaultPosition, wx.DefaultSize, junctionW3UnitwxChoiceChoices, 0 )
+		self.junctionW3UnitwxChoice.SetSelection( 1 )
+		_teeJunctionfgSizer.Add( self.junctionW3UnitwxChoice, 0, wx.ALL, 5 )
+
+		self.junctionW3CheckBox = wx.CheckBox( self.teeJunctionPanel, wx.ID_ANY, u"Auto", wx.DefaultPosition, wx.DefaultSize, 0 )
+		_teeJunctionfgSizer.Add( self.junctionW3CheckBox, 0, wx.ALL, 5 )
+
+
+		_teeJunctionbSizer.Add( _teeJunctionfgSizer, 1, wx.ALIGN_CENTER_VERTICAL|wx.ALL|wx.EXPAND, 5 )
+
 
 		self.teeJunctionPanel.SetSizer( _teeJunctionbSizer )
 		self.teeJunctionPanel.Layout()
@@ -411,7 +469,7 @@ class SettingsDialogBase ( wx.Dialog ):
 		self.junctionTrackPanel.SetSizer( _junctionbSizer )
 		self.junctionTrackPanel.Layout()
 		_junctionbSizer.Fit( self.junctionTrackPanel )
-		self.settingsNotebook.AddPage( self.junctionTrackPanel, u"Junction", False )
+		self.settingsNotebook.AddPage( self.junctionTrackPanel, u"Junction", True )
 
 		mainbSizer.Add( self.settingsNotebook, 1, wx.EXPAND |wx.ALL, 5 )
 
@@ -468,6 +526,9 @@ class SettingsDialogBase ( wx.Dialog ):
 		self.taperLengthSpinCtrlDouble.Bind( wx.EVT_SPINCTRLDOUBLE, self.OnTaperLengthSpinCtrlDouble )
 		self.taperLengthUnitwxChoice.Bind( wx.EVT_CHOICE, self.OnTaperLengthUnit )
 		self.taperLCheckBox.Bind( wx.EVT_CHECKBOX, self.OnTaperLengthAuto )
+		self.junctionW1UnitwxChoice.Bind( wx.EVT_CHOICE, self.OnJunctionW1Unit )
+		self.junctionW2UnitwxChoice.Bind( wx.EVT_CHOICE, self.OnJunctionW2Unit )
+		self.junctionW3UnitwxChoice.Bind( wx.EVT_CHOICE, self.OnJunctionW3Unit )
 		self.settingsButtonSizerOK.Bind( wx.EVT_BUTTON, self.OnOKSettingsButtonClick )
 
 	def __del__( self ):
@@ -577,6 +638,15 @@ class SettingsDialogBase ( wx.Dialog ):
 		event.Skip()
 
 	def OnTaperLengthAuto( self, event ):
+		event.Skip()
+
+	def OnJunctionW1Unit( self, event ):
+		event.Skip()
+
+	def OnJunctionW2Unit( self, event ):
+		event.Skip()
+
+	def OnJunctionW3Unit( self, event ):
 		event.Skip()
 
 	def OnOKSettingsButtonClick( self, event ):

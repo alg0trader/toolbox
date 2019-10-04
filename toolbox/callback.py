@@ -5,6 +5,7 @@ import gui
 import pcbnew
 import chamfer
 import taper
+import junctions
 import settings
 from layout import Layout
 
@@ -149,6 +150,35 @@ def taper_callback(event):
 
     t = taper.Taper(w1, w2, length, net, layer)
     t.TaperFootprint(center)
+
+def junction_callback(event):
+    '''Initiates the junction tool based on existing settings'''
+    net = None
+    layer = None
+    center = pcbnew.wxPoint(0, 0)
+    stracks = Layout.get_selected_tracks()
+
+    if len(stracks) == 1:
+        pass
+
+    cfgSettings = settings.JunctionSettings()
+    cfgSettings.Load()
+
+    w1 = float(cfgSettings.width1)
+    w2 = float(cfgSettings.width2)
+    w3 = float(cfgSettings.width3)
+
+    if cfgSettings.width1Unit == '1': w1 = w1 * 0.0254
+    elif cfgSettings.width1Unit == '2': w1 = w1 * 25.4
+
+    if cfgSettings.width2Unit == '1': w2 = w2 * 0.0254
+    elif cfgSettings.width2Unit == '2': w2 = w2 * 25.4
+
+    if cfgSettings.width3Unit == '1': w3 = w3 * 0.0254
+    elif cfgSettings.width3Unit == '2': w3 = w3 * 25.4
+
+    j = junctions.Junction(w1, w2, w3, net, layer)
+    j.JunctionFootprint(center)
 
 def settings_callback(event):
     '''Initiates the settings panel for edit.'''
